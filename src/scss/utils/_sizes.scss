@@ -1,0 +1,136 @@
+@use '../settings' as settings;
+@use '../tools/' as tools;
+
+.aspect-16\/9 {
+	aspect-ratio: 16 / 9;
+}
+
+.aspect-4\/3 {
+	aspect-ratio: 4 / 3;
+}
+
+.aspect-1\/1 {
+	aspect-ratio: 1 / 1;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.h-screen {
+	height: 100vh;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+@each $key, $value in settings.$spacers {
+
+	.mx-#{$key} {
+		margin-left: $value;
+		margin-right: $value;
+	};
+	.my-#{$key} {
+		margin-top: $value;
+		margin-bottom: $value;
+	};
+	.mb-#{$key} {
+		margin-bottom: $value;
+	};
+	.mt-#{$key} {
+		margin-top: $value;
+	};
+	.ml-#{$key} {
+		margin-left: $value;
+	};
+	.mr-#{$key} {
+		margin-right: $value;
+	};
+	.px-#{$key} {
+		padding-left: $value;
+		padding-right: $value;
+	};
+	.py-#{$key} {
+		padding-top: $value;
+		padding-bottom: $value;
+	};
+	.p-#{$key} {
+		padding: $value;
+	};
+	.m-#{$key} {
+		margin: $value;
+	};
+	.w-#{$key} {
+		width: $value;
+		height: $value;
+	};
+	.h-#{$key} {
+		height: $value;
+	};    
+}
+
+
+.margin--0 {
+	margin: 0;
+}
+
+.margin--1 {
+	margin: 1rem;
+}
+
+.padding--0 {
+	padding: 0;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.mt-auto {
+	margin-top: auto;
+}
+
+.place-center {
+	display: grid;
+	place-content: center;
+}
+
+@include tools.media-breakpoint(sm) { 
+    .sm\:mr-0 {
+        margin-right: 0
+    }
+
+	.sm\:ml-0 {
+        margin-left: 0
+    }
+}
+
+@include tools.media-breakpoint(md) { 
+    .md\:mr-0 {
+        margin-right: 0
+    }
+
+	.md\:ml-0 {
+        margin-left: 0
+    }
+}
+
+@include tools.media-breakpoint(lg) { 
+    .lg\:mr-0 {
+        margin-right: 0
+    }
+
+	.lg\:ml-0 {
+        margin-left: 0
+    }
+}

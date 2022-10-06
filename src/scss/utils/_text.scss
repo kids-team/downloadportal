@@ -1,0 +1,51 @@
+
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text--primary {
+    color: var(--primary-page);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.font-bold {
+	font-weight: bold;
+}
+
+.font-normal {
+	font-weight: normal;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.invisible {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.text--secondary {
+	color: var(--secondary-page);
+}
+
+.text--error {
+	color: var(--error);
+}
+
+.text--warning {
+	color: var(--warning);
+}
+
+.text-xs {
+    font-size: space(3) !important;
+    line-height: space(4) !important;
+}

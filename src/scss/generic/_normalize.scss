@@ -1,0 +1,50 @@
+/*
+*	Reset everything that the browser makes broken
+*
+*
+*/
+
+@use '../settings/' as settings;
+
+li {
+    padding: 0;
+    list-style-type: none;
+}
+
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    font-size: settings.$spacer;
+    line-height: settings.$line-height-factor;
+    -webkit-appearance: none;
+	counter-reset: section;
+}
+
+*:focus {
+    outline: 0 !important;
+}
+
+button,
+input,
+optgroup,
+select {
+    border: none;
+    background-image: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: 0 !important;
+    font-family: settings.$font-family;
+    font-size: settings.$spacer;
+}
+

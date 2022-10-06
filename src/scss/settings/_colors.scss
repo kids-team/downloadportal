@@ -1,0 +1,97 @@
+
+$themecolors: (
+    primary: (
+        'color': var(--primary),
+        'contrast': var(--primary-contrast),
+        'light': var(--primary-light),
+        'dark': var(--primary-dark)
+    ),
+    secondary: (
+        'color': var(--secondary),
+        'contrast': var(--secondary-contrast),
+        'light': var(--secondary-light),
+        'dark': var(--secondary-dark)
+    ),
+    success: (
+        'color': var(--success),
+        'contrast': var(--success-contrast),
+        'light': var(--success-light),
+        'dark': var(--success-dark)
+    ),
+    warning: (
+        'color': var(--warning),
+        'contrast': var(--warning-contrast),
+        'light': var(--warning-light),
+        'dark': var(--warning-dark)
+    ),
+    error: (
+        'color': var(--error),
+        'contrast': var(--error-contrast),
+        'light': var(--error-light),
+        'dark': var(--error-dark)
+    ),
+    gray: (
+        'color': var(--gray-600),
+        'contrast': var(--white),
+        'light': var(--gray-300),
+        'dark': var(--gray-800)
+    ),
+    white: (
+        'color': var(--white),
+        'contrast': var(--black),
+        'light': var(--white),
+        'dark': var(--white)
+    ),
+    black: (
+        'color': var(--black),
+        'contrast': var(--white),
+        'light': var(--black),
+        'dark': var(--black)
+    )
+);
+
+$black: var(--black);
+$white: var(--white);
+
+
+
+
+
+$graytones: (
+    100: (
+        'color': var(--gray-100),
+        'contrast': var(--gray-100-contrast)
+    ),
+    200: (
+        'color': var(--gray-200),
+        'contrast': var(--gray-200-contrast),
+    ),
+    300: (
+        'color': var(--gray-300),
+        'contrast': var(--gray-300-contrast),
+    ),
+    400: (
+        'color': var(--gray-400),
+        'contrast': var(--gray-400-contrast),
+    ),
+    500: (
+        'color': var(--gray-500),
+        'contrast': var(--gray-500-contrast),
+    ),
+    600: (
+        'color': var(--gray-600),
+        'contrast': var(--gray-600-contrast),
+    ),
+    700: (
+        'color': var(--gray-700),
+        'contrast': var(--gray-700-contrast),
+    ),
+    800: (
+        'color': var(--gray-800),
+        'contrast': var(--gray-800-contrast),
+    ),
+    900: (
+        'color': var(--gray-900),
+        'contrast': var(--gray-900-contrast),
+    )
+);

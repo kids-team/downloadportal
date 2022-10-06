@@ -1,0 +1,45 @@
+@use '../tools/' as tools;
+
+.breadcrumbs {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-items: end;
+    top: 0;
+    gap: tools.space(1);
+    right: 0;
+    margin-right: tools.space(4);
+    padding-top: tools.space(1);
+
+    &__item {
+        font-size: .75rem;
+        background-color: var(--primary-page);
+        color: var(--primary-page-contrast);
+        padding: 0.125rem tools.space(2);
+        transition: all 300ms ease-in-out;
+        &:first-child {
+            border-top-left-radius: radius('sm', 'tl');
+            border-bottom-left-radius: radius('sm', 'bl');
+        }
+        &:last-child {
+            border-top-right-radius: radius('sm', 'tr');
+            border-bottom-right-radius: radius('sm', 'br');;
+        }
+
+        &:hover {
+            padding: 0.125rem tools.space(4);
+        }
+    }
+}
+
+@include tools.media-breakpoint(md) {
+	.breadcrumbs {
+		margin-right: tools.space(8);
+	}
+}
+
+@include tools.media-breakpoint(lg) {
+	.breadcrumbs {
+		margin-right: tools.space(12);
+	}
+}

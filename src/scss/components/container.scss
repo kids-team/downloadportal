@@ -1,0 +1,25 @@
+@use '../settings/' as settings;
+@use '../tools/breakpoints' as breakpoints;
+
+.max-w-screen-xl,
+.container, .content {
+    max-width: map-get(settings.$screens, 'xxl');
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+@include breakpoints.media-breakpoint(md) {
+	.container, .content {
+		max-width: map-get(settings.$screens, 'xxl');
+		padding: 0 2rem;
+		margin: 0 auto;
+	}
+}
+
+@include breakpoints.media-breakpoint(lg) {
+	.container, .content {
+		max-width: map-get(settings.$screens, 'xxl');
+		padding: 0 3rem;
+		margin: 0 auto;
+	}
+}

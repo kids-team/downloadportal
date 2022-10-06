@@ -1,0 +1,15 @@
+hr {
+    border: 0;
+    border-bottom-style: dotted !important;
+    border-bottom-width: 4px !important;;
+    border-color: rgba(0,0,0,0.3);
+    margin: 1rem 0;
+
+	&.wp-block-separator {
+		width: 100%;
+	}
+}
+
+.dark hr {
+    border-color: rgba(255,255,255,0.3);
+}

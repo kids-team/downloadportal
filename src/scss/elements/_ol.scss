@@ -1,0 +1,22 @@
+ol.core-block {
+    list-style-type: decimal;
+	counter-reset: list 0;
+    padding: space(2) 0 space(2) space(8);
+
+	li {
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+	}
+
+	li::before {
+		counter-increment: list;
+  		content: counter(list);
+		background: rgba(0,0,0,0.2);
+		border-radius: 999px;
+		width: 1.5rem;
+		height: 1.5rem;
+		text-align: center;
+		margin-right: 0.5rem;
+		display: inline-block;
+	}
+}

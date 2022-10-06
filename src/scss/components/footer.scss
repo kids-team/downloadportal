@@ -1,0 +1,29 @@
+@use '../tools' as tools;
+
+.footer {
+    background: tools.gray(800);
+    color: tools.gray(500);
+    padding: tools.space(12) 0 tools.space(12) 0;
+
+	a {
+		color: #ffffff;
+	}
+}
+
+.bottom {
+	padding: 0rem 1rem;
+    &__text {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 0.25rem;
+    }
+
+    &__logo {
+        figure {
+            height: tools.space(5);
+            width: tools.space(5);
+            margin: 0;
+        }
+    }
+}

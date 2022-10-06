@@ -1,0 +1,18 @@
+{
+	"moreArticles": "Weitere Artikel",
+	"tags": "{count, plural, =0 {Keine Schlagworte} one {Schlagwort} other {Schlagworte}}",
+	"categories": "{count, plural, =0 {Keine Kategorie} one {Kategorie} other {Kategorien}}",
+	"bible": "Bibel",
+	"chapters": "{count, plural, =0 {} one {Kapitel} other {Kapitel}}",
+	"verses": "{count, plural, =0 {} one {Vers} other {Verse}}",
+	"search": "Suche",
+	"downloads": "{count, plural, =0 {no downloads} one {Download} other {Downloads}}",
+	"lastUpdated": "Zuletzt aktualisiert",
+	"skipToContent": "Zum Inhalt springen",
+	"selectCategory": "Kategorie wählen",
+	"all": "Alle",
+	"didYouMean": "Suchergebnisse für {didyoumean}. Stattdessen nach {alt} suchen...",
+	"noResults": "Keine Suchergebnisse gefunden.",
+	"changed": "Geändert"
+}
+  
