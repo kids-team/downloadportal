@@ -8,42 +8,51 @@
 
 .list {
 
-    &__item { 
-        padding: 1rem 0; 
-        display: flex;
-        align-items: center;
-        &:not(:last-child) {
-            border-bottom: 4px dotted tools.gray(400);
-        }
+	&__item {
+		padding: 1rem 0;
+		display: flex;
+		align-items: center;
 
-        p {
-            margin: 0;
-            padding: 0;
-        }
+		&:not(:last-child) {
+			border-bottom: 4px dotted tools.gray(400);
+		}
+
+		p {
+			margin: 0;
+			padding: 0;
+		}
 
 		&--active {
 			background-color: var(--primary);
-			color: #fff
+			color: #fff;
+
+			&:not(:last-child) {
+				border-bottom: 4px solid var(--primary);
+			}
+
+			.list__subtitle {
+				color: var(--primary-light);
+			}
 		}
-    }
+	}
 
-    &__actions {
-        display: flex;
-        flex: 1;
-        justify-self: flex-end;
-        text-align: right;
-        gap: 1rem;
-        justify-content: flex-end;
-    }
+	&__actions {
+		display: flex;
+		flex: 1;
+		justify-self: flex-end;
+		text-align: right;
+		gap: 1rem;
+		justify-content: flex-end;
+	}
 
-    &__image {
-        object-fit: cover;
-        height: 4rem;
-        width: 4rem;
-        
-        margin-right: 1rem;
+	&__image {
+		object-fit: cover;
+		height: 4rem;
+		width: 4rem;
+
+		margin-right: 1rem;
 		border-radius: tools.rounded(md);
-    }
+	}
 
 	&__icon {
 		margin-right: 1rem;
@@ -70,37 +79,37 @@
 		height: 2rem;
 	}
 
-    &__content {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-    }
+	&__content {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
 
-    &__title {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
+	&__title {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
 
-    &__subtitle {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        font-size: 0.85rem;
-        color: tools.gray(900)
-    }
+	&__subtitle {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		font-size: 0.85rem;
+		color: tools.gray(900)
+	}
 
 	&__description {
-        
-        font-size: 0.85rem;
-        color: tools.gray(900)
-    }
 
-    &__controls {
-        margin-left: auto;
-        display: flex;
+		font-size: 0.85rem;
+		color: tools.gray(900)
+	}
+
+	&__controls {
+		margin-left: auto;
+		display: flex;
 		gap: 1rem;
-    }
+	}
 
 	&--padded {
 		.list__item {

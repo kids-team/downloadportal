@@ -1,49 +1,65 @@
 @use '../tools/' as tools;
 
 .hidden {
-    display: none;
+	display: none;
 }
 
-@include tools.media-breakpoint(md) { 
-    .md\:show {
-        display: inherit;
-    }
-    .md\:hidden {
-        display: none;
-    }
+@include tools.media-breakpoint(md) {
+	.md\:show {
+		display: inherit;
+	}
+
+	.md\:hidden {
+		display: none;
+	}
 }
 
-@include tools.media-breakpoint(lg) { 
-    .lg\:show {
-        display: inherit;
-    }
-    .lg\:hidden {
-        display: none;
-    }
+@include tools.media-breakpoint(lg) {
+	.lg\:show {
+		display: inherit;
+	}
+
+	.lg\:hidden {
+		display: none;
+	}
 }
 
-@include tools.media-breakpoint(xl) { 
-    .xl\:show {
-        display: inherit;
-    }
-    .xl\:hidden {
-        display: none;
-    }
+@include tools.media-breakpoint(xl) {
+	.xl\:show {
+		display: inherit;
+	}
+
+	.xl\:hidden {
+		display: none;
+	}
+
 	.xl\:flex {
 		display: flex;
+
 		&--1 {
 			flex: 1;
 		}
+
 		&--center {
 			display: flex;
 			align-items: center;
 		}
+
 		&--row {
 			flex-direction: row;
 		}
+
 		&--column {
 			flex-direction: column;
 		}
-	
+
 	}
+}
+
+.flex {
+	display: flex;
+}
+
+.gap {
+	gap: 1rem;
 }
