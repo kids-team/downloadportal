@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { KeyboardEvent, useContext, useEffect } from "react";
 import {
 	BrowserRouter, Route, Routes
 } from "react-router-dom";
@@ -22,7 +22,7 @@ function App() {
 	const { state, dispatch } = globalState;
 
 	const currentLanguage = state.lang;
-	
+
 	useEffect(() => {
 		const args = {
 			controller: 'site',
@@ -33,6 +33,7 @@ function App() {
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
+				console.log(data)
 				dispatch({ type: 'SET_MENU', payload: data.menu });
 				dispatch({ type: 'SET_FOOTER', payload: data.footer });
 				dispatch({ type: 'SET_STATUS', payload: 'loaded' });
@@ -40,28 +41,33 @@ function App() {
 			})
 			.catch((error) => {
 				console.log(error)
-				dispatch({ type: 'SET_STATUS', payload: 'error'});
-				dispatch({ type: 'SET_ERROR', payload: error});
+				dispatch({ type: 'SET_STATUS', payload: 'error' });
+				dispatch({ type: 'SET_ERROR', payload: error });
 			});
 
 	}, [currentLanguage]);
 
 	const messages = useTranslation(currentLanguage)
 
-	if(state.error) return <Error message={`Server Error: ${state.error.toString()}`}/>
+	if (state.error) return <Error message={`Server Error: ${state.error.toString()}`} />
+	const bibleurl = state.bible?.info?.url ?? "bible"
+
+	const handleKeyEvent = (event: KeyboardEvent) => {
+		if (!event.ctrlKey) return;
+	}
 
 	return (
-		<div className={`app ${getTopLevelDomain()}`}>
+		<div className={`app ${getTopLevelDomain()}`} onKeyDown={(event) => handleKeyEvent(event)}>
 			<IntlProvider locale={currentLanguage} defaultLocale="en" messages={messages}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="bibel/:book/:chapter" element={<Bible />} />
-					<Route path="search/:query" element={<SearchPage />} />
-					<Route path="tag/:tag" element={<Tag />} />
-					<Route path="*" element={<ArticlePage />} />
-				</Routes>
-			</BrowserRouter>
-			<Footer />
+				<BrowserRouter>
+					<Routes>
+						<Route path={bibleurl + "/:book/:chapter"} element={<Bible />} />
+						<Route path="search/:query" element={<SearchPage />} />
+						<Route path="tag/:tag" element={<Tag />} />
+						<Route path="*" element={<ArticlePage />} />
+					</Routes>
+				</BrowserRouter>
+				<Footer />
 			</IntlProvider>
 		</div>
 	);
