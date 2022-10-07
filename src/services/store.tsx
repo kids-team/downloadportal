@@ -11,7 +11,7 @@ type InitialStateType = {
 	translation: {};
 	lang: string;
 	status: string;
-};	
+};
 
 const initialState: InitialStateType = {
 	menu: {
@@ -24,7 +24,7 @@ const initialState: InitialStateType = {
 	translation: {},
 	bible: {
 		books: [],
-		name: ""
+		info: {}
 	},
 	status: 'init',
 	error: '',
@@ -41,36 +41,38 @@ type ProviderProps = {
 const store = createContext<{
 	state: InitialStateType;
 	dispatch: Dispatch<Action>
-}>({state: initialState, dispatch: () => null});
+}>({ state: initialState, dispatch: () => null });
 
 const { Provider } = store;
 
 const StateProvider: React.FC<ProviderProps> = (props) => {
 
 	const reducer = (state: InitialStateType, action: Action) => {
-		switch(action.type) {
+		switch (action.type) {
 			case 'SET_MENU':
-				return {...state, menu: action.payload}
+				return { ...state, menu: action.payload }
 			case 'SET_LANG':
-				if(typeof action.payload != 'string') return {...state, error: 'Language must be a string', status: 'error'};
+				if (typeof action.payload != 'string') return { ...state, error: 'Language must be a string', status: 'error' };
 				localStorage.setItem('dp_lang', action.payload ?? '')
 				return { ...state, lang: action.payload }
-			case 'SET_STATUS': 
-				return {...state, status: action.payload}
-			case 'SET_FOOTER': 
-				return {...state, footer: action.payload}
+			case 'SET_STATUS':
+				return { ...state, status: action.payload }
+			case 'SET_FOOTER':
+				return { ...state, footer: action.payload }
+			case 'SET_BIBLE':
+				return { ...state, bible: action.payload }
 			case 'SET_TRANSLATION':
-					return {...state, translation: action.payload}
+				return { ...state, translation: action.payload }
 			case 'SET_ERROR':
-				return {...state, error: action.payload}
+				return { ...state, error: action.payload }
 			default:
 				return state;
 		};
 	}
-	
+
 	const [state, dispatch] = useReducer(reducer, initialState);
-	
-	return (<Provider value={{state, dispatch}} >{props.children}</Provider>);
+
+	return (<Provider value={{ state, dispatch }} >{props.children}</Provider>);
 };
 
 export { store, StateProvider };
