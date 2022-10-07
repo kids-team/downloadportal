@@ -1,4 +1,4 @@
-import { KeyboardEvent, MouseEvent, useContext, useEffect, useRef, useState } from 'react';
+import { MouseEvent, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUrl } from '../services/api';
 import { Article } from '../services/models/article';
@@ -55,13 +55,8 @@ const MenuSearch = (props: Props) => {
 		})
 	}
 
-	const openSearchPage = (event: KeyboardEvent | MouseEvent) => {
-		if (event instanceof KeyboardEvent && event.key == "Enter") return;
-		if (event instanceof MouseEvent && event.currentTarget.nodeName === 'I') return;
-		gotoSearchPage()
-	}
 
-	const inputKeyDown = (event: KeyboardEvent) => {
+	const inputKeyDown = (event: any) => {
 		console.log(event.key)
 		if (event.key == "Enter" && selectedSearchItem == -1) {
 			gotoSearchPage();

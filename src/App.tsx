@@ -1,4 +1,4 @@
-import { KeyboardEvent, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import {
 	BrowserRouter, Route, Routes
 } from "react-router-dom";
@@ -52,12 +52,8 @@ function App() {
 	if (state.error) return <Error message={`Server Error: ${state.error.toString()}`} />
 	const bibleurl = state.bible?.info?.url ?? "bible"
 
-	const handleKeyEvent = (event: KeyboardEvent) => {
-		if (!event.ctrlKey) return;
-	}
-
 	return (
-		<div className={`app ${getTopLevelDomain()}`} onKeyDown={(event) => handleKeyEvent(event)}>
+		<div className={`app ${getTopLevelDomain()}`}>
 			<IntlProvider locale={currentLanguage} defaultLocale="en" messages={messages}>
 				<BrowserRouter>
 					<Routes>

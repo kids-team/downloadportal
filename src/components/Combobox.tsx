@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface ComboboxProps {
 	options: Array<{ label: string, value: string | number, icon?: string }>
@@ -34,7 +34,7 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
 		return options.filter((option) => option.label.toLowerCase().includes(inputField.toLowerCase()))
 	}
 
-	const keyPress = (event: KeyboardEvent) => {
+	const keyPress = (event: any) => {
 		console.log(event)
 		if (event.key == "ArrowDown") {
 			console.log('down')
