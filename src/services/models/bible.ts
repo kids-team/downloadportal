@@ -1,5 +1,12 @@
 export type Bible = {
-	name: string;
+	info: {
+		description?: string,
+		chapter_string?: string,
+		chapter_string_ps?: string,
+		detailed_info?: string,
+		author?: string,
+		url?: string
+	};
 	books: Array<Book>
 }
 
@@ -13,7 +20,7 @@ export type Book = {
 	chapters: number;
 	testament: 'ot' | 'nt';
 	translation: string;
-} 
+}
 
 export type Verse = {
 	book: number;
@@ -23,18 +30,4 @@ export type Verse = {
 	linebreak: number;
 }
 
-export type BibleAction = { type: 'SET_BIBLE', payload: Bible}
-
-const bibleReducer = (state: Bible, action: BibleAction) => {
-	switch(action.type) {
-		case 'SET_BIBLE':
-			return {...state, 
-				books: action.payload.books,
-				name: action.payload.name
-			}
-		default:
-			return state;
-	};
-}
-
-export default bibleReducer;
+export type BibleAction = { type: 'SET_BIBLE', payload: Bible }
