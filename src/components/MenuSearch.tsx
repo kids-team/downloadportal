@@ -12,17 +12,15 @@ interface Props {
 }
 
 const MenuSearch = (props: Props) => {
-	const {state} = useContext(store);
+	const { state } = useContext(store);
 	const { setMenuOpen, searchOpen, setSearchOpen, className } = props
-	
+
 	const [query, setQuery] = useState('');
 	const [response, setResponse] = useState({
 		result: [],
 		more: false
-	});	
+	});
 	const [selectedSearchItem, setSelectedSearchItem] = useState(-1);
-
-	console.log(response)
 
 	const navigate = useNavigate();
 
@@ -30,19 +28,19 @@ const MenuSearch = (props: Props) => {
 
 	useEffect(() => {
 		setQuery('');
-		setResponse({result: [], more:false});
-		if(!searchOpen) return;
+		setResponse({ result: [], more: false });
+		if (!searchOpen) return;
 		if (null !== inputField.current) {
 			inputField?.current.focus();
-		  }
-		
+		}
+
 	}, [searchOpen])
 
 	const performSearch = (value: string) => {
 		setQuery(value);
-		if(!value) return;
-		if(value.length < 3) {
-			setResponse({result: [], more:false});
+		if (!value) return;
+		if (value.length < 3) {
+			setResponse({ result: [], more: false });
 			return;
 		}
 		fetch(getUrl('', {
@@ -58,27 +56,33 @@ const MenuSearch = (props: Props) => {
 	}
 
 	const openSearchPage = (event: KeyboardEvent | MouseEvent) => {
-		if(event instanceof KeyboardEvent && event.key == "Enter") return; 
-		if(event instanceof MouseEvent && event.currentTarget.nodeName === 'I') return;
+		if (event instanceof KeyboardEvent && event.key == "Enter") return;
+		if (event instanceof MouseEvent && event.currentTarget.nodeName === 'I') return;
 		gotoSearchPage()
 	}
 
 	const inputKeyDown = (event: KeyboardEvent) => {
-		if(event.key == "Enter" && selectedSearchItem == -1) {
+		console.log(event.key)
+		if (event.key == "Enter" && selectedSearchItem == -1) {
 			gotoSearchPage();
 			return;
 		}
-		if(event.key == "Enter") {
+		if (event.key == "Enter") {
 			gotoSearchPage();
 			return;
 		}
-		if(event.key == "ArrowDown" && selectedSearchItem < response.result.length) {
+		if (event.key == "ArrowDown" && selectedSearchItem < response.result.length) {
 			setSelectedSearchItem(selectedSearchItem + 1)
 		}
-		if(event.key == "ArrowUp" && selectedSearchItem != -1 ) {
+		if (event.key == "ArrowUp" && selectedSearchItem != -1) {
 			setSelectedSearchItem(selectedSearchItem - 1)
 		}
-		
+		if (event.key == "Escape") {
+			setSelectedSearchItem(selectedSearchItem - 1)
+			setSearchOpen(false)
+		}
+
+
 	}
 
 	console.log(selectedSearchItem)
@@ -86,7 +90,7 @@ const MenuSearch = (props: Props) => {
 	const gotoSearchPage = () => {
 		setQuery('')
 		setSearchOpen(false);
-		navigate('/search/'+query)
+		navigate('/search/' + query)
 	}
 
 	const openSearchResult = (link: string) => {
@@ -95,45 +99,45 @@ const MenuSearch = (props: Props) => {
 	}
 
 	const backdropClicked = (event: MouseEvent) => {
-		if(event.target === null) return;
-		if(event.currentTarget.tagName === 'DIV') {
+		if (event.target === null) return;
+		if (event.currentTarget.tagName === 'DIV') {
 			setSearchOpen(false);
 		}
 	}
 
 
-  return (<>
-	<div className={"search " + className + (searchOpen ? ' search--open' : '')}  >
-		<button onClick={() => {setSearchOpen(!searchOpen); setMenuOpen(false);}} type="button" className={'search__button ' + (searchOpen ? 'active' : '')}>
-			{ !searchOpen && <i className='material-icons'>search</i> }
-			{ searchOpen && <i className='material-icons'>close</i> }
-		</button>
-		{ searchOpen && <div className='search__form'>
-		<div className="search__input">
-		<input 
-			type="search" 
-			ref={inputField}
-			placeholder="Suche"
-			value={query} 
-			onChange={(event) => {performSearch(event.target.value)} }
-			onKeyDown={(event) => {inputKeyDown(event)}}
-		/>
-		<span className="search__send" onClick={() => {gotoSearchPage()}}><i className='material-icons'>search</i></span>
+	return (<>
+		<div className={"search " + className + (searchOpen ? ' search--open' : '')}  >
+			<button onClick={() => { setSearchOpen(!searchOpen); setMenuOpen(false); }} type="button" className={'search__button ' + (searchOpen ? 'active' : '')}>
+				{!searchOpen && <i className='material-icons'>search</i>}
+				{searchOpen && <i className='material-icons'>close</i>}
+			</button>
+			{searchOpen && <div className='search__form'>
+				<div className="search__input">
+					<input
+						type="search"
+						ref={inputField}
+						placeholder="Suche"
+						value={query}
+						onChange={(event) => { performSearch(event.target.value) }}
+						onKeyDown={(event) => { inputKeyDown(event) }}
+					/>
+					<span className="search__send" onClick={() => { gotoSearchPage() }}><i className='material-icons'>search</i></span>
+				</div>
+				<div className={'search__results ' + (searchOpen ? 'search__results--visible' : '')} onClick={(event) => { backdropClicked(event) }}>
+					<ul className='list list--padded'>
+						{response.result?.map((item: Article, index) => {
+							return <a key={index} onClick={() => { openSearchResult(item.id) }} className={'list__item ' + (selectedSearchItem == index ? 'list__item--active' : '')}>
+								<span >{item.title}<br /><sub className='list__subtitle'>{item.abstract}</sub></span>
+							</a>
+						})}
+					</ul>
+				</div>
+			</div>}
 		</div>
-		<div className={'search__results ' + (searchOpen ? 'search__results--visible' : '')} onClick={(event) => {backdropClicked(event)}}>
-			<ul className='list list--padded'>
-			{  response.result?.map((item: Article, index) => {
-			return <a key={index} onClick={() => {openSearchResult(item.id)}} className={'list__item ' + (selectedSearchItem == index ? 'list__item--active' : '')}>
-					<span >{item.title}<br /><sub className='list__subtitle'>{item.abstract}</sub></span>
-				</a>
-		}) }
-		</ul>
-		</div>
-		</div> }
-	</div>
-	
+
 	</>
-  )
+	)
 }
 
 export default MenuSearch;
