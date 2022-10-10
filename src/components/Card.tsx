@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLink } from '../services/api';
 import useUrl from '../services/useUrl';
@@ -17,14 +18,17 @@ const Card = (props: Props) => {
 		image, title, subtitle, text, link, label, badge
 	} = props;
 
-	const imgSrc = useUrl({w: 1000}, image)
-	
+	const [imageLoaded, setImageLoaded] = useState(false);
+
+	const imgSrc = useUrl({ w: 800 }, image)
+
 	return (<Link className='card card--image-top card--white card--shadow card--hover card--primary' to={getLink(link)}>
 		<div className='card__image'>
-			{ badge && <b className='card__badge'>{badge}</b> }
-			{ image && 
-			<img src={imgSrc} /> }
-			{ !image && <div className='card__image--replace'></div>}	
+			{badge && <b className='card__badge'>{badge}</b>}
+			{image &&
+				<img className={imageLoaded ? '' : 'imageLoaded'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
+			{!image && <div className='card__image--replace'></div>}
+			{!imageLoaded && <div className='card__image--loading'><div className='loader'></div></div>}
 		</div>
 		<div className='card__content'>
 			<div className='card__label'>{label}</div>
