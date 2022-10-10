@@ -80,7 +80,6 @@ const MenuSearch = (props: Props) => {
 
 	}
 
-	console.log(selectedSearchItem)
 
 	const gotoSearchPage = () => {
 		setQuery('')
