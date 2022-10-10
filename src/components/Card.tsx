@@ -26,9 +26,9 @@ const Card = (props: Props) => {
 		<div className='card__image'>
 			{badge && <b className='card__badge'>{badge}</b>}
 			{image &&
-				<img className={imageLoaded ? '' : 'imageLoaded'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
+				<img className={imageLoaded ? '' : 'hidden'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
 			{!image && <div className='card__image--replace'></div>}
-			{!imageLoaded && <div className='card__image--loading'><div className='loader'></div></div>}
+			{image && !imageLoaded && <div className='card__image--loading'><div className='loader'></div></div>}
 		</div>
 		<div className='card__content'>
 			<div className='card__label'>{label}</div>
