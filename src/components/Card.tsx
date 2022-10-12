@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLink } from '../services/api';
-import useUrl from '../services/useUrl';
+import { useMediaUrl } from '../services/useUrl';
 
 type Props = {
 	image?: string;
@@ -11,16 +11,17 @@ type Props = {
 	link: string;
 	label?: string;
 	badge?: string;
+	footer?: React.ReactNode
 }
 
-const Card = (props: Props) => {
+const Card: React.FC<Props> = (props) => {
 	const {
-		image, title, subtitle, text, link, label, badge
+		image, title, subtitle, text, link, label, badge, footer
 	} = props;
 
 	const [imageLoaded, setImageLoaded] = useState(false);
 
-	const imgSrc = useUrl({ w: 800 }, image)
+	const imgSrc = useMediaUrl(image, 800)
 
 	return (<Link className='card card--image-top card--white card--shadow card--hover card--primary' to={getLink(link)}>
 		<div className='card__image'>
@@ -41,6 +42,9 @@ const Card = (props: Props) => {
 			<div className='card__text'>
 				{text}
 			</div>
+			{footer && <div className='card__footer card__footer--dotted'>
+				{footer}
+			</div>}
 		</div>
 	</Link>)
 }
