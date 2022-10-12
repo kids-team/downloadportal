@@ -29,7 +29,7 @@ const ArticlePage = () => {
 	}
 
 	const availableFiles = fileList();
-	console.log(availableFiles)
+	console.log(data)
 
 	const hasFiles = availableFiles.length > 0;
 	const sideInfo = data?.showSubpages || hasFiles;
