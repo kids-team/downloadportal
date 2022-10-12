@@ -98,7 +98,14 @@
 		justify-content: center;
 		flex-direction: column;
 		font-size: 0.85rem;
-		color: tools.gray(900)
+		color: tools.gray(900);
+
+		&--ellipsis {
+			line-height: 1.25rem;
+			max-height: 2.5rem;
+			overflow: hidden;
+			display: block;
+		}
 	}
 
 	&__description {

@@ -22,7 +22,7 @@ const ListItem: React.FC<ListItemProps> = (props) => {
 			{icon && <i className="material-icons">{icon}</i>}
 			<div className="item__content">
 				<span className="list__title">{title}</span>
-				{description && <span className="list__subtitle">{description}</span>}
+				{description && <span className="list__subtitle list__subtitle--ellipsis">{description}</span>}
 			</div>
 		</Link>
 	)
