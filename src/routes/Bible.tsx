@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import ArticleList from '../components/ArticleList';
 import Combobox from '../components/Combobox';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
@@ -25,17 +26,14 @@ const Bible = () => {
 		book: currentBook?.id ?? 10,
 		chapter: chapter ?? 1
 	}
-	console.log(book, currentBook)
-	const url = useUrl(args);
+
+	const url = useUrl({}, `/api/${state.lang}/bible/${currentBook?.id ?? 10}/${chapter}`)
+
 	const { data, error } = useFetch<Array<Verse>>(url);
 
+	const notesurl = useUrl({ pages: true }, `/api/${state.lang}/biblepages/${currentBook?.id ?? 10}/${chapter}`)
 
-	const tagUrl = useUrl({
-		controller: 'tag',
-		tag: currentBook?.short_name
-	});
-
-	const { data: tag, error: tagError } = useFetch(tagUrl);
+	const { data: tag, error: tagError } = useFetch(notesurl);
 	console.log(tag)
 
 	const bibleurl = state.bible?.info?.url ?? "bible"
@@ -53,7 +51,7 @@ const Bible = () => {
 	return (
 		<>
 			<Navigation />
-			<Header title={currentBook?.long_name} subtitle={state.bible.info.chapter_string + ' ' + chapter ?? ''} />
+			<Header height={10} title={currentBook?.long_name} subtitle={state.bible.info.chapter_string + ' ' + chapter ?? ''} />
 			<div className='section bg-gray-300 py-12'>
 				<div className='content flex gap'>
 					<Combobox
@@ -67,6 +65,7 @@ const Bible = () => {
 			<section>
 				<div className='container grid grid--columns-4 grid--gap-4'>
 					<div className='sm:grid__column--span-4 lg:grid__column--span-3'>
+						<h4>Bibeltext</h4>
 						<div>
 							<ul>
 								{data?.map((verse) => {
@@ -77,6 +76,10 @@ const Bible = () => {
 					</div>
 					<div>
 						<h4>Artikel</h4>
+						<ArticleList
+							query='bible'
+							value={`${currentBook?.id}:${chapter}`}
+						/>
 					</div>
 				</div>
 			</section>
