@@ -1,5 +1,5 @@
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ArticleList from '../components/ArticleList';
 import Error from '../components/Error';
 import FileList from '../components/FileList';
@@ -78,7 +78,7 @@ const ArticlePage = () => {
 					<div className='content'>
 						<div className='pills'>
 							<span><FormattedMessage id="tags" values={{ count: data.tags.length }} defaultMessage="{count, plural, =0 {no tags} one {Tag} other {Tags}}"></FormattedMessage></span>
-							{data?.tags?.map((tag, index) => { return <span className='bg-gray-800 pills__item pills__item--dark' key={index}>{tag}</span> })}
+							{data?.tags?.map((tag, index) => { return <Link to={'/tag/' + tag} className='bg-gray-800 pills__item pills__item--dark' key={index}>{tag}</Link> })}
 						</div>
 						<FormattedMessage id="lastUpdated" defaultMessage="Last updated" />: <FormattedDate value={new Date(data.date?.date)} />
 
