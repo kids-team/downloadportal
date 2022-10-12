@@ -64,7 +64,7 @@ const Bible = () => {
 			</div>
 			<section>
 				<div className='container grid grid--columns-4 grid--gap-4'>
-					<div className='sm:grid__column--span-4 lg:grid__column--span-3'>
+					<div className='grid__column--span-4 lg:grid__column--span-3'>
 						<h4>Bibeltext</h4>
 						<div>
 							<ul>
@@ -74,7 +74,7 @@ const Bible = () => {
 							</ul>
 						</div>
 					</div>
-					<div>
+					<div className='grid__column--span-4 lg:grid__column--span-1'>
 						<h4>Artikel</h4>
 						<ArticleList
 							query='bible'
