@@ -1,5 +1,5 @@
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import { Link, useParams } from "react-router-dom";
+import { Link, ScrollRestoration, useParams } from "react-router-dom";
 import ArticleList from '../components/ArticleList';
 import Error from '../components/Error';
 import FileList from '../components/FileList';
@@ -12,8 +12,7 @@ import useUrl from '../services/useUrl';
 
 const ArticlePage = () => {
 
-	const params = useParams();
-	let id = Object.values(params).join('/').replace(/\/+$/, '');
+	const { "*": id } = useParams();
 
 	const args = {
 		controller: 'page',
@@ -40,6 +39,7 @@ const ArticlePage = () => {
 	return (
 		<>
 			<Navigation />
+			<ScrollRestoration />
 			<Header title={data?.title ?? ""} image={data?.pageimage} />
 
 			<section className="bg-gray-100 py-12">
