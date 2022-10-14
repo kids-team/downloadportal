@@ -1,20 +1,15 @@
 import { useContext, useEffect } from "react";
-import {
-	BrowserRouter, Route, Routes
-} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import { IntlProvider } from 'react-intl';
 import './App.css';
 import Error from "./components/Error";
 import Footer from "./components/Footer";
-import ArticlePage from "./routes/ArticlePage";
-import Bible from './routes/Bible';
-import SearchPage from "./routes/SearchPage";
-import Tag from "./routes/Tag";
 import './scss/style.scss';
 import { getUrl } from "./services/api";
 import getTopLevelDomain from "./services/getTopLevelDomain";
 import useTranslation from "./services/i18n";
+import router from "./services/routes";
 import { store } from './services/store';
 
 function App() {
@@ -50,19 +45,12 @@ function App() {
 	const messages = useTranslation(currentLanguage)
 
 	if (state.error) return <Error message={`Server Error: ${state.error.toString()}`} />
-	const bibleurl = state.bible?.info?.url ?? "bible"
 
 	return (
 		<div className={`app ${getTopLevelDomain()}`}>
 			<IntlProvider locale={currentLanguage} defaultLocale="en" messages={messages}>
-				<BrowserRouter>
-					<Routes>
-						<Route path={bibleurl + "/:book/:chapter"} element={<Bible />} />
-						<Route path="search/:query" element={<SearchPage />} />
-						<Route path="tag/:tag" element={<Tag />} />
-						<Route path="*" element={<ArticlePage />} />
-					</Routes>
-				</BrowserRouter>
+				<RouterProvider router={router} />
+
 				<Footer />
 			</IntlProvider>
 		</div>
