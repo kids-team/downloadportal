@@ -45,6 +45,10 @@ const store = createContext<{
 
 const { Provider } = store;
 
+const getState = (state: any) => {
+	return state
+}
+
 const StateProvider: React.FC<ProviderProps> = (props) => {
 
 	const reducer = (state: InitialStateType, action: Action) => {
@@ -75,4 +79,4 @@ const StateProvider: React.FC<ProviderProps> = (props) => {
 	return (<Provider value={{ state, dispatch }} >{props.children}</Provider>);
 };
 
-export { store, StateProvider };
+export { store, StateProvider, getState };
