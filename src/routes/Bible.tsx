@@ -36,17 +36,16 @@ const Bible = () => {
 	const { data: tag, error: tagError } = useFetch(notesurl);
 	console.log(tag)
 
-	const bibleurl = state.bible?.info?.url ?? "bible"
+	const bibleurl = "bible"
 	const bookOptions = state.bible.books.map((book) => { return { label: book.long_name, value: book.short_name } })
 
 	const setBook = (bookId: number | string) => {
-		navigate(`/${bibleurl}/${bookId}/1`);
+		navigate(`/${bibleurl}/${bookId}/1`, { preventScrollReset: true, replace: true });
 	}
 
 	const setChapter = (chapter: number) => {
-		navigate(`/${bibleurl}/${currentBook?.short_name ?? 'genesis'}/${chapter}`);
+		navigate(`/${bibleurl}/${currentBook?.short_name ?? 'genesis'}/${chapter}`, { preventScrollReset: true, replace: true });
 	}
-
 
 	return (
 		<>
