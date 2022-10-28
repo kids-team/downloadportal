@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Parser = (props: Props) => {
-	
+
 	let replacedText;
 
 	const { content } = props;
@@ -18,29 +18,29 @@ const Parser = (props: Props) => {
 	if (content === undefined) return <></>
 
 	replacedText = content.replaceAll(/(={2,6}.+?={2,6})/g, (match) => {
-		
-		const count =  match.split(' ')[0].length
+
+		const count = match.split(' ')[0].length
 		let result;
-		let title = match.replaceAll(/={2,}/g,'');
+		let title = match.replaceAll(/={2,}/g, '');
 		switch (count) {
-			case 2: 
+			case 2:
 				result = `<h5>${title}</h5>`
 				break;
-			case 3: 
+			case 3:
 				result = `<h4>${title}</h4>`
 				break;
-			case 4: 
+			case 4:
 				result = `<h3>${title}</h3>`
 				break;
-			case 5: 
+			case 5:
 				result = `<h2>${title}</h2>`
 				break;
-			case 6: 
+			case 6:
 				result = `<h1>${title}</h1>`
 				break;
 			default:
 				result = `<h5>${title}</h5>`
-				
+
 		}
 		return result
 	});
@@ -55,14 +55,14 @@ const Parser = (props: Props) => {
 	})
 
 	replacedText = replacedText.replaceAll(/((?<!\:)\/{2}[\s\S]*?\/{2})/g, (match) => {
-		let title = match.replaceAll(/\/{2,}/g,'');
+		let title = match.replaceAll(/\/{2,}/g, '');
 		return (
 			`<i>${title}</i>`
 		)
 	});
 
 	replacedText = replacedText.replaceAll(/(\{{2}youtube>.+\}{2})/g, (match) => {
-		const data = match.slice(10).slice(0,-2);
+		const data = match.slice(10).slice(0, -2);
 		const [url, size] = data.includes('?') ? data.split('?') : [data, '']
 		return (
 			`<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" style="aspect-ratio: 16/9;" type="text/html" src="https://www.youtube.com/embed/${url}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe>`
@@ -71,7 +71,7 @@ const Parser = (props: Props) => {
 
 
 	replacedText = replacedText.replaceAll(/(\{{2}[\s\S]*?\}{2})/g, (match) => {
-		const data = match.replaceAll(/[{}]{2,}/g,'');
+		const data = match.replaceAll(/[{}]{2,}/g, '');
 		const [media, alt] = data.includes('|') ? data.split('|') : [data, '']
 		const [id, width] = media.includes('?') ? media.split('?') : [media, 0]
 		const url = `${settings.api}/_media${id.replaceAll(':', '/')}${width > 0 ? `?w=${width}` : ''}`
@@ -80,14 +80,14 @@ const Parser = (props: Props) => {
 		)
 	});
 	replacedText = replacedText.replaceAll(/(\*{2}[\s\S]*?\*{2})/g, (match) => {
-		let title = match.replaceAll(/\*{2,}/g,'');
+		let title = match.replaceAll(/\*{2,}/g, '');
 		return (
 			`<b>${title}</b>`
 		)
 	});
 
 	replacedText = replacedText.replaceAll(/(__[\s\S]*?__)/g, (match) => {
-		let title = match.replaceAll(/_{2,}/g,'');
+		let title = match.replaceAll(/_{2,}/g, '');
 		return (
 			`<u>${title}</u>`
 		)
@@ -97,14 +97,14 @@ const Parser = (props: Props) => {
 		return (
 			`<br />`
 		)
-		}
+	}
 	);
 
 	replacedText = replacedText.replaceAll(/(-{4})/g, (match, i) => {
 		return (
 			`<hr />`
 		)
-		}
+	}
 	);
 
 	replacedText = replacedText.replaceAll(/^[|^](.+\n)+\|(.+)[|^]$/gm, (match) => {
@@ -113,7 +113,7 @@ const Parser = (props: Props) => {
 		lines.map(line => {
 			const start = line[0] === "|" ? '<tr><td>' : '<th><td>'
 			const end = line[0] === "|" ? '</td><tr>' : '</td><th>'
-			result += start + line.substring(1).slice(0,-1).replaceAll(/\|/g, '</td><td>') + end;
+			result += start + line.substring(1).slice(0, -1).replaceAll(/\|/g, '</td><td>') + end;
 		});
 		result += '</table>';
 		return result
@@ -125,55 +125,55 @@ const Parser = (props: Props) => {
 		const tag = regExp.test(list[0]) ? 'ul' : 'ol'
 		let result = '';
 		list.map((element) => {
-			if(element === '') return;
+			if (element === '') return;
 			let title = element.replaceAll(/[ ]{2,}[*-][ ]/g, '');
 			result += `<li>${title}</li>`
 		})
-		
+
 		return (
 			`<${tag} class="core-block">${result}</${tag}>`
 		)
-		}
+	}
 	);
 
-	
+	let result = parse(replacedText, {
+		replace: (domNode: any) => {
 
-	let result = parse(replacedText, {replace: (domNode: any) => {
-		
-		if (domNode.attribs && domNode.name === 'bible') {
-			const props = attributesToProps(domNode.attribs);
-		  	return <BibleVerse verse={domNode.attribs.verse}>{domToReact(domNode.children)}</BibleVerse>
+			if (domNode.attribs && domNode.name === 'bible') {
+				const props = attributesToProps(domNode.attribs);
+				return <BibleVerse verse={domNode.attribs.verse}>{domToReact(domNode.children)}</BibleVerse>
+			}
+
+			if (domNode.attribs?.id && domNode.name === 'a') {
+				const props = attributesToProps(domNode.attribs);
+				return <Link to={(domNode.attribs.id)}>{domToReact(domNode.children)}</Link>
+			}
+
+			if (domNode.attribs && domNode.name === 'subpages') {
+				const attribute = ['tag', 'namespace', 'id'].filter(value => value in domNode.attribs)
+				const style = domNode.attribs.style ?? "cards";
+				if (attribute.length !== 1) return <></>;
+				const query = attribute[0];
+				let props = {
+					query,
+					columns: domNode.attribs.columns ?? 3,
+					value: domNode.attribs[query]
+				};
+
+				if (style === "cards") return <ArticleCards {...props} />
+				return <ArticleList {...props} />
+			}
+
+			if (domNode.attribs && domNode.name === 'wrap') {
+				const props = attributesToProps(domNode.attribs);
+				return <div {...props}>{domToReact(domNode.children)}</div>
+			}
 		}
-
-		if (domNode.attribs?.id && domNode.name === 'a') {
-			const props = attributesToProps(domNode.attribs);
-			return <Link to={(domNode.attribs.id)}>{domToReact(domNode.children)}</Link>
-		}
-
-		if (domNode.attribs && domNode.name === 'subpages') {
-			const attribute = ['tag', 'namespace', 'id'].filter(value => value in domNode.attribs)
-			const style = domNode.attribs.style ?? "cards";
-			if(attribute.length !== 1) return <></>;
-			const query = attribute[0];
-			let props = {
-				query,
-				columns: domNode.attribs.columns ?? 3,
-				value: domNode.attribs[query]
-			};
-
-			if(style === "cards") return <ArticleCards {...props} />
-			return <ArticleList {...props} />
-		}
-
-		if (domNode.attribs && domNode.name === 'wrap') {
-			const props = attributesToProps(domNode.attribs);
-			return <div {...props}>{domToReact(domNode.children)}</div>
-		}
-	}})
+	})
 
 	return <>{result}</>
-  	
-  
+
+
 }
 
 export default Parser
