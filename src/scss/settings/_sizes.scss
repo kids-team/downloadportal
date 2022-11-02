@@ -1,25 +1,27 @@
 $spacer: 1rem;
 $spacers: (
-    0: 0,
-    1: $spacer * 0.25,
-    2: $spacer * 0.5,
-    4: $spacer,
-    5: $spacer * 1.25,
-    6: $spacer * 1.5,
-    8: $spacer * 2,
-    12: $spacer * 3,
-    16: $spacer * 4,
-    32: $spacer * 8,
-    64: $spacer * 16,
+	0: 0,
+	1: $spacer * 0.25,
+	2: $spacer * 0.5,
+	4: $spacer,
+	5: $spacer * 1.25,
+	6: $spacer * 1.5,
+	8: $spacer * 2,
+	12: $spacer * 3,
+	16: $spacer * 4,
+	32: $spacer * 8,
+	64: $spacer * 16,
 );
 
+$body-width: 1440px;
+
 $screens: (
-    '': 0,
-    'sm': 640px,
-    'md': 768px,
-    'lg': 1024px,
-    'xl': 1280px,
-    'xxl': 1536px
+	'': 0,
+	'sm': 640px,
+	'md': 768px,
+	'lg': 1024px,
+	'xl': 1440px,
+	'xxl': 1536px
 );
 
 $content-width: map-get($screens, 'lg');
@@ -28,36 +30,40 @@ $content-width: map-get($screens, 'lg');
 /   Border Radius base multiplier
 */
 $border-base: (
-    'sm': $spacer * 0.5,
-    'md': $spacer *.75,
-    'lg': $spacer * 2,
-    'xl': $spacer * 4,
+	'sm': $spacer * 0.5,
+	'md': $spacer *.75,
+	'lg': $spacer * 2,
+	'xl': $spacer * 4,
 );
 
 /*
 /   Border Radius multiplier for each corner
 */
 $border-multiplier: (
-    'tl': 1,
-    'tr': 0,
-    'bl': 0,
-    'br': 1,
+	'tl': 1,
+	'tr': 0,
+	'bl': 0,
+	'br': 1,
 );
 
 
-$text-base: 1rem !default; 
+$text-base: 1rem !default;
 $line-height-factor: 1.5;
 $font-family: "Exo 2", sans-serif;
 
 $headings: (
-    h1: 2.5,
-    h2: 2,
-    h3: 1.75,
-    h4: 1.5,
-    h5: 1.25,
-    h6: 1
+	h1: 2.5,
+	h2: 2,
+	h3: 1.75,
+	h4: 1.5,
+	h5: 1.25,
+	h6: 1
 );
 
-$text-xs:                $text-base * .75 !default;
-$text-sm:                $text-base * .875 !default;
-$text-lg:                $text-base * 1.25 !default;
+$text-xs: $text-base * .75 !default;
+$text-sm: $text-base * .875 !default;
+$text-lg: $text-base * 1.25 !default;
+
+.gap-4 {
+	gap: 1rem;
+}

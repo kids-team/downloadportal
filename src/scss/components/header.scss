@@ -2,55 +2,94 @@
 @use '../tools' as tools;
 
 .header {
-    background-size: cover;
-    background-color: var(--primary-page-light);
-    position: relative;
-    margin-top: 5rem;
-    img {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-    &__title {
-        position: relative;
-        display: inline-block;
-        background: var(--primary-page-transparent);
-        backdrop-filter: blur(5px);
-        border-bottom-left-radius: 2.5rem;
-        border-top-right-radius: 3rem;
-        color: var(--primary-page-contrast);
-        margin-left: -2000px; 
-        padding: 50px 50px 50px 2000px;
-        text-align: right;
-        h1 {
-            font-size: 1.875rem;
-            line-height: 1;
-            margin: 0;
+	background-size: cover;
+	background-color: var(--primary-page-light);
+	position: relative;
+	margin-top: 5rem;
+	display: flex;
+
+
+	img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+
+	&--top {
+		align-items: flex-start;
+
+		&.header--left .header__title {
+			border-bottom-right-radius: 3rem;
+		}
+
+		&.header--right .header__title {
+			border-bottom-left-radius: 3rem;
+		}
+	}
+
+	&--bottom {
+		align-items: flex-end;
+
+		&.header--left .header__title {
+			border-top-right-radius: 3rem;
+		}
+
+		&.header--right .header__title {
+			border-top-left-radius: 3rem;
+		}
+	}
+
+	&--left {
+		justify-content: flex-start;
+	}
+
+	&--right {
+		justify-content: flex-end;
+	}
+
+	&__title {
+		position: relative;
+		display: inline-block;
+		background: var(--primary-page-transparent);
+		backdrop-filter: blur(5px);
+		color: var(--primary-page-contrast);
+		margin-left: 0px;
+		padding: 50px 50px 50px 50px;
+		text-align: right;
+
+		h1 {
+			font-size: 1.875rem;
+			line-height: 1;
+			margin: 0;
+
 			@include tools.media-breakpoint(md) {
-                font-size: 2rem;
-            }
-            @include tools.media-breakpoint(xl) {
-                font-size: 3rem;
-                line-height: 1;
-            }
-        }
-        h4 {
-            margin: 0;
-        }
-        a {
-            position: absolute;
-            right: 0;
-            
-            background-color: var(--secondary-page);
-            color: var(--secondary-page-contrast);
-            margin-right: tools.space(4);
-            top: 0;
-            margin-top: -1.5rem;
-        }
-    }
+				font-size: 2rem;
+			}
+
+			@include tools.media-breakpoint(xl) {
+				font-size: 3rem;
+				line-height: 1;
+			}
+		}
+
+		h4 {
+			margin: 0;
+		}
+
+		a {
+			position: absolute;
+			right: 0;
+
+			background-color: var(--secondary-page);
+			color: var(--secondary-page-contrast);
+			margin-right: tools.space(4);
+			top: 0;
+			margin-top: -1.5rem;
+		}
+	}
 }
