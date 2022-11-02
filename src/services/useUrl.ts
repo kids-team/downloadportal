@@ -8,7 +8,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 function useUrl(params: Params = {}, path = '/') {
 	const { state } = useContext(store)
 
-	if (path[0] != '/') path = '/' + path;
+	if (path[0] !== '/') path = '/' + path;
 	path = path.replaceAll(':', '/')
 	if (Object.keys(params).length === 0) return SERVER_URL + path;
 
