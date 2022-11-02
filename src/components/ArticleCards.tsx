@@ -6,7 +6,7 @@ import useFetch from '../services/useFetch';
 import useUrl from '../services/useUrl';
 import Card from './Card';
 
-type Props = {
+interface Props {
 	query: string;
 	value: string;
 	columns: number;
