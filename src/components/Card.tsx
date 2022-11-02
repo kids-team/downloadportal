@@ -25,10 +25,6 @@ const Card: React.FC<Props> = (props) => {
 	console.log(entry?.isIntersecting)
 	const [imageLoaded, setImageLoaded] = useState(false);
 
-	const load = () => {
-
-	}
-
 	const imgSrc = useMediaUrl(image, 800)
 
 	return (<Link className='card card--image-top card--white card--shadow card--hover card--primary' to={getLink(link)}>
