@@ -32,7 +32,8 @@ function App() {
 				dispatch({ type: 'SET_MENU', payload: data.menu });
 				dispatch({ type: 'SET_FOOTER', payload: data.footer });
 				dispatch({ type: 'SET_STATUS', payload: 'loaded' });
-				dispatch({ type: 'SET_BIBLE', payload: data.bible })
+				dispatch({ type: 'SET_BIBLE', payload: data.bible });
+				dispatch({ type: 'SET_TAXONOMIES', payload: data.taxonomies })
 			})
 			.catch((error) => {
 				console.log(error)
