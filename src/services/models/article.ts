@@ -8,6 +8,7 @@ export type Article = {
 	title: string;
 	content: string;
 	summary: string;
+	audience: string;
 	link: string;
 	exclude: string;
 	category: string;
@@ -39,4 +40,21 @@ export type DokuFile = {
 	info: string;
 	writable: boolean
 	minor_change: boolean;
+}
+
+export type Tag = {
+	name: string,
+	id: string
+}
+
+export type Category = {
+	value: string
+	label: string
+	icon: string,
+	color: string
+}
+
+export type Audience = {
+	value: string
+	label: string
 }
