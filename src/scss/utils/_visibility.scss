@@ -6,17 +6,18 @@
 
 @include tools.media-breakpoint(md) {
 	.md\:show {
-		display: inherit;
+		display: initial;
 	}
 
 	.md\:hidden {
 		display: none;
+		;
 	}
 }
 
 @include tools.media-breakpoint(lg) {
 	.lg\:show {
-		display: inherit;
+		display: initial;
 	}
 
 	.lg\:hidden {
@@ -26,7 +27,7 @@
 
 @include tools.media-breakpoint(xl) {
 	.xl\:show {
-		display: inherit;
+		display: initial;
 	}
 
 	.xl\:hidden {
