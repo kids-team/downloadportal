@@ -15,5 +15,9 @@
 	"noResults": "Keine Suchergebnisse gefunden.",
 	"changed": "Geändert",
 	"articles": "Artikel",
-	"bibletext": "Bibeltext"
+	"bibletext": "Bibeltext",
+	"category": "Kategorie",
+	"filter": "Filter",
+	"noCategory": "Keine Kategorie",
+	"audience": "Zielgruppe"
 }
