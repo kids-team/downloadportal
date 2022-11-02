@@ -27,7 +27,7 @@ const Card: React.FC<Props> = (props) => {
 		<div className='card__image'>
 			{badge && <b className='card__badge'>{badge}</b>}
 			{image &&
-				<img className={imageLoaded ? '' : 'hidden'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
+				<img loading="lazy" className={imageLoaded ? '' : 'hidden'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
 			{!image && <div className='card__image--replace'></div>}
 			{image && !imageLoaded && <div className='card__image--loading'><div className='loader'></div></div>}
 		</div>
