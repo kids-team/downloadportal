@@ -1,15 +1,18 @@
 import React, { useRef, useState } from 'react';
+import { Category } from '../services/models/article';
 
 interface ComboboxProps {
-	options: Array<{ label: string, value: string | number, icon?: string }>
+	options: Array<{ label: string, value: string | number, icon?: string }> | Array<Category>
 	placeholder?: string
 	default?: string | number
+	nullOption?: string
+	className?: string;
 	onChange?: (option: string | number) => void
 }
 
 const Combobox: React.FC<ComboboxProps> = (props) => {
 
-	const { options, onChange, placeholder } = props;
+	const { options, onChange, placeholder, nullOption, className } = props;
 
 	const input = useRef<HTMLInputElement>(null);
 
@@ -51,11 +54,21 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
 		}
 	}
 
+	const nullSelect = () => {
+		setListSelect(-1)
+		dropdownSelect(0)
+	}
+
 
 	return (
-		<div className='combobox' onKeyDown={(event) => keyPress(event)}>
+		<div className={'combobox ' + className} onKeyDown={(event) => keyPress(event)}>
 			<input ref={input} type="text" onMouseOver={() => { setListSelect(-1) }} onClick={(event) => { }} placeholder={selection != -1 ? options[selection].label : placeholder} value={inputField} onChange={(event) => setInputField(event.target.value)} />
 			<ul>
+				{nullOption !== '' && <>
+					<li className={listSelect == -1 ? "selected" : ''} onMouseDown={(event) => { nullSelect() }}>
+						{nullOption}
+					</li>
+				</>}
 				{filteredOptions().map((option, index) => {
 					return <li className={listSelect == index ? "selected" : ''} onMouseDown={(event) => { dropdownSelect(option.value) }} key={index}>
 						{option.label}
@@ -70,7 +83,9 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
 }
 
 Combobox.defaultProps = {
-	placeholder: ''
+	placeholder: '',
+	nullOption: '',
+	className: ''
 }
 
 export default Combobox
