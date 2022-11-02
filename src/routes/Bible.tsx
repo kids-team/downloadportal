@@ -50,7 +50,7 @@ const Bible = () => {
 	return (
 		<>
 			<Navigation />
-			<Header height={10} title={currentBook?.long_name} subtitle={state.bible.info.chapter_string + ' ' + chapter ?? ''} />
+			<Header aspectRatio='21' title={currentBook?.long_name} subtitle={state.bible.info.chapter_string + ' ' + chapter ?? ''} />
 			<div className='section bg-gray-300 py-12'>
 				<div className='content flex gap'>
 					<Combobox

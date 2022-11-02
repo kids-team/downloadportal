@@ -5,32 +5,40 @@ export interface Props {
 	title?: string;
 	subtitle?: string;
 	image?: string;
-	height?: number;
+	aspectRatio?: "21" | "16" | "12";
 }
 
 const Header: React.FC<Props> = props => {
 
-	const { image, title, subtitle, height } = props;
+	const { image, title, subtitle, aspectRatio } = props;
 
-	const imageSrc : string = useMediaUrl(image);
-  
+	const imageSrc: string = useMediaUrl(image);
+
+	const className: string = [
+		'header',
+		'aspect-12/9',
+		'lg:aspect-' + aspectRatio + '/9',
+		'header--left',
+		'header--bottom',
+		'fill-body'
+	].filter(Boolean).join(' ')
+
 	return (
-		<header className="header" style={{paddingTop: `${height}vh`}}>
-				
-				{ image && <img src={imageSrc} /> }
-				
-				<div className="content">
-					<div className="header__title">
-						<h1 className="font-script">{title}</h1>
-						{ subtitle && <h4 className="ml-4 xl:mr-0">{subtitle}</h4> }
-					</div>
-				</div>
+		<header className={className}>
+			{image && <img src={imageSrc} />}
+
+
+			<div className="header__title">
+				<h1 className="font-script">{title}</h1>
+				{subtitle && <h4 className="ml-4 xl:mr-0">{subtitle}</h4>}
+			</div>
+
 		</header>
-  	)
+	)
 }
 
 Header.defaultProps = {
-	height: 30,
+	aspectRatio: "16",
 	image: "",
 	title: ""
 };
