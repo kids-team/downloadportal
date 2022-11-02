@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLink } from '../services/api';
+import useIntersectionObserver from '../services/hooks/useIntersectionObserver';
 import { useMediaUrl } from '../services/useUrl';
 
 type Props = {
@@ -19,15 +20,22 @@ const Card: React.FC<Props> = (props) => {
 		image, title, subtitle, text, link, label, badge, footer
 	} = props;
 
+	const imgRef = useRef<HTMLDivElement>(null);
+	const entry = useIntersectionObserver(imgRef, { freezeOnceVisible: true });
+	console.log(entry?.isIntersecting)
 	const [imageLoaded, setImageLoaded] = useState(false);
+
+	const load = () => {
+
+	}
 
 	const imgSrc = useMediaUrl(image, 800)
 
 	return (<Link className='card card--image-top card--white card--shadow card--hover card--primary' to={getLink(link)}>
-		<div className='card__image'>
+		<div className='card__image' ref={imgRef}>
 			{badge && <b className='card__badge'>{badge}</b>}
-			{image &&
-				<img loading="lazy" className={imageLoaded ? '' : 'hidden'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
+			{image && entry?.isIntersecting &&
+				<img className={imageLoaded ? '' : 'hidden'} src={imgSrc} onLoad={() => setImageLoaded(true)} />}
 			{!image && <div className='card__image--replace'></div>}
 			{image && !imageLoaded && <div className='card__image--loading'><div className='loader'></div></div>}
 		</div>
