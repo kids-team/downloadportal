@@ -1,14 +1,19 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
 import getCurrentLanguage from './getCurrentLanguage';
+import { Audience, Category, Tag } from './models/article';
 import { Bible, BibleAction } from './models/bible';
 import { Menu, MenuAction } from './models/menu';
 
 type InitialStateType = {
 	menu: Menu;
+	taxonomies: {
+		tags: { [key: string]: Tag };
+		categories: { [key: string]: Category };
+		audience: { [key: string]: Audience };
+	},
 	bible: Bible;
 	footer: string;
 	error: string;
-	translation: {};
 	lang: string;
 	status: string;
 };
@@ -20,8 +25,12 @@ const initialState: InitialStateType = {
 		brand: "",
 		available_langs: []
 	},
+	taxonomies: {
+		categories: {},
+		audience: {},
+		tags: {},
+	},
 	footer: "",
-	translation: {},
 	bible: {
 		books: [],
 		info: {}
@@ -31,7 +40,10 @@ const initialState: InitialStateType = {
 	lang: getCurrentLanguage()
 }
 
-type Action = MenuAction | BibleAction | { type: 'SET_LANG' | 'SET_ERROR' | 'SET_FOOTER' | 'SET_STATUS'; payload: string } | { type: 'SET_TRANSLATION', payload: {} }
+type Action = MenuAction
+	| BibleAction
+	| { type: 'SET_LANG' | 'SET_ERROR' | 'SET_FOOTER' | 'SET_STATUS'; payload: string }
+	| { type: 'SET_TAXONOMIES', payload: any }
 
 
 type ProviderProps = {
@@ -65,8 +77,8 @@ const StateProvider: React.FC<ProviderProps> = (props) => {
 				return { ...state, footer: action.payload }
 			case 'SET_BIBLE':
 				return { ...state, bible: action.payload }
-			case 'SET_TRANSLATION':
-				return { ...state, translation: action.payload }
+			case 'SET_TAXONOMIES':
+				return { ...state, taxonomies: action.payload }
 			case 'SET_ERROR':
 				return { ...state, error: action.payload }
 			default:
