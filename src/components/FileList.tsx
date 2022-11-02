@@ -47,8 +47,8 @@ const FileList = (props: Props) => {
 						<span className='list__title text--black'>{file.filename}</span>
 						<span className='list__subtitle'>
 							<FormattedNumber value={size.value} unit={size.unit} style="unit" maximumSignificantDigits={3} />,
-							<FormattedMessage id="changed" defaultMessage="Changed" />:
-							<FormattedDate day="numeric" year="numeric" month='long' value={new Date(file.modified.date)} />
+							<FormattedMessage id="changed" defaultMessage="Changed" />: &nbsp;
+							<FormattedDate day="numeric" year="numeric" month='long' value={new Date(file.modified.date.replace('-', '/'))} />
 						</span>
 					</div>
 				</a>

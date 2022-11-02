@@ -37,16 +37,16 @@ const ArticlePage = () => {
 
 
 	return (
-		<>
+		<div>
 			<Navigation />
 			<ScrollRestoration />
-			<Header title={data?.title ?? ""} image={data?.pageimage} />
+			<Header aspectRatio='21' title={data?.title ?? ""} image={data?.pageimage} />
 
-			<section className="bg-gray-100 py-12">
+			<div className="py-12">
 				{error && <Error message="No connection to server" />}
 				{!data && <div className='loader'></div>}
 				{data &&
-					<div className="content">
+					<div className="">
 						<div className={sideInfo ? 'grid grid--columns-1 md:grid--columns-2 xl:grid--columns-3 grid--gap-12' : ''}>
 							<div className={sideInfo ? 'grid__column grid__column--span-0 md:grid__column--span-0 xl:grid__column--span-2' : ''}><Parser content={data?.content} /></div>
 							{sideInfo && <div>
@@ -72,20 +72,21 @@ const ArticlePage = () => {
 						</div>
 					</div>
 				}
-			</section>
-			<section className='bg-gray-300 py-8'>
+			</div>
+
+			<section className='bg-gray-300 py-8 section--rounded'>
 				{data &&
-					<div className='content'>
+					<div className=''>
 						<div className='pills'>
 							<span><FormattedMessage id="tags" values={{ count: data.tags.length }} defaultMessage="{count, plural, =0 {no tags} one {Tag} other {Tags}}"></FormattedMessage></span>
 							{data?.tags?.map((tag, index) => { return <Link to={'/tag/' + tag} className='bg-gray-800 pills__item pills__item--dark' key={index}>{tag}</Link> })}
 						</div>
-						<FormattedMessage id="lastUpdated" defaultMessage="Last updated" />: <FormattedDate value={new Date(data.date?.date)} />
+						<FormattedMessage id="lastUpdated" defaultMessage="Last updated" />: <FormattedDate value={new Date(data.date?.date.replace('-', '/'))} />
 
 					</div>
 				}
 			</section>
-		</>
+		</div>
 	)
 }
 
