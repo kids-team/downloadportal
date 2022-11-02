@@ -54,8 +54,8 @@ const Parser = (props: Props) => {
 		return `<a href=${href} ${id}>${title}</a>`
 	})
 
-	replacedText = replacedText.replaceAll(/((?<!\:)\/{2}[\s\S]*?\/{2})/g, (match) => {
-		let title = match.replaceAll(/\/{2,}/g, '');
+	replacedText = replacedText.replaceAll(/(\/{2}[\s\S]*?\/{2})/g, (match) => {
+		let title = match.replaceAll(/\*{2,}/g, '');
 		return (
 			`<i>${title}</i>`
 		)
