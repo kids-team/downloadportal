@@ -79,13 +79,13 @@
 	--info-dark: #145a92;
 	--info-light: #7ac0f8;
 	--info-light-transparent: #2196f3;
-	--primary-page: #8721f3;
+	--primary-page: #D9435D;
 	--primary-contrast: var(--white);
-	--primary: #8721f3;
+	--primary: #D9435D;
 	--primary-page-contrast: var(--white);
-	--primary-page-transparent: #8721f3aa;
-	--primary-transparent: #8721f3aa;
-	--primary-page-light: #d1b2f1;
-	--primary-light: #d1b2f1;
+	--primary-page-transparent: #D9435Daa;
+	--primary-transparent: #D9435Daa;
+	--primary-page-light: #d8b5bb;
+	--primary-light: #d8b5bb;
 
 }
