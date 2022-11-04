@@ -47,8 +47,6 @@ const ArticlePage = () => {
 						<div className={sideInfo ? 'grid grid--columns-1 md:grid--columns-2 xl:grid--columns-3 grid--gap-12' : ''}>
 							<div className={sideInfo ? 'grid__column grid__column--span-0 md:grid__column--span-0 xl:grid__column--span-2' : ''}><Parser content={data?.content} /></div>
 							{sideInfo && <div>
-
-
 							</div>}
 						</div>
 					</div>

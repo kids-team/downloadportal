@@ -160,7 +160,7 @@ const SearchPage = ({ intl }: SearchPageProps) => {
 
 
 
-					{filterAvailable && <div className={showFilter ? 'bg-gray-100 p-4' : 'bg-gray-200 p-4'}>
+					{true && <div className={showFilter ? 'bg-gray-100 p-4' : 'bg-gray-200 p-4'}>
 						<p className='flex flex-center'><i className="material-icons mr-2">tune</i><FormattedMessage defaultMessage="Filter" id="filter" /></p>
 						{categoriesAvailable.length !== 0 && <>
 							<p className='uppercase bold text-gray-700'><FormattedMessage id="category" defaultMessage="Category" /></p>
