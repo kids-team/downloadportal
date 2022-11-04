@@ -25,6 +25,12 @@ type Filter = {
 	category: string | number
 }
 
+const emptyFilter: Filter = {
+	tags: [],
+	audience: [],
+	category: ''
+}
+
 interface SearchPageProps {
 	intl: IntlShape
 }
@@ -40,11 +46,7 @@ const SearchPage = ({ intl }: SearchPageProps) => {
 	const [fuzzy, setFuzzy] = useState(true)
 	const [showFilter, setShowFilter] = useState(false)
 
-	const [filterSettings, setFilterSettings] = useState<Filter>({
-		tags: [],
-		audience: [],
-		category: ''
-	})
+	const [filterSettings, setFilterSettings] = useState<Filter>(emptyFilter)
 
 	const args = {
 		controller: 'search',
@@ -111,6 +113,7 @@ const SearchPage = ({ intl }: SearchPageProps) => {
 	const changeSearch = (event: any) => {
 		setQueryField(event.currentTarget?.value)
 		setFuzzy(true);
+		setFilterSettings(emptyFilter)
 		if (event.key !== 'Enter') return;
 		setQuery(event.target.value);
 	}
