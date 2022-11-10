@@ -1,7 +1,7 @@
 import { MouseEvent, useContext, useEffect, useRef, useState } from 'react';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { getUrl } from '../services/api';
-import { Article } from '../services/models/article';
 import { store } from '../services/store';
 
 interface Props {
@@ -9,6 +9,19 @@ interface Props {
 	setSearchOpen: (a: boolean) => void;
 	searchOpen: Boolean;
 	className: string;
+	intl: IntlShape
+}
+
+interface Result {
+	abstract: string,
+	id: string,
+	title: string,
+	type: string
+}
+
+type Response = {
+	result: Array<Result>
+	more: boolean
 }
 
 const MenuSearch = (props: Props) => {
@@ -16,7 +29,7 @@ const MenuSearch = (props: Props) => {
 	const { setMenuOpen, searchOpen, setSearchOpen, className } = props
 
 	const [query, setQuery] = useState('');
-	const [response, setResponse] = useState({
+	const [response, setResponse] = useState<Response>({
 		result: [],
 		more: false
 	});
@@ -63,7 +76,9 @@ const MenuSearch = (props: Props) => {
 			return;
 		}
 		if (event.key == "Enter") {
-			gotoSearchPage();
+			const currentItem = response?.result[selectedSearchItem]
+			navigate('/' + currentItem.id)
+			setSearchOpen(false);
 			return;
 		}
 		if (event.key == "ArrowDown" && selectedSearchItem < response.result.length) {
@@ -120,7 +135,8 @@ const MenuSearch = (props: Props) => {
 				</div>
 				<div className={'search__results ' + (searchOpen ? 'search__results--visible' : '')} onClick={(event) => { backdropClicked(event) }}>
 					<ul className='list list--padded'>
-						{response.result?.map((item: Article, index) => {
+						{response.more && <li className='list__item'><FormattedMessage defaultMessage="Hit Enter for more results" id="hitEnter" /></li>}
+						{response.result?.map((item: Result, index) => {
 							return <a key={index} onClick={() => { openSearchResult(item.id) }} className={'list__item ' + (selectedSearchItem == index ? 'list__item--active' : '')}>
 								<span >{item.title}<br /><sub className='list__subtitle'>{item.abstract}</sub></span>
 							</a>
@@ -134,4 +150,4 @@ const MenuSearch = (props: Props) => {
 	)
 }
 
-export default MenuSearch;
+export default injectIntl(MenuSearch)
