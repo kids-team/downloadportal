@@ -22,6 +22,12 @@ export type Book = {
 	translation: string;
 }
 
+export type BibleRef = {
+	book_id: number;
+	id: string;
+	chapter: number;
+}
+
 export type Verse = {
 	book: number;
 	text: string;
