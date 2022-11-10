@@ -6,7 +6,7 @@
 	"chapters": "{count, plural, =0 {} one {Kapitel} other {Kapitel}}",
 	"verses": "{count, plural, =0 {} one {Vers} other {Verse}}",
 	"search": "Suche",
-	"downloads": "{count, plural, =0 {Keine Dateien} one {Datei} other {Dateien}}",
+	"downloads": "{count, plural, =0 {Keine Download} one {Download} other {Downloads}}",
 	"lastUpdated": "Zuletzt aktualisiert",
 	"skipToContent": "Zum Inhalt springen",
 	"selectCategory": "Kategorie wählen",
@@ -19,5 +19,6 @@
 	"category": "Kategorie",
 	"filter": "Filter",
 	"noCategory": "Keine Kategorie",
-	"audience": "Zielgruppe"
+	"audience": "Zielgruppe",
+	"hitEnter": "Enter drücken für mehr Suchergebnisse"
 }
