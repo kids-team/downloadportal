@@ -55,7 +55,7 @@ const Parser = (props: Props) => {
 	})
 
 	replacedText = replacedText.replaceAll(/(\/{2}[\s\S]*?\/{2})/g, (match) => {
-		let title = match.replaceAll(/\*{2,}/g, '');
+		let title = match.replaceAll(/\/{2,}/g, '');
 		return (
 			`<i>${title}</i>`
 		)
