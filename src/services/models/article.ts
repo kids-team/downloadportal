@@ -1,29 +1,30 @@
+import { BibleRef } from "./bible";
 import PhpDate from "./date";
 
 export type Article = {
 	id: string;
-	tags: Array<string>;
-	pageimage: string;
-	image?: DokuFile;
 	title: string;
 	content: string;
-	summary: string;
-	audience: string;
-	link: string;
-	exclude: string;
-	category: string;
-	icon: string
-	template: string;
-	pagelink: string;
-	date: PhpDate;
-	language: string
 	abstract: string;
-	showSubpages: boolean;
 	namespace: string;
-	files?: Array<DokuFile>;
-	filter: Array<string>;
-	user: string;
+
 	minor_change: boolean;
+	user: string;
+	date: PhpDate;
+	created: PhpDate;
+
+	category: string;
+	audience: string;
+	tags: Array<string>;
+	bibleref: Array<BibleRef>;
+
+	icon: string;
+	files: Array<DokuFile>;
+	pagelink: string;
+	pageimage: string;
+	copyright: string;
+
+	showSubpages: boolean;
 }
 
 export type DokuFile = {
