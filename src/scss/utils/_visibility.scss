@@ -4,6 +4,14 @@
 	display: none;
 }
 
+.order-first {
+	order: -1;
+}
+
+.order-initial {
+	order: initial;
+}
+
 @include tools.media-breakpoint(md) {
 	.md\:show {
 		display: initial;
@@ -22,6 +30,14 @@
 
 	.lg\:hidden {
 		display: none;
+	}
+
+	.lg\:order-first {
+		order: -1;
+	}
+
+	.lg\:order-initial {
+		order: initial;
 	}
 }
 
@@ -53,7 +69,6 @@
 		&--column {
 			flex-direction: column;
 		}
-
 	}
 }
 

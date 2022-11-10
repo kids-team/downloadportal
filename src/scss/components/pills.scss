@@ -4,7 +4,7 @@
 	display: flex;
 	gap: 1rem;
 	flex-wrap: wrap;
-	
+
 	&__item {
 		font-weight: bold;
 		position: relative;
@@ -47,11 +47,14 @@
 
 	}
 
+	a.pills__item:hover {
+		background-color: var(--primary-page);
+		color: var(--primary-page-contrast)
+	}
+
 	&--small {
 		.pills__item {
 			border-radius: tools.rounded(sm);
 		}
 	}
 }
-
-

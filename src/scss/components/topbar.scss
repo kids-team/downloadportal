@@ -77,7 +77,6 @@
 
 		display: flex;
 		margin-right: 0rem;
-		margin-bottom: 0.25rem;
 
 		&--open {
 			width: 100%;
@@ -89,9 +88,21 @@
 		}
 
 		&__button {
-			i {
-				font-size: 20px;
+			height: 36px;
+			padding: 0rem 0.75rem;
+			margin: 0.25rem 0 -0.25rem 1rem;
+			width: auto;
+			border-bottom: none;
+			background-color: transparent;
+			margin-top: 0;
+			position: relative;
+			margin-left: 1rem;
+			cursor: pointer;
+			border-radius: tools.rounded(md);
 
+			&:hover {
+				background: var(--primary);
+				color: var(--primary-page-contrast)
 			}
 		}
 
@@ -133,6 +144,8 @@
 
 			ul {
 				background: var(--gray-200);
+				max-width: 1440px;
+				margin: auto;
 			}
 		}
 
@@ -500,6 +513,14 @@
 	.top-bar--search {
 		.menu {
 			display: none;
+		}
+	}
+
+	.search {
+		&__button {
+			i {
+				font-size: 20px;
+			}
 		}
 	}
 

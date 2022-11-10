@@ -20,6 +20,8 @@
 		height: 100%;
 	}
 
+
+
 	&--top {
 		align-items: flex-start;
 
@@ -90,6 +92,23 @@
 			margin-right: tools.space(4);
 			top: 0;
 			margin-top: -1.5rem;
+		}
+	}
+
+	&--minimal {
+		padding: 3rem 0rem 1rem 2rem;
+		background-color: transparent;
+
+		.header__title {
+			padding: 0;
+			background: transparent;
+			backdrop-filter: none;
+			color: var(--black);
+
+			h1 {
+				font-family: "Exo 2";
+				font-size: 1.5rem;
+			}
 		}
 	}
 }
