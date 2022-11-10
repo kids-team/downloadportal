@@ -5,19 +5,19 @@ export interface Props {
 	title?: string;
 	subtitle?: string;
 	image?: string;
+	minimal?: boolean;
 	aspectRatio?: "21" | "16" | "12";
 }
 
 const Header: React.FC<Props> = props => {
 
-	const { image, title, subtitle, aspectRatio } = props;
+	const { image, title, subtitle, aspectRatio, minimal } = props;
 
-	const imageSrc: string = useMediaUrl(image);
+	const imageSrc: string = useMediaUrl(image, 1440);
 
 	const className: string = [
 		'header',
-		'aspect-12/9',
-		'lg:aspect-' + aspectRatio + '/9',
+		minimal ? 'header--minimal' : 'aspect-12/9 lg:aspect-' + aspectRatio + '/9',
 		'header--left',
 		'header--bottom',
 		'fill-body'
@@ -40,7 +40,8 @@ const Header: React.FC<Props> = props => {
 Header.defaultProps = {
 	aspectRatio: "16",
 	image: "",
-	title: ""
+	title: "",
+	minimal: false
 };
 
 export default Header
