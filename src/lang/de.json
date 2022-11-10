@@ -20,5 +20,11 @@
 	"filter": "Filter",
 	"noCategory": "Keine Kategorie",
 	"audience": "Zielgruppe",
-	"hitEnter": "Enter drücken für mehr Suchergebnisse"
+	"hitEnter": "Enter drücken für mehr Suchergebnisse",
+	"files": "{count, plural, =0 {} one {Datei} other {Dateien}}",
+	"downloadsButton": "Downloads",
+	"close": "Schließen",
+	"allinall": "Insgesamt",
+	"copyright": "Copyright",
+	"furtherInfo": "Weitere Informationen"
 }
