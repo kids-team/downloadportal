@@ -238,4 +238,4 @@ const SearchPage = ({ intl }: SearchPageProps) => {
 	)
 }
 
-export default injectIntl(SearchPage)
+export default injectIntl(SearchPage) 
