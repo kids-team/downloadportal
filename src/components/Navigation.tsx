@@ -111,7 +111,7 @@ const Navigation: React.FC = () => {
 							</g>
 						</svg>
 					</figure>
-					<span className='top-bar__title'>{brand}</span>
+
 				</a>
 
 				<button onClick={() => { setMenuOpen(!menuOpen) }} className={'hamburger' + (menuOpen ? ' hamburger--active' : '')} type="button">
