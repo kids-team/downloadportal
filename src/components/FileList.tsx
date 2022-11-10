@@ -36,34 +36,50 @@ const FileList = (props: Props) => {
 		return { value: bytes, unit: units[u] }
 	}
 
+	const getFullFileSize = (): { value: number, unit: string } => {
+		let sum = 0;
+		files.forEach((file) => {
+			sum += file.size
+		})
+		return fileSize(sum)
+	}
 
+	const singleFile = () => {
+		return <ul className='list'>
+			<div className="list__item">
+				<FileIcon size={16} className="list__image list__image--edgy list__image--small" extension={files[0].extension} />
+				<div className='list__content'>
+					<span className='list__title text--black'>{files[0].filename}</span>
+					<span className='list__subtitle'>
+						<FormattedMessage id="changed" defaultMessage="Changed" />: &nbsp;
+						<FormattedDate day="numeric" year="numeric" month='long' value={new Date(files[0].modified.date.replace('-', '/'))} />
+					</span>
+
+				</div>
+				<div className='list__actions'>
+					<a className="button button--primary" href={getUrl(files[0].src, { lang: state.lang })}>Download</a>
+				</div>
+			</div>
+		</ul>
+	}
 
 
 	return (
 		<div className={"order " + (showList ? 'order--open' : '')}>
-			{files.length === 1 && <>
-				<ul className='list'>
-					<div className="list__item">
-						<FileIcon size={16} className="list__image list__image--edgy list__image--small" extension={files[0].extension} />
-						<div className='list__content'>
-							<span className='list__title text--black'>{files[0].filename}</span>
-							<span className='list__subtitle'>
-								<FormattedMessage id="changed" defaultMessage="Changed" />: &nbsp;
-								<FormattedDate day="numeric" year="numeric" month='long' value={new Date(files[0].modified.date.replace('-', '/'))} />
-							</span>
-
-						</div>
-						<div className='list__actions'>
-							<a className="button button--primary" href={getUrl(files[0].src, { lang: state.lang })}>Download</a>
-						</div>
-					</div>
-				</ul>
-			</>}
+			{files.length === 1 && singleFile()}
 			{files.length > 1 &&
 				<div className=''>
 					<div className="order__header">
-						<h4>{files.length} <FormattedMessage id="downloads" values={{ count: files.length }} defaultMessage="{count, plural, =0 {Keine Download} one {Download} other {Downloads}}"></FormattedMessage></h4>
-						<button onClick={() => { setShowList(!showList) }} className='button button--icon button--round button--primary'><i className='material-icons'>keyboard_arrow_down</i></button>
+						<div><h4>{files.length} <FormattedMessage id="files" values={{ count: files.length }} defaultMessage="{count, plural, =0 {no File} one {File} other {Files}}"></FormattedMessage></h4>
+							<small>
+								<FormattedMessage id="allinall" values={{ count: files.length }} defaultMessage="All in all"></FormattedMessage> &nbsp;
+								<FormattedNumber value={getFullFileSize().value} unit={getFullFileSize().unit} style="unit" maximumSignificantDigits={3} />
+							</small>
+						</div>
+						<button onClick={() => { setShowList(!showList) }} className='button button--primary'>
+							{!showList && <FormattedMessage id="downloadsButton" values={{ count: files.length }} defaultMessage="Downloads"></FormattedMessage>}
+							{showList && <FormattedMessage id="close" values={{ count: files.length }} defaultMessage="Close"></FormattedMessage>}
+						</button>
 					</div>
 					<ul className='list order__list'>
 						{files?.map((file, key) => {
