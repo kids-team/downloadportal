@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Article, DokuFile } from '../services/models/article';
+import { Article } from '../services/models/article';
 import { store } from '../services/store';
 import useFetch from '../services/useFetch';
 import useUrl from '../services/useUrl';
@@ -28,10 +28,6 @@ const ArticleCards: React.FC<Props> = (props) => {
 
 	const { data, error } = useFetch<Array<Article>>(url);
 
-	const getFiles = (files: Array<DokuFile>) => {
-		return files.filter((file) => { return !file.extension.includes('jp') }).length;
-	}
-
 	return (
 		<>
 			{!data && <div className={`grid grid--columns-${columns} grid--gap-12`}>{[...Array(6)].map((page, index) => {
@@ -51,7 +47,7 @@ const ArticleCards: React.FC<Props> = (props) => {
 				</div>)
 			})}</div>}
 			<div className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12`}>{data?.map((page: Article, index: any) => {
-				const fileNum = page.files ? getFiles(page.files) : 0;
+				const fileNum = page.files?.length;
 
 
 				return (
