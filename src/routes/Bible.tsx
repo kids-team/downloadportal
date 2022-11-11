@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import ArticleList from '../components/ArticleList';
-import Combobox from '../components/Combobox';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
-import NumberSelect from '../components/NumberSelect';
+import Combobox from '../components/base/Combobox';
+import NumberSelect from '../components/base/NumberSelect';
+import Header from '../components/common/Header';
+import Navigation from '../components/navigation/Navigation';
 import { Verse } from '../services/models/bible';
 import { store } from '../services/store';
 import useFetch from '../services/useFetch';

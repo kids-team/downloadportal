@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import Card from '../components/Card';
-import Header from "../components/Header";
-import Navigation from '../components/Navigation';
+import Card from '../components/base/Card';
+import Header from "../components/common/Header";
+import Navigation from '../components/navigation/Navigation';
 import { Article } from '../services/models/article';
 import useFetch from '../services/useFetch';
 import useUrl from '../services/useUrl';
