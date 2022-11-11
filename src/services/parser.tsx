@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import ArticleCards from '../components/ArticleCards';
 import ArticleList from '../components/ArticleList';
 import BibleVerse from '../components/bibleVerse';
+import Newest from '../components/content/Newest';
+import Popular from '../components/content/Popular';
 import settings from '../settings.json';
 
 interface Props {
@@ -147,6 +149,16 @@ const Parser = (props: Props) => {
 			if (domNode.attribs?.id && domNode.name === 'a') {
 				const props = attributesToProps(domNode.attribs);
 				return <Link to={(domNode.attribs.id)}>{domToReact(domNode.children)}</Link>
+			}
+
+			if (domNode.name === 'newest') {
+				const props = attributesToProps(domNode.attribs);
+				return <Newest limit={(domNode.attribs?.limit)} />
+			}
+
+			if (domNode.name === 'popular') {
+				const props = attributesToProps(domNode.attribs);
+				return <Popular limit={(domNode.attribs?.limit)} />
 			}
 
 			if (domNode.attribs && domNode.name === 'subpages') {
