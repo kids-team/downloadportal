@@ -1,3 +1,4 @@
+import fileSize from '@contexis/filesize';
 import { useContext, useState } from 'react';
 import { FormattedDate, FormattedMessage, FormattedNumber } from 'react-intl';
 import { getUrl } from '../services/api';
@@ -15,26 +16,6 @@ const FileList = (props: Props) => {
 	const { files } = props;
 	const { state } = useContext(store)
 	const [showList, setShowList] = useState(false)
-
-	const fileSize = (bytes: number): { value: number, unit: string } => {
-		const thresh = 1024;
-
-		if (Math.abs(bytes) < thresh) {
-			return { value: bytes, unit: 'byte' };
-		}
-
-		const units = ['kilobyte', 'megabyte', 'gigabyte', 'terrabyte'];
-		let u = -1;
-		const r = 10 ** 1;
-
-		do {
-			bytes /= thresh;
-			++u;
-		} while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
-
-
-		return { value: bytes, unit: units[u] }
-	}
 
 	const getFullFileSize = (): { value: number, unit: string } => {
 		let sum = 0;

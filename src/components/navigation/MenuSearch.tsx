@@ -1,8 +1,8 @@
 import { MouseEvent, useContext, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { getUrl } from '../services/api';
-import { store } from '../services/store';
+import { getUrl } from '../../services/api';
+import { store } from '../../services/store';
 
 interface Props {
 	setMenuOpen: (a: boolean) => void;

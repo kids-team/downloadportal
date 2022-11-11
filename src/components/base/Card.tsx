@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getLink } from '../services/api';
-import useIntersectionObserver from '../services/hooks/useIntersectionObserver';
-import { useMediaUrl } from '../services/useUrl';
+import { getLink } from '../../services/api';
+import useIntersectionObserver from '../../services/hooks/useIntersectionObserver';
+import { useMediaUrl } from '../../services/useUrl';
 
 type Props = {
 	image?: string;

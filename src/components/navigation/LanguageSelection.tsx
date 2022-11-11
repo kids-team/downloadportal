@@ -1,15 +1,15 @@
 
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFlagCode } from '../services/getCurrentLanguage';
-import { store } from '../services/store';
+import { getFlagCode } from '../../services/getCurrentLanguage';
+import { store } from '../../services/store';
 
-import at from '../icons/countries/at.svg';
-import ch from '../icons/countries/ch.svg';
-import de from '../icons/countries/de.svg';
-import en from '../icons/countries/en.svg';
-import fr from '../icons/countries/fr.svg';
-import it from '../icons/countries/it.svg';
+import at from '../../icons/countries/at.svg';
+import ch from '../../icons/countries/ch.svg';
+import de from '../../icons/countries/de.svg';
+import en from '../../icons/countries/en.svg';
+import fr from '../../icons/countries/fr.svg';
+import it from '../../icons/countries/it.svg';
 
 type Props = {
 	languages: Array<string>

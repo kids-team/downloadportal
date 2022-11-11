@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Category } from '../services/models/article';
+import { Category } from '../../services/models/article';
 
 interface ComboboxProps {
 	options: Array<{ label: string, value: string | number, icon?: string }> | Array<Category>

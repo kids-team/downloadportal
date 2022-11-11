@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMediaUrl } from '../services/useUrl';
+import { useMediaUrl } from '../../services/useUrl';
 
 export interface Props {
 	title?: string;

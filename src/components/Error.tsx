@@ -5,18 +5,18 @@ interface Props {
 	message: string,
 	icon?: string
 }
-const Error : React.FC<Props> = props => {
-  return (
-	<div className="alert alert--error h-full mx-8">
-		<h2 className='alert__title'>
-			<i className="material-icons mr-2 font-normal">{props.icon}</i>
-			{props.title}
-		</h2>
-		<p className='alert__text'>
-			{props.message}
-		</p>
-	</div>
-  )
+const Error: React.FC<Props> = props => {
+	return (
+		<div className="alert alert--error h-full mx-8">
+			<h2 className='alert__title'>
+				<i className="material-icons mr-2 font-normal">{props.icon}</i>
+				{props.title}
+			</h2>
+			<p className='alert__text'>
+				{props.message}
+			</p>
+		</div>
+	)
 }
 
 Error.defaultProps = {
