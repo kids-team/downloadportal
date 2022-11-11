@@ -3,8 +3,8 @@ import { RouterProvider } from "react-router-dom";
 
 import { IntlProvider } from 'react-intl';
 import './App.css';
+import Footer from "./components/common/Footer";
 import Error from "./components/Error";
-import Footer from "./components/Footer";
 import './scss/style.scss';
 import { getUrl } from "./services/api";
 import getTopLevelDomain from "./services/getTopLevelDomain";

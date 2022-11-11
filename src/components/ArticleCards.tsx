@@ -4,7 +4,7 @@ import { Article } from '../services/models/article';
 import { store } from '../services/store';
 import useFetch from '../services/useFetch';
 import useUrl from '../services/useUrl';
-import Card from './Card';
+import Card from './base/Card';
 
 interface Props {
 	query: string;
@@ -30,7 +30,7 @@ const ArticleCards: React.FC<Props> = (props) => {
 
 	return (
 		<>
-			{!data && <div className={`grid grid--columns-${columns} grid--gap-12`}>{[...Array(6)].map((page, index) => {
+			{!data && <div className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12`}>{[...Array(6)].map((page, index) => {
 				return (<div key={index} className='card card--image-top card--white card--shadow card--loading'>
 					<div className='card__image'>
 

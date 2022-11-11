@@ -34,7 +34,6 @@ const ArticleList = (props: Props) => {
 					key={index}
 				>
 					<img className='list__image' />
-
 				</li>)
 			})}</div>}
 			<div className={`list`}>{data?.map((page: Article, index: any) => {

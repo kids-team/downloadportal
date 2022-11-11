@@ -12,10 +12,12 @@
 	"dependencies": {
 		"@babel/cli": "^7.18.10",
 		"@babel/core": "^7.19.1",
+		"@contexis/filesize": "^1.0.0",
 		"@formatjs/ts-transformer": "^3.10.0",
 		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/react": "^13.2.0",
 		"@testing-library/user-event": "^13.5.0",
+		"@trendyol-js/react-carousel": "^3.0.0",
 		"@types/jest": "^29.0.3",
 		"@types/node": "^18.7.18",
 		"@types/react": "^18.0.21",

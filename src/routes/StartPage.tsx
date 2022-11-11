@@ -1,7 +1,7 @@
 import { ScrollRestoration, useParams } from "react-router-dom";
+import Header from '../components/common/Header';
 import Error from '../components/Error';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
+import Navigation from '../components/navigation/Navigation';
 import { Article } from '../services/models/article';
 import Parser from '../services/parser';
 import useFetch from '../services/useFetch';
@@ -44,10 +44,8 @@ const ArticlePage = () => {
 				{!data && <div className='loader'></div>}
 				{data &&
 					<div className="">
-						<div className={sideInfo ? 'grid grid--columns-1 md:grid--columns-2 xl:grid--columns-3 grid--gap-12' : ''}>
-							<div className={sideInfo ? 'grid__column grid__column--span-0 md:grid__column--span-0 xl:grid__column--span-2' : ''}><Parser content={data?.content} /></div>
-							{sideInfo && <div>
-							</div>}
+						<div className="">
+							<div className={""}><Parser content={data?.content} /></div>
 						</div>
 					</div>
 				}
