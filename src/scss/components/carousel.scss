@@ -2,14 +2,8 @@
 
 .carousel {
 	position: relative;
-	margin: 0 -3rem;
-	padding: 0 3rem;
 
-	&:hover {
-		.carousel__button {
-			visibility: visible !important;
-		}
-	}
+
 
 	&__container {
 		display: flex;
@@ -39,7 +33,6 @@
 	}
 
 	&__button {
-		visibility: hidden;
 		position: absolute;
 		z-index: 1;
 		cursor: pointer;
@@ -54,13 +47,13 @@
 		&:first-child {
 			top: 50%;
 			left: 0;
-			margin-left: 3.5rem;
+
 		}
 
 		&:last-child {
 			top: 50%;
 			right: 0;
-			margin-right: 3.5rem;
+
 		}
 	}
 }
@@ -79,14 +72,4 @@
 	}
 }
 
-@include tools.media-breakpoint(xl) {
-	.carousel__button {
-		&:first-child {
-			margin-left: 0rem;
-		}
-
-		&:last-child {
-			margin-right: 0rem;
-		}
-	}
-}
+@include tools.media-breakpoint(xl) {}
