@@ -1,0 +1,92 @@
+@use '../tools/' as tools;
+
+.carousel {
+	position: relative;
+	margin: 0 -3rem;
+	padding: 0 3rem;
+
+	&:hover {
+		.carousel__button {
+			visibility: visible !important;
+		}
+	}
+
+	&__container {
+		display: flex;
+		padding: 1rem 0;
+		overflow: hidden;
+		width: 100%;
+		gap: 2rem;
+		overflow-x: scroll;
+		scroll-snap-type: x mandatory;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+		transition-duration: 0ms;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		&>* {
+			scroll-snap-align: center;
+		}
+	}
+
+
+	&__item {
+		width: 100%;
+		min-width: 100%;
+	}
+
+	&__button {
+		visibility: hidden;
+		position: absolute;
+		z-index: 1;
+		cursor: pointer;
+		background: #fff;
+		border-radius: 99px;
+		padding: 2px;
+
+		i {
+			font-size: 35px;
+		}
+
+		&:first-child {
+			top: 50%;
+			left: 0;
+			margin-left: 3.5rem;
+		}
+
+		&:last-child {
+			top: 50%;
+			right: 0;
+			margin-right: 3.5rem;
+		}
+	}
+}
+
+@include tools.media-breakpoint(md) {
+	.carousel__item {
+		width: 44%;
+		min-width: 44%;
+	}
+}
+
+@include tools.media-breakpoint(lg) {
+	.carousel__item {
+		width: 29%;
+		min-width: 29%;
+	}
+}
+
+@include tools.media-breakpoint(xl) {
+	.carousel__button {
+		&:first-child {
+			margin-left: 0rem;
+		}
+
+		&:last-child {
+			margin-right: 0rem;
+		}
+	}
+}
