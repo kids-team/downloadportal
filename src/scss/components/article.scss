@@ -88,6 +88,7 @@
 		.order {
 			position: relative;
 			box-shadow: 1px 1px 4px rgb(0 0 0 / 30%);
+			z-index: 0;
 			margin-bottom: 2rem;
 
 			&__header {
