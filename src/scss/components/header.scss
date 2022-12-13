@@ -82,15 +82,15 @@
             }
         }
     }
+}
 
-    .subheader {
-        margin-top: -3rem;
-        margin-bottom: 3rem;
-        padding: 1.5rem;
-        align-items: center;
-        justify-content: space-between;
-        display: flex;
-    }
+.subheader {
+    margin-top: -3rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
 }
 
 @include tools.media-breakpoint(md) {
