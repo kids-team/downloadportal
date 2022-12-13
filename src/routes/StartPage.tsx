@@ -14,8 +14,16 @@ const ArticlePage = () => {
         id: id ? id : 'start',
     };
 
+    const headerUrl = useUrl({
+        controller: 'page',
+        id: 'system:header',
+    });
+
     const url = useUrl(args);
     const { data, error } = useFetch<Article>(url);
+    const header = useFetch<Article>(headerUrl);
+
+    console.log('headser', header);
 
     const fileList = () => {
         if (!data?.files) return [];
@@ -38,29 +46,11 @@ const ArticlePage = () => {
 
             <header className="header" style={{ backgroundColor: '#e7caac' }}>
                 <div className="header__content align-self-end">
-                    <div>
-                        <h3>Über 400 Dateien</h3>
-                        <p>
-                            Hier bekommst du haufenweise Material für deine Kinderstunden, den Reliunterrricht,
-                            Kinderzeltlager - und vieles andere, was dich bei deiner Arbeit mit Kindern unterstützen
-                            kann. Stöbere einfach herum oder benutze die Suchfunktion.
-                        </p>
-                    </div>
-                    <div>
-                        <div className="header__title">
-                            <a className="button button--primary" href="">
-                                Über uns
-                            </a>
-                            <h1 className="font-script">{data?.title}</h1>
-                        </div>
-                    </div>
+                    {header.data && <Parser content={header.data?.content} />}
                 </div>
 
                 {data?.pageimage && <img src={imageSrc} style={{ objectPosition: 'right' }} />}
             </header>
-            <div>
-                Bald ist Weihnachten! <a href="">Mehr dazu</a>
-            </div>
 
             <div className="py-12">
                 {error && <Error message="No connection to server" />}
