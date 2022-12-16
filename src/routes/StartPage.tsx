@@ -65,8 +65,6 @@ const ArticlePage = () => {
                     </div>
                 )}
             </div>
-
-            <section className="bg-gray-300 py-8 section--rounded"></section>
         </div>
     );
 };
