@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import ArticleCards from '../components/ArticleCards';
 import ArticleList from '../components/ArticleList';
 import BibleVerse from '../components/bibleVerse';
+import Banner from '../components/content/Banner';
 import Newest from '../components/content/Newest';
 import Popular from '../components/content/Popular';
+import Subpage from '../components/content/Subpage';
 
 interface Props {
     content: string;
@@ -52,11 +54,6 @@ const Parser = (props: Props) => {
         return `<a href=${href} ${id}>${title}</a>`;
     });
 
-    replacedText = replacedText.replaceAll(/(\/{2}[\s\S]*?\/{2})/g, match => {
-        let title = match.replaceAll(/\/{2,}/g, '');
-        return `<i>${title}</i>`;
-    });
-
     replacedText = replacedText.replaceAll(/(\{{2}youtube>.+\}{2})/g, match => {
         const data = match.slice(10).slice(0, -2);
         const [url, size] = data.includes('?') ? data.split('?') : [data, ''];
@@ -74,6 +71,11 @@ const Parser = (props: Props) => {
     replacedText = replacedText.replaceAll(/(\*{2}[\s\S]*?\*{2})/g, match => {
         let title = match.replaceAll(/\*{2,}/g, '');
         return `<b>${title}</b>`;
+    });
+
+    replacedText = replacedText.replaceAll(/(\*{1}[\s\S]*?\*{1})/g, match => {
+        let title = match.replaceAll(/\*{1,}/g, '');
+        return `<i>${title}</i>`;
     });
 
     replacedText = replacedText.replaceAll(/(__[\s\S]*?__)/g, match => {
@@ -135,6 +137,16 @@ const Parser = (props: Props) => {
             if (domNode.name === 'popular') {
                 const props = attributesToProps(domNode.attribs);
                 return <Popular limit={domNode.attribs?.limit} />;
+            }
+
+            if (domNode.name === 'subpage') {
+                const props = attributesToProps(domNode.attribs);
+                return <Subpage id={domNode.attribs?.id} />;
+            }
+
+            if (domNode.name === 'banner') {
+                const props = attributesToProps(domNode.attribs);
+                return <Banner id={domNode.attribs?.id} link={domNode.attribs?.link} />;
             }
 
             if (domNode.attribs && domNode.name === 'subpages') {
