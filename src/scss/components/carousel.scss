@@ -1,75 +1,71 @@
 @use '../tools/' as tools;
 
 .carousel {
-	position: relative;
+    position: relative;
 
+    &__container {
+        display: flex;
+        padding: 1rem 0;
+        overflow: hidden;
+        width: 100%;
+        gap: 2rem;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        transition-duration: 0ms;
 
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
-	&__container {
-		display: flex;
-		padding: 1rem 0;
-		overflow: hidden;
-		width: 100%;
-		gap: 2rem;
-		overflow-x: scroll;
-		scroll-snap-type: x mandatory;
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-		transition-duration: 0ms;
+        & > * {
+            scroll-snap-align: center;
+        }
+    }
 
-		&::-webkit-scrollbar {
-			display: none;
-		}
+    &__item {
+        width: 100%;
+        min-width: 100%;
+    }
 
-		&>* {
-			scroll-snap-align: center;
-		}
-	}
+    &__button {
+        position: absolute;
+        z-index: 1;
+        cursor: pointer;
+        background: #fff;
+        border-radius: 99px;
+        padding: 2px;
 
+        i {
+            font-size: 35px;
+        }
 
-	&__item {
-		width: 100%;
-		min-width: 100%;
-	}
+        &:first-child {
+            top: 50%;
+            left: 1rem;
+        }
 
-	&__button {
-		position: absolute;
-		z-index: 1;
-		cursor: pointer;
-		background: #fff;
-		border-radius: 99px;
-		padding: 2px;
-
-		i {
-			font-size: 35px;
-		}
-
-		&:first-child {
-			top: 50%;
-			left: 0;
-
-		}
-
-		&:last-child {
-			top: 50%;
-			right: 0;
-
-		}
-	}
+        &:last-child {
+            top: 50%;
+            right: 1rem;
+        }
+    }
 }
 
 @include tools.media-breakpoint(md) {
-	.carousel__item {
-		width: 44%;
-		min-width: 44%;
-	}
+    .carousel__item {
+        width: 44%;
+        min-width: 44%;
+    }
 }
 
 @include tools.media-breakpoint(lg) {
-	.carousel__item {
-		width: 29%;
-		min-width: 29%;
-	}
+    .carousel__item {
+        width: 29%;
+        min-width: 29%;
+    }
 }
 
-@include tools.media-breakpoint(xl) {}
+@include tools.media-breakpoint(xl) {
+}
