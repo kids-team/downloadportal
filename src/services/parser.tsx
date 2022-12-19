@@ -120,32 +120,26 @@ const Parser = (props: Props) => {
     let result = parse(replacedText, {
         replace: (domNode: any) => {
             if (domNode.attribs && domNode.name === 'bible') {
-                const props = attributesToProps(domNode.attribs);
                 return <BibleVerse verse={domNode.attribs.verse}>{domToReact(domNode.children)}</BibleVerse>;
             }
 
             if (domNode.attribs?.id && domNode.name === 'a') {
-                const props = attributesToProps(domNode.attribs);
                 return <Link to={domNode.attribs.id}>{domToReact(domNode.children)}</Link>;
             }
 
             if (domNode.name === 'newest') {
-                const props = attributesToProps(domNode.attribs);
                 return <Newest limit={domNode.attribs?.limit} />;
             }
 
             if (domNode.name === 'popular') {
-                const props = attributesToProps(domNode.attribs);
                 return <Popular limit={domNode.attribs?.limit} />;
             }
 
             if (domNode.name === 'subpage') {
-                const props = attributesToProps(domNode.attribs);
                 return <Subpage id={domNode.attribs?.id} />;
             }
 
             if (domNode.name === 'banner') {
-                const props = attributesToProps(domNode.attribs);
                 return <Banner id={domNode.attribs?.id} link={domNode.attribs?.link} />;
             }
 
