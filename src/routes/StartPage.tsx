@@ -43,28 +43,29 @@ const ArticlePage = () => {
         <div>
             <Navigation />
             <ScrollRestoration />
+            <main>
+                <header className="header" style={{ backgroundColor: '#e7caac' }}>
+                    <div className="header__content align-self-end">
+                        {header.data && <Parser content={header.data?.content} />}
+                    </div>
 
-            <header className="header" style={{ backgroundColor: '#e7caac' }}>
-                <div className="header__content align-self-end">
-                    {header.data && <Parser content={header.data?.content} />}
-                </div>
+                    {data?.pageimage && <img src={imageSrc} style={{ objectPosition: 'right' }} />}
+                </header>
 
-                {data?.pageimage && <img src={imageSrc} style={{ objectPosition: 'right' }} />}
-            </header>
-
-            <div className="py-12">
-                {error && <Error message="No connection to server" />}
-                {!data && <div className="loader"></div>}
-                {data && (
-                    <div className="">
+                <div className="py-12">
+                    {error && <Error message="No connection to server" />}
+                    {!data && <div className="loader"></div>}
+                    {data && (
                         <div className="">
-                            <div className={''}>
-                                <Parser content={data?.content} />
+                            <div className="">
+                                <div className={''}>
+                                    <Parser content={data?.content} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+            </main>
         </div>
     );
 };

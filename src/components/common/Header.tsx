@@ -26,7 +26,7 @@ const Header: React.FC<Props> = props => {
 
     return (
         <header className={className}>
-            {image && <img src={imageSrc} />}
+            {image && <img alt="" src={imageSrc} />}
 
             <div className="header__content">
                 <div>

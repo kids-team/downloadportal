@@ -26,7 +26,7 @@ const Banner = (props: Props) => {
     const imageUrl = data?.pageimage ? getMediaUrl(data?.pageimage, 1440) : '';
 
     if (error || !data?.content) return <></>;
-    return <Link to={link}>{imageUrl ? <img src={data.pageimage} /> : <></>}</Link>;
+    return <Link to={link}>{imageUrl ? <img alt="" src={data.pageimage} /> : <></>}</Link>;
 };
 
 export default Banner;
