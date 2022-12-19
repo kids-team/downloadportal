@@ -12,66 +12,73 @@
     animation-duration: 1s;
     animation-timing-function: linear;
     position: relative;
-  }
-  
-  @keyframes rotate-s-loader {
+}
+
+@keyframes rotate-s-loader {
     from {
-      transform: rotate(0);
+        transform: rotate(0);
     }
     to {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
 
-  .loader {
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	display: block;
-	margin:15px auto;
-	position: relative;
-	color: var(--primary);
-	box-sizing: border-box;
-	animation: animloader 1s linear infinite alternate;
-  }
-  
-  @keyframes animloader {
-	0% {
-	  box-shadow: -38px -12px ,  -14px 0,  14px 0, 38px 0;
-	}
-	33% {
-	  box-shadow: -38px 0px, -14px -12px,  14px 0, 38px 0;
-	}
-	66% {
-	  box-shadow: -38px 0px , -14px 0, 14px -12px, 38px 0;
-	}
-	100% {
-	  box-shadow: -38px 0 , -14px 0, 14px 0 , 38px -12px;
-	}
-  }
-  
+.loader {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+    margin: 15px auto;
+    position: relative;
+    color: var(--primary);
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite alternate;
+}
 
-
-  @keyframes button-zoom-in {
+@keyframes animloader {
     0% {
-      	transform: scale(1);
+        box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
     }
-	70% {
-		transform: scale(1.2);
-	}
-	100% {
-		transform: scale(1.1);
-	}
-  }
+    33% {
+        box-shadow: -38px 0px, -14px -12px, 14px 0, 38px 0;
+    }
+    66% {
+        box-shadow: -38px 0px, -14px 0, 14px -12px, 38px 0;
+    }
+    100% {
+        box-shadow: -38px 0, -14px 0, 14px 0, 38px -12px;
+    }
+}
 
-  @keyframes action-zoom-in {
+@keyframes button-zoom-in {
     0% {
-      	transform: scale(1);
+        transform: scale(1);
     }
-	70% {
-		transform: scale(1.5);
-	}
-	100% {
-		transform: scale(1.3);
-	}
-  }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes action-zoom-in {
+    0% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1.3);
+    }
+}
+
+main {
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+body:has(.search__results--visible) main {
+    transform-origin: 50vw 50vh;
+    transform: perspective(1000px) translate3d(0, 0, 0) rotate3d(1, 0, 0, 30deg);
+    pointer-events: none;
+}
