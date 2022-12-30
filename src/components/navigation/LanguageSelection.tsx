@@ -74,25 +74,20 @@ const LanguageSelection = ({ languages }: Props) => {
                 </a>
                 <ul className="dropdown">
                     {languages.map((language, index) => {
-                        return (
-                            <>
-                                {language !== state.lang ? (
-                                    <li className="dropdown__item" key={index}>
-                                        <a onClick={() => setLanguage(language)}>
-                                            <img
-                                                className="menu__icon lg:show"
-                                                height="12px"
-                                                alt=""
-                                                src={getFlag(getFlagCode(language))}
-                                            />
-                                            <span>{countryNames[language]}</span>
-                                        </a>
-                                    </li>
-                                ) : (
-                                    <></>
-                                )}
-                            </>
-                        );
+                        if (language !== state.lang)
+                            return (
+                                <li className="dropdown__item" key={index}>
+                                    <a onClick={() => setLanguage(language)}>
+                                        <img
+                                            className="menu__icon lg:show"
+                                            height="12px"
+                                            alt=""
+                                            src={getFlag(getFlagCode(language))}
+                                        />
+                                        <span>{countryNames[language]}</span>
+                                    </a>
+                                </li>
+                            );
                     })}
                 </ul>
             </li>
