@@ -15,15 +15,8 @@
 
     &__content {
         padding-top: 2rem;
-    }
-
-    p,
-    h3,
-    h4,
-    h5,
-    h2 {
-        padding: 1rem;
-        line-height: 1.5;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     &__title {
@@ -67,11 +60,12 @@
     }
 
     &--minimal {
-        padding: 3rem 0rem 1rem 2rem;
+        padding: 3rem 0rem 1rem 0rem;
         background-color: transparent;
 
         .header__title {
             padding: 0;
+
             background: transparent;
             backdrop-filter: none;
             color: var(--black);

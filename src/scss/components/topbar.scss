@@ -327,8 +327,6 @@
 
     .top-bar {
         &__logo {
-            margin-left: tools.space(4);
-
             &:hover figure,
             &:focus figure {
                 transform: scale(1.2);

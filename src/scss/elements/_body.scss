@@ -2,17 +2,17 @@
 @use '../tools/' as tools;
 
 body {
-	max-width: sizes.$body-width;
-	margin: auto;
-	font-family: Exo\ 2, sans-serif;
-	background-color: var(--gray-100);
-	padding-left: 1rem;
-	padding-right: 1rem;
+    max-width: sizes.$body-width;
+    margin: auto;
+    font-family: 'Exo 2', sans-serif;
+    background-color: var(--gray-100);
+    padding-left: 0rem;
+    padding-right: 0rem;
 }
 
 @include tools.media-breakpoint(xl) {
-	body {
-		padding-left: 0rem;
-		padding-right: 0rem;
-	}
+    body {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
 }

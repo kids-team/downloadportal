@@ -1,35 +1,35 @@
-ul.core-block {
-    padding-left: 0px !important
+article ul.parser-block {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+
+    li {
+        list-style-type: none;
+        margin-left: 1.5rem;
+        align-content: center;
+        padding: 0.25rem 0.5rem;
+
+        &:before {
+            content: 'label';
+            display: inline-block;
+            font-family: 'material-icons';
+            margin-left: -2rem;
+            margin-right: 0.5rem;
+            font-size: 24px;
+            color: rgba(0, 0, 0, 0.4);
+            line-height: 1;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            white-space: nowrap;
+            font-style: normal;
+            word-wrap: normal;
+            direction: ltr;
+        }
+    }
 }
 
-ul.core-block li {
-    list-style-type: none;
-    margin-left: 2rem;
-    align-content: center;
-    padding: 0.25rem 0.5rem
-}
-
-ul.core-block li:before {
-    content: "label";
-    display: inline-block;
-    font-family: 'material-icons';
-    margin-left: -2rem;
-    margin-right: 0.5rem;
-    font-size: 24px;
-    color: rgba(0,0,0,0.4);
-    line-height: 1;
-	-webkit-font-feature-settings: 'liga';
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-	line-height: 1;
-	letter-spacing: normal;
-	text-transform: none;
-	white-space: nowrap;
-	font-style: normal;
-	word-wrap: normal;
-	direction: ltr;
-}
-
-.dark ul.core-block li:before {
-    color: rgba(255,255,255,0.4);
+.dark ul.parser-block li:before {
+    color: rgba(255, 255, 255, 0.4);
 }
