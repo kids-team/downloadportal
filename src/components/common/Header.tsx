@@ -16,17 +16,18 @@ const Header: React.FC<Props> = props => {
 
     const className: string = [
         'header',
-        minimal ? 'header--minimal' : 'aspect-12/9 lg:aspect-' + aspectRatio + '/9',
+        minimal || image === 'error' ? 'header--minimal' : 'aspect-12/9 lg:aspect-' + aspectRatio + '/9',
         'header--left',
         'header--bottom',
-        'fill-body',
     ]
         .filter(Boolean)
         .join(' ');
 
+    console.log(image);
+
     return (
         <header className={className}>
-            {image && <img alt="" src={imageSrc} />}
+            {image && image !== 'error' && <img alt="" src={imageSrc} />}
 
             <div className="header__content">
                 <div>
