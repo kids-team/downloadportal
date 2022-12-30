@@ -68,7 +68,9 @@ const ArticlePage = () => {
                                 )}
 
                                 <div className={sideInfo ? ' product__description' : 'product__description'}>
-                                    <Parser content={data?.content} />
+                                    <article>
+                                        <Parser content={data?.content} />
+                                    </article>
                                 </div>
                             </div>
                             {sideInfo && (
@@ -91,7 +93,7 @@ const ArticlePage = () => {
                                         </div>
                                     )}
 
-                                    <div className="">
+                                    <div className="product__info">
                                         <h3>
                                             <FormattedMessage id="furtherInfo" defaultMessage="Further Info" />
                                         </h3>
