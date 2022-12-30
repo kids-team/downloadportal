@@ -33,8 +33,8 @@ const ArticleSlider = (props: Props) => {
             <div className={'carousel__container carousel--columns-' + columns} ref={sliderContainer}>
                 {articleList.map((article, key) => {
                     return (
-                        <div className="carousel__item">
-                            <Card image={article.pageimage} link={article.id} key={key} title={article.title} />
+                        <div className="carousel__item" key={key}>
+                            <Card image={article.pageimage} link={article.id} title={article.title} />
                         </div>
                     );
                 })}
