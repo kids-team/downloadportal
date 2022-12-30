@@ -4,6 +4,7 @@ import ArticleCards from '../components/ArticleCards';
 import ArticleList from '../components/ArticleList';
 import BibleVerse from '../components/bibleVerse';
 import Banner from '../components/content/Banner';
+import Box from '../components/content/Box';
 import Newest from '../components/content/Newest';
 import Popular from '../components/content/Popular';
 import Subpage from '../components/content/Subpage';
@@ -19,28 +20,37 @@ const Parser = (props: Props) => {
 
     if (content === undefined) return <></>;
 
-    replacedText = content.replaceAll(/(={2,6}.+?={2,6})/g, match => {
+    replacedText = content.replaceAll(/(\n\n|^)[\s\S]*?\n\n/gm, match => {
+        if (match.includes('==')) return match;
+        if (match.includes('<') || match.includes('>')) return match;
+        if (match.includes('  *') || match.includes('  -')) return match;
+        return `<p class="parser-block">${match}</p>\n`;
+    });
+
+    console.log(replacedText);
+
+    replacedText = replacedText.replaceAll(/(={2,6}.+?={2,6})/g, match => {
         const count = match.split(' ')[0].length;
         let result;
-        let title = match.replaceAll(/={2,}/g, '');
+        let title = match.replaceAll(/={2,}/g, '').trim();
         switch (count) {
             case 2:
-                result = `<h5>${title}</h5>`;
+                result = `<h5 class="parser-block">${title}</h5>`;
                 break;
             case 3:
-                result = `<h4>${title}</h4>`;
+                result = `<h4 class="parser-block">${title}</h4>`;
                 break;
             case 4:
-                result = `<h3>${title}</h3>`;
+                result = `<h3 class="parser-block">${title}</h3>`;
                 break;
             case 5:
-                result = `<h2>${title}</h2>`;
+                result = `<h2 class="parser-block">${title}</h2>`;
                 break;
             case 6:
-                result = `<h1>${title}</h1>`;
+                result = `<h1 class="parser-block">${title}</h1>`;
                 break;
             default:
-                result = `<h5>${title}</h5>`;
+                result = `<h5 class="parser-block">${title}</h5>`;
         }
         return result;
     });
@@ -51,13 +61,13 @@ const Parser = (props: Props) => {
         const href = match.includes('|') ? match.split('|')[0] : match;
         const regex = /(www|http|mailto)/g;
         const id = regex.test(href) ? '' : `id=${href}`;
-        return `<a href=${href} ${id}>${title}</a>`;
+        return `<a  class="parser-block" href=${href} ${id}>${title}</a>`;
     });
 
     replacedText = replacedText.replaceAll(/(\{{2}youtube>.+\}{2})/g, match => {
         const data = match.slice(10).slice(0, -2);
         const [url, size] = data.includes('?') ? data.split('?') : [data, ''];
-        return `<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" style="aspect-ratio: 16/9;" type="text/html" src="https://www.youtube.com/embed/${url}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe>`;
+        return `<iframe class="parser-block" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" style="aspect-ratio: 16/9;" type="text/html" src="https://www.youtube.com/embed/${url}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"></iframe>`;
     });
 
     replacedText = replacedText.replaceAll(/(\{{2}[\s\S]*?\}{2})/g, match => {
@@ -66,21 +76,37 @@ const Parser = (props: Props) => {
         const [id, width] = media.includes('?') ? media.split('?') : [media, 0];
         const SERVER_URL = process.env.REACT_APP_SERVER_URL;
         const url = `${SERVER_URL}/_media${id.replaceAll(':', '/')}${width > 0 ? `?w=${width}` : ''}`;
-        return `<img src="${url}" alt="${alt}"/>`;
+        return `<img  class="parser-block" src="${url}" alt="${alt}"/>`;
     });
     replacedText = replacedText.replaceAll(/(\*{2}[\s\S]*?\*{2})/g, match => {
         let title = match.replaceAll(/\*{2,}/g, '');
-        return `<b>${title}</b>`;
+        return `<b class="parser-block">${title}</b>`;
+    });
+
+    replacedText = replacedText.replaceAll(/((([ ]{2,})([*-])[ ].+\n?)+)/gi, match => {
+        const list = match.split(/\n/g);
+        const regExp = new RegExp(/[ ]{2,}\*/);
+        const tag = regExp.test(list[0]) ? 'ul' : 'ol';
+        let result: Array<string> | undefined;
+        result = list.map(element => {
+            if (element === '') return '';
+            let title = element.replaceAll(/[ ]{2,}[*-][ ]/g, '');
+            return `<li>${title}</li>`;
+        });
+
+        console.log(result);
+
+        return `<${tag}  class="parser-block">${result.join('')}</${tag}>`;
     });
 
     replacedText = replacedText.replaceAll(/(\*{1}[\s\S]*?\*{1})/g, match => {
         let title = match.replaceAll(/\*{1,}/g, '');
-        return `<i>${title}</i>`;
+        return `<i class="parser-block">${title}</i>`;
     });
 
     replacedText = replacedText.replaceAll(/(__[\s\S]*?__)/g, match => {
         let title = match.replaceAll(/_{2,}/g, '');
-        return `<u>${title}</u>`;
+        return `<u class="parser-block">${title}</u>`;
     });
 
     replacedText = replacedText.replaceAll(/(\\{2})/g, (match, i) => {
@@ -93,7 +119,7 @@ const Parser = (props: Props) => {
 
     replacedText = replacedText.replaceAll(/^[|^](.+\n)+\|(.+)[|^]$/gm, match => {
         const lines = match.split('\n');
-        let result = '<table>';
+        let result = '<table class="parser-block">';
         lines.map(line => {
             const start = line[0] === '|' ? '<tr><td>' : '<th><td>';
             const end = line[0] === '|' ? '</td><tr>' : '</td><th>';
@@ -103,20 +129,7 @@ const Parser = (props: Props) => {
         return result;
     });
 
-    replacedText = replacedText.replaceAll(/((([ ]{2,})([*-])[ ].+\n?)+)/gi, match => {
-        const list = match.split(/\n/g);
-        const regExp = new RegExp(/[ ]{2,}\*/);
-        const tag = regExp.test(list[0]) ? 'ul' : 'ol';
-        let result = '';
-        list.map(element => {
-            if (element === '') return;
-            let title = element.replaceAll(/[ ]{2,}[*-][ ]/g, '');
-            result += `<li>${title}</li>`;
-        });
-
-        return `<${tag} class="core-block">${result}</${tag}>`;
-    });
-
+    //console.log(replacedText);
     let result = parse(replacedText, {
         replace: (domNode: any) => {
             if (domNode.attribs && domNode.name === 'bible') {
@@ -128,11 +141,16 @@ const Parser = (props: Props) => {
             }
 
             if (domNode.name === 'newest') {
-                return <Newest limit={domNode.attribs?.limit} />;
+                return <Newest limit={domNode.attribs?.limit} title={domNode.attribs?.title} />;
+            }
+
+            if (domNode.name === 'box') {
+                const attribs = domNode.attribs || {};
+                return <Box {...attribs}>{domToReact(domNode.children)}</Box>;
             }
 
             if (domNode.name === 'popular') {
-                return <Popular limit={domNode.attribs?.limit} />;
+                return <Popular limit={domNode.attribs?.limit} title={domNode.attribs?.title} />;
             }
 
             if (domNode.name === 'subpage') {
@@ -165,7 +183,7 @@ const Parser = (props: Props) => {
         },
     });
 
-    return <>{result}</>;
+    return <div className="parsed-text">{result}</div>;
 };
 
 export default Parser;
