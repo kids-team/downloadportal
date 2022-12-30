@@ -52,19 +52,11 @@ const ArticlePage = () => {
                     {data?.pageimage && <img src={imageSrc} style={{ objectPosition: 'right' }} />}
                 </header>
 
-                <div className="py-12">
+                <article className="py-12">
                     {error && <Error message="No connection to server" />}
                     {!data && <div className="loader"></div>}
-                    {data && (
-                        <div className="">
-                            <div className="">
-                                <div className={''}>
-                                    <Parser content={data?.content} />
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                    {data && <Parser content={data?.content} />}
+                </article>
             </main>
         </div>
     );
