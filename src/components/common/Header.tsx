@@ -16,7 +16,7 @@ const Header: React.FC<Props> = props => {
 
     const className: string = [
         'header',
-        minimal || image === 'error' ? 'header--minimal' : 'aspect-12/9 lg:aspect-' + aspectRatio + '/9',
+        minimal || image === 'error' ? 'header--minimal' : '',
         'header--left',
         'header--bottom',
     ]
