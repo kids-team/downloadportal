@@ -2,14 +2,12 @@
 
 section,
 .section {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	background-size: cover;
-	background-position: center;
-	padding-left: 1rem;
-	padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-size: cover;
+    background-position: center;
 
-	&--rounded {
-		border-radius: tools.rounded('lg');
-	}
+    &--rounded {
+        border-radius: tools.rounded('lg');
+    }
 }
