@@ -2,6 +2,8 @@
 
 .carousel {
     position: relative;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 
     &__container {
         display: flex;
@@ -68,4 +70,8 @@
 }
 
 @include tools.media-breakpoint(xl) {
+    .carousel {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
