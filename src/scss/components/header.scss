@@ -95,6 +95,7 @@
 
 @include tools.media-breakpoint(md) {
     .header {
+        margin-bottom: -6px;
         &__content {
             position: absolute;
             top: -6px;
