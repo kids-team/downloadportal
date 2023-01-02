@@ -51,6 +51,7 @@ const Bible = () => {
         <>
             <Navigation />
             <Header
+                minimal
                 aspectRatio="21"
                 title={currentBook?.long_name}
                 subtitle={state.bible.info.chapter_string + ' ' + chapter ?? ''}
@@ -66,16 +67,24 @@ const Bible = () => {
                     <div className="grid__column--span-4 lg:grid__column--span-3">
                         <h4>Bibeltext</h4>
                         <div>
-                            <ul>
-                                {data?.map(verse => {
-                                    return (
-                                        <li>
-                                            <sup>{verse.verse}</sup>
-                                            {verse.text}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
+                            {data ? (
+                                <ul>
+                                    {data?.map(verse => {
+                                        return (
+                                            <li>
+                                                <sup>{verse.verse}</sup>
+                                                {verse.text}
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            ) : (
+                                <ul className="loader">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            )}
                         </div>
                     </div>
                     <div className="grid__column--span-4 lg:grid__column--span-1">
