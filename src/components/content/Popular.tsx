@@ -28,7 +28,7 @@ const Newest = (props: Props) => {
 
     return (
         <div className="my-12">
-            {title ? <h2>{title}</h2> : <></>}
+            {title ? <h2 className="parser-block">{title}</h2> : <></>}
             <ArticleSlider articleList={articles ?? []} />
         </div>
     );
