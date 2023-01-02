@@ -71,7 +71,7 @@
 
         .header__title {
             padding: 0;
-
+            padding-left: 1.5rem;
             background: transparent;
             backdrop-filter: none;
             color: var(--black);
@@ -118,6 +118,10 @@
         img {
             aspect-ratio: unset;
             object-fit: unset;
+        }
+
+        &--minimal .header__content {
+            position: relative !important;
         }
     }
 }
