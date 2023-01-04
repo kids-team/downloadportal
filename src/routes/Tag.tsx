@@ -40,21 +40,19 @@ const Tag = () => {
             )}
 
             <section className="bg-gray-100 py-12">
-                <div className="content">
-                    <div className="grid grid--columns-1 md:grid--columns-2 xl:grid--columns-3 grid--gap-12 mt-12">
-                        {data?.articles.map((article, index) => {
-                            return (
-                                <Card
-                                    key={index}
-                                    title={article.title}
-                                    label={article.category}
-                                    text={article.abstract}
-                                    image={article.pageimage}
-                                    link={article.id}
-                                />
-                            );
-                        })}
-                    </div>
+                <div className="grid grid--columns-1 md:grid--columns-2 xl:grid--columns-3 grid--gap-12 mt-12">
+                    {data?.articles.map((article, index) => {
+                        return (
+                            <Card
+                                key={index}
+                                title={article.title}
+                                label={article.category}
+                                text={article.abstract}
+                                image={article.pageimage}
+                                link={article.id}
+                            />
+                        );
+                    })}
                 </div>
             </section>
         </>

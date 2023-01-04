@@ -5,7 +5,8 @@
     background-size: cover;
     position: relative;
     margin-top: 5rem;
-
+    display: flex;
+    flex-direction: column;
     img {
         width: 100%;
         aspect-ratio: 4/3;
@@ -95,6 +96,7 @@
 
 @include tools.media-breakpoint(md) {
     .header {
+        flex-direction: row;
         margin-bottom: -6px;
         &__content {
             position: absolute;

@@ -50,6 +50,9 @@ const ArticlePage = () => {
 
     return (
         <div>
+            <meta property="og:title" content={data?.title ?? ''} />
+            <meta property="og:description" content={data?.abstract ?? ''} />
+            <meta property="og:image" content={getMediaUrl('/' + data?.pageimage, 1440)} />
             <Navigation />
             <ScrollRestoration />
             <main>
