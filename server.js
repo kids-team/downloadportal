@@ -7,8 +7,8 @@ const httpsPort = process.env.HTTPS_PORT || 4000;
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
-const redis = require('redis');
-import fetch from 'node-fetch';
+//const redis = require('redis');
+const fetch = require('node-fetch');
 var session = require('express-session');
 
 console.log('Welcome to express.js Server');
