@@ -1,17 +1,22 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Article } from './services/models/article';
 import { StateProvider } from './services/store';
 
-const root = ReactDOM.createRoot(
-	document.getElementById('root') as HTMLElement
-);
+declare global {
+    interface Window {
+        PAGE_DATA: Article;
+    }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-	<>
-		<StateProvider>
-			<App />
-		</StateProvider>
-	</>
+    <>
+        <StateProvider>
+            <App />
+        </StateProvider>
+    </>
 );
 
 // If you want to start measuring performance in your app, pass a function

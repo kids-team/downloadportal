@@ -1,68 +1,86 @@
 const express = require('express');
 const app = express();
+const sessions = require('express-session');
+const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 5000;
+const httpsPort = process.env.HTTPS_PORT || 4000;
+const https = require('https');
 const path = require('path');
 const fs = require('fs');
+const redis = require('redis');
+var session = require('express-session');
 
-app.get('/', function (request, response) {
-    console.log('Home page visited!');
-    const filePath = path.resolve(__dirname, './build', 'index.html');
-    fs.readFile(filePath, 'utf8', function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-        data = data.replace(/\$OG_TITLE/g, 'Home Page');
-        data = data.replace(/\$OG_DESCRIPTION/g, 'Home page description');
-        result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
-        response.send(result);
+console.log('Welcome to express.js Server');
+
+https
+    .createServer(
+        {
+            key: fs.readFileSync('.ssl/server.key'),
+            cert: fs.readFileSync('.ssl/server.cert'),
+        },
+        app
+    )
+    .listen(httpsPort, () => {
+        console.log(`✅ HTTPS server is running on port ${httpsPort}`);
     });
-});
 
-const page = async function (id) {
-    var fromServer = await fetch('https://dlapi.kids-team.com/?controller=page&id=' + id)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (responseJson) {
-            return responseJson.myString;
-        });
-};
+let RedisStore = require('connect-redis')(session);
+let redisClient = redis.createClient();
 
-app.get('/*', function (request, response) {
-    const data = page(request.params[0]);
+redisClient.on('error', err => console.log(`❌ Fail to connect with redis. ${err}`));
+redisClient.on('connect', () => console.log('✅ Successful to connect with redis'));
 
-    const filePath = path.resolve(__dirname, './build', 'index.html');
+app.use(
+    sessions({
+        store: new RedisStore({ client: redisClient }),
+        saveUninitialized: true,
+        secret: 'nvcuioseprfhkjclgsegfdjzsgcfchsdacf',
+        resave: false,
+        secure: true,
+    })
+);
 
-    fs.readFile(filePath, 'utf8', function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-        data = data.replace(/\$OG_TITLE/g, 'About Page');
-        data = data.replace(/\$OG_DESCRIPTION/g, 'About page description');
-        result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
-        response.send(result);
-    });
-});
-
-app.get('/contact', function (request, response) {
-    console.log('Contact page visited!');
-    const filePath = path.resolve(__dirname, './build', 'index.html');
-    fs.readFile(filePath, 'utf8', function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-        data = data.replace(/\$OG_TITLE/g, 'Contact Page');
-        data = data.replace(/\$OG_DESCRIPTION/g, 'Contact page description');
-        result = data.replace(/\$OG_IMAGE/g, 'https://i.imgur.com/V7irMl8.png');
-        response.send(result);
-    });
-});
+app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, './build')));
 
-app.get('*', function (request, response) {
-    const filePath = path.resolve(__dirname, './build', 'index.html');
-    response.sendFile(filePath);
+app.post('/api/lang', async function (request, response) {
+    console.log('Lang set to ', request.body.lang);
+    console.log('Session: ', session);
+    session.lang = request.body.lang;
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.get('*', async function (request, response) {
+    let language = session.lang;
+    if (language === undefined) response.cookie('lang', 'de');
+
+    const filePath = path.resolve(__dirname, './build', 'index.html');
+
+    let page = await fetch(
+        'https://dlapi.kids-team.com/?controller=page&method=meta&id=' + request.url + '&lang=' + session.lang
+    );
+    const pageData = await page.json();
+
+    fs.readFile(filePath, 'utf8', function (error, data) {
+        if (error) {
+            response.send(
+                "There has been a critical error. It's not you, it's us. Please contact the administrator. We're sorry for the inconvenience."
+            );
+        }
+
+        let htmlData = data
+            .replace(/__LANG__/g, session.lang)
+            .replace(/__PAGE_DATA__/g, JSON.stringify(pageData))
+            .replaceAll(/__DESCRIPTION__/g, pageData.abstract)
+            .replace(/__TITLE__/g, pageData.title)
+            .replace(/__URL__/g, request.url)
+            .replace(
+                /__IMAGE__/g,
+                `https://dlapi.kids-team.com/_media/${pageData.pageimage}?w=720&lang=${session.lang}`
+            );
+
+        response.send(htmlData);
+    });
+});
+
+app.listen(port, () => console.log(`✅ HTTP Server running on port ${port}`));

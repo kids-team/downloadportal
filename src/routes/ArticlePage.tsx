@@ -34,8 +34,9 @@ const ArticlePage = () => {
         return data.files.filter(file => file.extension !== 'jpg' && file.extension !== 'jpeg');
     };
 
+    document.title = data?.title ?? '';
+
     const availableFiles = fileList();
-    console.log(data);
 
     const hasFiles = availableFiles.length > 0;
     const sideInfo = data?.showSubpages || hasFiles;

@@ -27,8 +27,6 @@ const Parser = (props: Props) => {
         return `<p class="parser-block">${match}</p>\n`;
     });
 
-    console.log(replacedText);
-
     replacedText = replacedText.replaceAll(/(={2,6}.+?={2,6})/g, match => {
         const count = match.split(' ')[0].length;
         let result;
@@ -94,8 +92,6 @@ const Parser = (props: Props) => {
             return `<li>${title}</li>`;
         });
 
-        console.log(result);
-
         return `<${tag}  class="parser-block">${result.join('')}</${tag}>`;
     });
 
@@ -129,7 +125,6 @@ const Parser = (props: Props) => {
         return result;
     });
 
-    //console.log(replacedText);
     let result = parse(replacedText, {
         replace: (domNode: any) => {
             if (domNode.attribs && domNode.name === 'bible') {
