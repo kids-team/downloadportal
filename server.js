@@ -24,15 +24,14 @@ https
         console.log(`✅ HTTPS server is running on port ${httpsPort}`);
     });
 
-let RedisStore = require('connect-redis')(session);
-let redisClient = redis.createClient();
+//let RedisStore = require('connect-redis')(session);
+//let redisClient = redis.createClient();
 
-redisClient.on('error', err => console.log(`❌ Fail to connect with redis. ${err}`));
-redisClient.on('connect', () => console.log('✅ Successful to connect with redis'));
+//redisClient.on('error', err => console.log(`❌ Fail to connect with redis. ${err}`));
+//redisClient.on('connect', () => console.log('✅ Successful to connect with redis'));
 
 app.use(
     sessions({
-        store: new RedisStore({ client: redisClient }),
         saveUninitialized: true,
         secret: 'nvcuioseprfhkjclgsegfdjzsgcfchsdacf',
         resave: false,
