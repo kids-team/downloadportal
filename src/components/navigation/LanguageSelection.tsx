@@ -51,7 +51,6 @@ const LanguageSelection = ({ languages }: Props) => {
     const { state, dispatch } = useContext(store);
     const navigate = useNavigate();
     const setLanguage = (language: string) => {
-        fetch('/api/lang', { method: 'POST', body: JSON.stringify({ lang: language }) }).then((response) => {response.json().then((data) => {console.log(data);});
         dispatch({ type: 'SET_LANG', payload: language });
         navigate('/');
     };
