@@ -23,8 +23,6 @@ const Header: React.FC<Props> = props => {
         .filter(Boolean)
         .join(' ');
 
-    console.log(image);
-
     return (
         <header className={className}>
             {image && image !== 'error' && <img alt="" src={imageSrc} />}
