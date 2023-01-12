@@ -1,17 +1,24 @@
-const express = require('express');
+/*
+ *	Vendor imports
+ */
+import express from 'express';
+import fs from 'fs';
+import https from 'https';
+import fetch from 'node-fetch';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import parseUrlQueryParams from './server/parseUrlQueryParams.js';
+
+/*
+ * App constants
+ */
 const app = express();
-const sessions = require('express-session');
-const cookieParser = require('cookie-parser');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 5000;
 const httpsPort = process.env.HTTPS_PORT || 4000;
-const https = require('https');
-const path = require('path');
-const fs = require('fs');
-//const redis = require('redis');
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-var session = require('express-session');
-
-console.log('Welcome to express.js Server');
+const filePath = path.resolve(__dirname, './build', 'index.html');
 
 https
     .createServer(
@@ -25,62 +32,31 @@ https
         console.log(`✅ HTTPS server is running on port ${httpsPort}`);
     });
 
-//let RedisStore = require('connect-redis')(session);
-//let redisClient = redis.createClient();
-
-//redisClient.on('error', err => console.log(`❌ Fail to connect with redis. ${err}`));
-//redisClient.on('connect', () => console.log('✅ Successful to connect with redis'));
-
-app.use(
-    sessions({
-        saveUninitialized: true,
-        secret: 'nvcuioseprfhkjclgsegfdjzsgcfchsdacf',
-        resave: false,
-        secure: true,
-    })
-);
-
-app.use(cookieParser());
-
 app.use(express.static(path.resolve(__dirname, './build')));
 
-app.post('/api/lang', async function (request, response) {
-    console.log('Lang set to ', request.body.lang);
-    console.log('Session: ', session);
-    session.lang = request.body.lang;
-});
-
 app.get('*', async function (request, response) {
-    let language = session.lang;
-    if (language === undefined) response.cookie('lang', 'de');
+    const urlParams = parseUrlQueryParams(request.url);
+    const htmlData = fs.readFileSync(filePath, 'utf8');
 
-    const filePath = path.resolve(__dirname, './build', 'index.html');
+    if (!urlParams.lang) {
+        response.send(htmlData);
+        return;
+    }
 
     let page = await fetch(
-        'https://dlapi.kids-team.com/?controller=page&method=meta&id=' + request.url + '&lang=' + session.lang
+        `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${urlParams.lang}`
     );
     const pageData = await page.json();
 
-    fs.readFile(filePath, 'utf8', function (error, data) {
-        if (error) {
-            response.send(
-                "There has been a critical error. It's not you, it's us. Please contact the administrator. We're sorry for the inconvenience."
-            );
-        }
+    let injectedHtml = htmlData
+        .replace(/__LANG__/g, urlParams.lang)
+        .replace(/__PAGE_DATA__/g, JSON.stringify(pageData))
+        .replaceAll(/__DESCRIPTION__/g, pageData.abstract)
+        .replace(/__TITLE__/g, pageData.title)
+        .replace(/__URL__/g, request.url)
+        .replace(/__IMAGE__/g, `https://dlapi.kids-team.com/_media/${pageData.pageimage}?w=720&lang=${urlParams.lang}`);
 
-        let htmlData = data
-            .replace(/__LANG__/g, session.lang)
-            .replace(/__PAGE_DATA__/g, JSON.stringify(pageData))
-            .replaceAll(/__DESCRIPTION__/g, pageData.abstract)
-            .replace(/__TITLE__/g, pageData.title)
-            .replace(/__URL__/g, request.url)
-            .replace(
-                /__IMAGE__/g,
-                `https://dlapi.kids-team.com/_media/${pageData.pageimage}?w=720&lang=${session.lang}`
-            );
-
-        response.send(htmlData);
-    });
+    response.send(injectedHtml);
 });
 
 app.listen(port, () => console.log(`✅ HTTP Server running on port ${port}`));
