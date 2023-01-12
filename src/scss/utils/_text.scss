@@ -1,3 +1,5 @@
+@use '../tools/' as tools;
+
 .text-right {
     text-align: right;
 }
@@ -44,8 +46,8 @@
 }
 
 .text-xs {
-    font-size: space(3) !important;
-    line-height: space(4) !important;
+    font-size: tools.space(3) !important;
+    line-height: tools.space(4) !important;
 }
 
 .link {
@@ -79,4 +81,17 @@ article {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
+
+	.box {
+		h1.parser-block,
+		h2.parser-block,
+		h3.parser-block,
+		h4.parser-block,
+		h5.parser-block,
+		h6.parser-block,
+		p.parser-block {
+			padding-left: 0rem;
+			padding-right: 0rem;
+    	}
+	}
 }
