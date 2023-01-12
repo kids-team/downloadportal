@@ -3,20 +3,22 @@ import { FormattedMessage } from 'react-intl';
 import { useLocation } from 'react-router-dom';
 import { store } from '../../services/store';
 
-type Props = {};
-
-
+type Props = {
+	tags: Array<string>;
+	title: string;
+};
 
 const ShareButtons = (props: Props) => {
+
+	const { tags, title } = props;
 
 	const url = useLocation();
 	const base = document.location.host;
 	
-	const href = base + url.pathname;
     const { state } = useContext(store);
     const [copySuccess, setCopySuccess] = useState<boolean>(false);
 
-    const link = `${href}&lang=${state.lang}`;
+    const link = `${base + url.pathname}&lang=${state.lang}`;
 
     const copyContent = async (text: string) => {
         try {
@@ -40,11 +42,11 @@ const ShareButtons = (props: Props) => {
                 </a>
                 <a
                     className="button button--icon button--primary"
-                    href={'https://instagram.com/share?url=' + link}
+                    href={`http://twitter.com/share?text=${title}&url=${link}&hashtags=${tags.join(',')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <i className="material-icons">instagram</i>
+                    <i className="material-icons">twitter</i>
                 </a>
                 <button className="button button--icon button--primary" onClick={() => copyContent(link)}>
                     <i className="material-icons">content_copy</i>

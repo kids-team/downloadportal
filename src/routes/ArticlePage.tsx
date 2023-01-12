@@ -210,7 +210,7 @@ const ArticlePage = () => {
                                                 <FormattedMessage id="share" defaultMessage="Share" />
                                             </h3>
                                             <div className="share">
-                                                <ShareButtons />
+                                                <ShareButtons title={data.title} tags={data.tags}/>
                                             </div>
                                         </div>
                                     </div>
