@@ -3,6 +3,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import { Link, ScrollRestoration, useParams } from 'react-router-dom';
 import ArticleList from '../components/ArticleList';
 import Header from '../components/common/Header';
+import ShareButtons from '../components/common/ShareButtons';
 import Error from '../components/Error';
 import FileList from '../components/FileList';
 import Navigation from '../components/navigation/Navigation';
@@ -203,6 +204,15 @@ const ArticlePage = () => {
                                                 </div>
                                             </>
                                         )}
+
+                                        <div>
+                                            <h3>
+                                                <FormattedMessage id="share" defaultMessage="Share" />
+                                            </h3>
+                                            <div className="share">
+                                                <ShareButtons />
+                                            </div>
+                                        </div>
                                     </div>
                                 </aside>
                             )}

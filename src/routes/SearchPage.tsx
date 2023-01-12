@@ -150,6 +150,8 @@ const SearchPage = ({ intl }: SearchPageProps) => {
     const categoriesAvailable = availableCategories();
     const tagsAvailable = availableTags();
 
+	document.title = intl.formatMessage({ defaultMessage: 'Search', id: 'search' }) + ': ' + query ?? 'kids-team Downloads';
+
     return (
         <>
             <Navigation />

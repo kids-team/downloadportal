@@ -25,6 +25,8 @@ const Tag = () => {
     const url = useUrl(args);
     const { data, error } = useFetch<TagResult>(url);
 
+	document.title = data?.root.title ?? 'kids-team Downloads';
+
     if (error) return <></>;
 
     return (

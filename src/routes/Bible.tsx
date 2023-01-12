@@ -47,6 +47,8 @@ const Bible = () => {
 
     if (error) return <></>;
 
+	document.title = currentBook?.long_name + ' ' + chapter + ' | kids-team Downloads';
+
     return (
         <>
             <Navigation />

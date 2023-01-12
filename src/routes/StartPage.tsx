@@ -14,6 +14,7 @@ const ArticlePage = () => {
         id: id ? id : 'start',
     };
 
+	
     const headerUrl = useUrl({
         controller: 'page',
         id: 'system:header',
@@ -22,6 +23,8 @@ const ArticlePage = () => {
     const url = useUrl(args);
     const { data, error } = useFetch<Article>(url);
     const header = useFetch<Article>(headerUrl);
+
+	document.title = data?.title ?? 'kids-team Downloads';
 
     console.log('headser', header);
 
