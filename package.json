@@ -1,6 +1,7 @@
 {
     "name": "downloads-kids-team",
     "lang": "lang",
+    "type": "module",
     "supportedLocales": [
         "en",
         "de",
