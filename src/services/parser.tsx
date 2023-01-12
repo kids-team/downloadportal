@@ -23,7 +23,9 @@ const Parser = (props: Props) => {
     replacedText = content.replaceAll(/(\n\n|^)[\s\S]*?\n\n/gm, match => {
         if (match.includes('==')) return match;
         if (match.includes('<') || match.includes('>')) return match;
-        if (match.includes('  *') || match.includes('  -')) return match;
+        if (match.includes(' *') || match.includes(' -')) {
+            return match;
+        }
         return `<p class="parser-block">${match}</p>\n`;
     });
 
@@ -81,14 +83,14 @@ const Parser = (props: Props) => {
         return `<b class="parser-block">${title}</b>`;
     });
 
-    replacedText = replacedText.replaceAll(/((([ ]{2,})([*-])[ ].+\n?)+)/gi, match => {
+    replacedText = replacedText.replaceAll(/((([\s]{2,})([*-])[\s].+\n?)+)/gi, match => {
         const list = match.split(/\n/g);
         const regExp = new RegExp(/[ ]{2,}\*/);
         const tag = regExp.test(list[0]) ? 'ul' : 'ol';
         let result: Array<string> | undefined;
         result = list.map(element => {
             if (element === '') return '';
-            let title = element.replaceAll(/[ ]{2,}[*-][ ]/g, '');
+            let title = element.replaceAll(/[\s]{2,}[*-][\s]/g, '');
             return `<li>${title}</li>`;
         });
 
