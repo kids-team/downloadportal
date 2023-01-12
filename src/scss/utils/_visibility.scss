@@ -1,81 +1,97 @@
 @use '../tools/' as tools;
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 .order-first {
-	order: -1;
+    order: -1;
 }
 
 .order-initial {
-	order: initial;
+    order: initial;
 }
 
 @include tools.media-breakpoint(md) {
-	.md\:show {
-		display: initial;
-	}
+    .md\:show {
+        display: initial;
+    }
 
-	.md\:hidden {
-		display: none;
-		;
-	}
+    .md\:hidden {
+        display: none;
+    }
 }
 
 @include tools.media-breakpoint(lg) {
-	.lg\:show {
-		display: initial;
-	}
+    .lg\:show {
+        display: initial;
+    }
 
-	.lg\:hidden {
-		display: none;
-	}
+    .lg\:hidden {
+        display: none;
+    }
 
-	.lg\:order-first {
-		order: -1;
-	}
+    .lg\:order-first {
+        order: -1;
+    }
 
-	.lg\:order-initial {
-		order: initial;
-	}
+    .lg\:order-initial {
+        order: initial;
+    }
 }
 
 @include tools.media-breakpoint(xl) {
-	.xl\:show {
-		display: initial;
-	}
+    .xl\:show {
+        display: initial;
+    }
 
-	.xl\:hidden {
-		display: none;
-	}
+    .xl\:hidden {
+        display: none;
+    }
 
-	.xl\:flex {
-		display: flex;
+    .xl\:flex {
+        display: flex;
 
-		&--1 {
-			flex: 1;
-		}
+        &--1 {
+            flex: 1;
+        }
 
-		&--center {
-			display: flex;
-			align-items: center;
-		}
+        &--center {
+            display: flex;
+            align-items: center;
+        }
 
-		&--row {
-			flex-direction: row;
-		}
+        &--row {
+            flex-direction: row;
+        }
 
-		&--column {
-			flex-direction: column;
-		}
-	}
+        &--column {
+            flex-direction: column;
+        }
+    }
 }
 
 .flex {
-	display: flex;
+    display: flex;
+
+    &--1 {
+        flex: 1;
+    }
+
+    &--center {
+        display: flex;
+        align-items: center;
+    }
+
+    &--row {
+        flex-direction: row;
+    }
+
+    &--column {
+        flex-direction: column;
+    }
 }
 
 .gap {
-	gap: 1rem;
+    gap: 1rem;
 }
