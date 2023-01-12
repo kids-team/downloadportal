@@ -10,11 +10,12 @@ interface Props {
     query: string;
     value: string;
     columns: number;
+	counter?: boolean;
 }
 
 const ArticleCards: React.FC<Props> = props => {
     const { state } = useContext(store);
-    const { query, value, columns = 3 } = props;
+    const { counter, query, value, columns = 3 } = props;
 
     const args = {
         controller: 'pages',
@@ -26,6 +27,8 @@ const ArticleCards: React.FC<Props> = props => {
     const url = useUrl(args);
 
     const { data, error } = useFetch<Array<Article>>(url);
+
+	
 
     return (
         <>
@@ -60,8 +63,8 @@ const ArticleCards: React.FC<Props> = props => {
                             label={page.label ?? page.category}
                             text={page.abstract}
                             link={page.id}
-                            footer={
-                                <>
+                            footer={ counter && fileNum ? 
+									
                                     <small className="text-gray-600">
                                         {fileNum && fileNum}&nbsp;
                                         <FormattedMessage
@@ -70,7 +73,8 @@ const ArticleCards: React.FC<Props> = props => {
                                             defaultMessage="{count, plural, =0 {No downloads} one {Download} other {Downloads}}"
                                         />
                                     </small>
-                                </>
+                                
+								: null
                             }
                         />
                     );
@@ -79,5 +83,9 @@ const ArticleCards: React.FC<Props> = props => {
         </>
     );
 };
+
+ArticleCards.defaultProps = {
+	counter: false
+}
 
 export default ArticleCards;
