@@ -1,16 +1,22 @@
 import { useContext, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useLocation } from 'react-router-dom';
 import { store } from '../../services/store';
 
 type Props = {};
 
-const url = window.location.href;
+
 
 const ShareButtons = (props: Props) => {
+
+	const url = useLocation();
+	const base = document.location.host;
+	
+	const href = base + url.pathname;
     const { state } = useContext(store);
     const [copySuccess, setCopySuccess] = useState<boolean>(false);
 
-    const link = `${url}&lang=${state.lang}`;
+    const link = `${href}&lang=${state.lang}`;
 
     const copyContent = async (text: string) => {
         try {
@@ -45,7 +51,7 @@ const ShareButtons = (props: Props) => {
                 </button>
             </div>
             {copySuccess && <div className="text-xs text-success flex--center mt-4">
-				<i className='material-icons text-xs text-green mr-2'>done</i> <FormattedMessage id="copySuccess" defaultMessage="Link copied successfully"/>
+				<i className='material-icons text-xs text-green mr-2'>check_circle</i> <FormattedMessage id="copySuccess" defaultMessage="Link copied successfully"/>
 				</div>}
         </div>
     );
