@@ -3,6 +3,8 @@ import getTopLevelDomain from './getTopLevelDomain';
 function getLanguageFromDomain(tld: string): string {
     if (['at', 'ch', 'de', 'internal'].includes(tld)) return 'de';
     if (['com', 'net', 'org'].includes(tld)) return 'en';
+    if (tld === 'fr') return 'fr';
+    if (tld === 'it') return 'it';
     return tld;
 }
 
