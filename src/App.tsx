@@ -28,11 +28,11 @@ function App() {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 dispatch({ type: 'SET_MENU', payload: data.menu });
                 dispatch({ type: 'SET_FOOTER', payload: data.footer });
                 dispatch({ type: 'SET_STATUS', payload: 'loaded' });
                 dispatch({ type: 'SET_BIBLE', payload: data.bible });
+				dispatch({ type: 'SET_ORGANIZATION', payload: data.organizations });
                 dispatch({ type: 'SET_TAXONOMIES', payload: data.taxonomies });
             })
             .catch(error => {

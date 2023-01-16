@@ -3,6 +3,7 @@ import getCurrentLanguage from './getCurrentLanguage';
 import { Audience, Category, Tag } from './models/article';
 import { Bible, BibleAction } from './models/bible';
 import { Menu, MenuAction } from './models/menu';
+import { Organization, OrganizationAction } from './models/organization';
 
 type InitialStateType = {
 	menu: Menu;
@@ -12,6 +13,7 @@ type InitialStateType = {
 		audience: { [key: string]: Audience };
 	},
 	bible: Bible;
+	organizations: Organization[];
 	footer: string;
 	error: string;
 	lang: string;
@@ -35,6 +37,7 @@ const initialState: InitialStateType = {
 		books: [],
 		info: {}
 	},
+	organizations: [],
 	status: 'init',
 	error: '',
 	lang: getCurrentLanguage()
@@ -42,6 +45,7 @@ const initialState: InitialStateType = {
 
 type Action = MenuAction
 	| BibleAction
+	| OrganizationAction
 	| { type: 'SET_LANG' | 'SET_ERROR' | 'SET_FOOTER' | 'SET_STATUS'; payload: string }
 	| { type: 'SET_TAXONOMIES', payload: any }
 
@@ -77,6 +81,8 @@ const StateProvider: React.FC<ProviderProps> = (props) => {
 				return { ...state, footer: action.payload }
 			case 'SET_BIBLE':
 				return { ...state, bible: action.payload }
+			case 'SET_ORGANIZATION':
+				return { ...state, organizations: action.payload }
 			case 'SET_TAXONOMIES':
 				return { ...state, taxonomies: action.payload }
 			case 'SET_ERROR':
