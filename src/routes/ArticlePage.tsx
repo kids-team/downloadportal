@@ -36,7 +36,7 @@ const ArticlePage = () => {
     };
 
     document.title = data?.title ?? '';
-
+	console.log(data?.tags)
     const availableFiles = fileList();
 
     const hasFiles = availableFiles.length > 0;
@@ -49,6 +49,22 @@ const ArticlePage = () => {
 
     const category = data?.category ? taxonomies.categories[data?.category] : false;
     const audience = data?.audience ? taxonomies.audience[data?.audience] : false;
+
+	const tagList = <>{data?.tags?.map((tag, index) => {
+		const tagName = getTag(tag);
+		if (!tagName) return;
+		return (
+			<Link
+				to={'/tag/' + tag}
+				className="bg-gray-400 pills__item text-black"
+				key={index}
+			>
+				{tagName.name}
+			</Link>
+		);
+	})}</>
+
+	
 
     return (
         <div>
@@ -178,8 +194,7 @@ const ArticlePage = () => {
                                             )}
                                         </div>
 
-                                        {data.tags.length > 0 && (
-                                            <>
+                                        {!!tagList.props.children.length && <>
                                                 <h3>
                                                     <FormattedMessage
                                                         id="tags"
@@ -188,29 +203,17 @@ const ArticlePage = () => {
                                                     ></FormattedMessage>
                                                 </h3>
                                                 <div className="pills py-2">
-                                                    {data?.tags?.map((tag, index) => {
-                                                        const tagName = getTag(tag);
-                                                        if (!tagName) return;
-                                                        return (
-                                                            <Link
-                                                                to={'/tag/' + tag}
-                                                                className="bg-gray-400 pills__item text-black"
-                                                                key={index}
-                                                            >
-                                                                {tagName.name}
-                                                            </Link>
-                                                        );
-                                                    })}
+                                                    {tagList}
                                                 </div>
                                             </>
-                                        )}
+                                        }
 
                                         <div>
                                             <h3>
                                                 <FormattedMessage id="share" defaultMessage="Share" />
                                             </h3>
                                             <div className="share">
-                                                <ShareButtons title={data.title} tags={data.tags}/>
+                                                 <ShareButtons title={data.title} tags={data.tags}/>
                                             </div>
                                         </div>
                                     </div>
