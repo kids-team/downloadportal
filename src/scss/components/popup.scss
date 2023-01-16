@@ -4,14 +4,16 @@
 	display: none;
 	position: absolute;
 	background: #fff;
-	
+	left: 0;
 	color: var(--black);
-	max-width: 24rem;
+	max-width: 25rem;
+	width: 25rem;
 	box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
 
 	&__head {
 		border-bottom: 4px dotted tools.gray(200);
 		padding: 1rem;
+		display: block;
 	}
 
 	&__title {
@@ -31,5 +33,10 @@
 
 	&__body {
 		padding: 1rem;
+		display: block;
 	}
+}
+
+.has-popup {
+	position: relative;
 }
