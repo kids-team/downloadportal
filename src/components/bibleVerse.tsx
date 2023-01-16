@@ -67,32 +67,34 @@ const BibleVerse = (props: Props) => {
             });
     };
 
+	console.log(bibleText);
+
     const close = () => {
         setVisible(false);
     };
     return (
-        <a href="#/" tabIndex={0} onFocus={open} onBlur={close}>
+        <a className="has-popup" href="#/" tabIndex={0} onFocus={open} onBlur={close}>
             {props.children}
-            <div className={`popup ${visible ? 'popup--active' : ''}`}>
-                <div className="popup__head">
-                    <h5 className="popup__title">
+            <span className={`popup ${visible ? 'popup--active' : ''}`}>
+                <span className="popup__head">
+                    <b className="popup__title">
                         {bibleText.book?.long_name} {bibleText.query?.chapter},{bibleText.query?.verse}
-                    </h5>
+                    </b>
                     <small>{bibleText.book?.translation}</small>
-                </div>
-                <div className="popup__body">
+                </span>
+                <span className="popup__body">
                     {bibleText?.verses?.length === 0 && <span className="loading"></span>}
                     {bibleText?.verses?.length > 0 &&
-                        Object.values(bibleText.verses).map(verse => {
+                        Object.values(bibleText.verses).map((verse, index) => {
                             return (
-                                <span>
+                                <span key={index}>
                                     <sup>{verse.verse}</sup>
                                     {verse.text}
                                 </span>
                             );
                         })}
-                </div>
-            </div>
+                </span>
+            </span>
         </a>
     );
 };
