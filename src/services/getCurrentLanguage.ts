@@ -34,4 +34,4 @@ function getFlagCode(language: string) {
 }
 
 export default getCurrentLanguage;
-export { getFlagCode };
+export { getFlagCode, getLanguageFromDomain };
