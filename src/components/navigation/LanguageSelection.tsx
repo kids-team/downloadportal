@@ -9,6 +9,7 @@ import de from '../../icons/countries/de.svg';
 import en from '../../icons/countries/en.svg';
 import fr from '../../icons/countries/fr.svg';
 import it from '../../icons/countries/it.svg';
+import rd from '../../icons/countries/rd.svg';
 
 type Props = {
     languages: Array<string>;
@@ -29,6 +30,8 @@ const LanguageSelection = ({ languages }: Props) => {
                 return en;
             case 'it':
                 return it;
+			case 'it':
+				return rd;
         }
     };
 
@@ -85,7 +88,7 @@ const LanguageSelection = ({ languages }: Props) => {
                                         <img
                                             className="menu__icon lg:show"
                                             height="12px"
-                                            alt={getFlag(getFlagCode(language))}
+                                            alt={language}
                                             src={getFlag(getFlagCode(language))}
                                         />
                                         <span>{countryNames[language]}</span>
