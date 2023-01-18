@@ -30,7 +30,7 @@ const LanguageSelection = ({ languages }: Props) => {
                 return en;
             case 'it':
                 return it;
-			case 'it':
+			case 'rd':
 				return rd;
         }
     };
