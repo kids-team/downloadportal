@@ -85,7 +85,7 @@ const LanguageSelection = ({ languages }: Props) => {
                                         <img
                                             className="menu__icon lg:show"
                                             height="12px"
-                                            alt=""
+                                            alt={getFlag(getFlagCode(language))}
                                             src={getFlag(getFlagCode(language))}
                                         />
                                         <span>{countryNames[language]}</span>
