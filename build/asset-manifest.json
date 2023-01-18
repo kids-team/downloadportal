@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.33f5d04c.css",
-    "main.js": "/static/js/main.78e83d7f.js",
+    "main.js": "/static/js/main.df2b4df6.js",
     "static/js/471.a1566d29.chunk.js": "/static/js/471.a1566d29.chunk.js",
     "static/js/7.fb52ca21.chunk.js": "/static/js/7.fb52ca21.chunk.js",
     "static/js/863.86217ded.chunk.js": "/static/js/863.86217ded.chunk.js",
@@ -32,6 +32,7 @@
     "static/media/doc.svg": "/static/media/doc.214cc3a2aad80df80b6806562f928421.svg",
     "static/media/pdf.svg": "/static/media/pdf.e7fdcea086aa8459c5b8bdab77ffe07e.svg",
     "static/media/jpg.svg": "/static/media/jpg.ad712c41ff809d6a00d6b113ad72b03e.svg",
+    "static/media/rd.svg": "/static/media/rd.a1ada8926a18db2c96b7fae0842edb0c.svg",
     "static/media/en.svg": "/static/media/en.6e68ad8fcc322b28c663d03995ebf272.svg",
     "static/media/mp3.svg": "/static/media/mp3.672151f3f78bc5cd17a3288387fe5245.svg",
     "static/media/file.svg": "/static/media/file.a32c775dd00d3f383d114adfd5d23b22.svg",
@@ -43,11 +44,11 @@
     "static/media/de.svg": "/static/media/de.26fd74b818fa5e974b6a65821c8a74f6.svg",
     "static/media/at.svg": "/static/media/at.d9d3403d1e37db1806870cc972743125.svg",
     "main.33f5d04c.css.map": "/static/css/main.33f5d04c.css.map",
-    "main.78e83d7f.js.map": "/static/js/main.78e83d7f.js.map",
+    "main.df2b4df6.js.map": "/static/js/main.df2b4df6.js.map",
     "787.fe587808.chunk.js.map": "/static/js/787.fe587808.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.33f5d04c.css",
-    "static/js/main.78e83d7f.js"
+    "static/js/main.df2b4df6.js"
   ]
 }
