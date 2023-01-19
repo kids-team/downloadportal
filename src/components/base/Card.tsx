@@ -12,11 +12,12 @@ type Props = {
     link: string;
     label?: string;
     badge?: string;
+	icon?: string;
     footer?: React.ReactNode;
 };
 
 const Card: React.FC<Props> = props => {
-    const { image, title, subtitle, text, link, label, badge, footer } = props;
+    const { image, title, subtitle, text, link, label, badge, footer, icon } = props;
 
     const imgRef = useRef<HTMLDivElement>(null);
     const entry = useIntersectionObserver(imgRef, { freezeOnceVisible: true });
@@ -38,6 +39,7 @@ const Card: React.FC<Props> = props => {
                     />
                 )}
                 {!image && <div className="card__image--replace"></div>}
+				{!image && icon && <div className="card__image--icon"><i className='material-icons'>{icon}</i></div>}
                 {image && !imageLoaded && (
                     <div className="card__image--loading">
                         <div className="loader"></div>

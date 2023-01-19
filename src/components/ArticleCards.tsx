@@ -63,6 +63,7 @@ const ArticleCards: React.FC<Props> = props => {
                             label={page.label ?? page.category}
                             text={page.abstract}
                             link={page.id}
+							icon={page.icon}
                             footer={ counter && fileNum ? 
 									
                                     <small className="text-gray-600">

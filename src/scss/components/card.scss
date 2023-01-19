@@ -46,6 +46,18 @@
 		height: 100%;
 	}
 
+	&__image--icon {
+		height: 100%;
+		background: antiquewhite;
+		display: grid;
+		place-content: center;
+
+		i {
+			font-size: 10rem;
+    		color: #00000055;
+		}
+	}
+
 	&--image-top {
 		flex-direction: column;
 
