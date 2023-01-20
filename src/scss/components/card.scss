@@ -22,15 +22,13 @@
 	}
 
 	&--hover {
-		transition: all 300ms;
 
-		&:hover .card__image>img,
-		&:focus .card__image>img {
-			transform: scale(1.1);
+		&:hover {
+			transition: all 300ms;
+			transform: scale(1.05);
 		}
-
 		&.card--shadow:hover {
-			//box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 		}
 
 		&.card--rotate:hover {
