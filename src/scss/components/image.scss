@@ -1,5 +1,4 @@
 .image {
-    display: grid;
     img { };
     &--rounded {
         img {
@@ -69,4 +68,8 @@
         margin-top: 0.25rem;
     }
 
+}
+
+img.parser-block {
+	max-width: 100%;
 }
