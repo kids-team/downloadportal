@@ -38,7 +38,7 @@ const FileList = (props: Props) => {
 
 				</div>
 				<div className='list__actions'>
-					<a className="button button--primary" href={getUrl(files[0].src, { lang: state.lang })}>Download</a>
+					<a className="button button--primary" href={getUrl(files[0].src, { lang: state.lang })}><i className='material-icons'>cloud_download</i></a>
 				</div>
 			</div>
 		</ul>
@@ -57,16 +57,16 @@ const FileList = (props: Props) => {
 								<FormattedNumber value={getFullFileSize().value} unit={getFullFileSize().unit} style="unit" maximumSignificantDigits={3} />
 							</small>
 						</div>
-						<button onClick={() => { setShowList(!showList) }} className='button button--primary'>
-							{!showList && <FormattedMessage id="downloadsButton" values={{ count: files.length }} defaultMessage="Downloads"></FormattedMessage>}
-							{showList && <FormattedMessage id="close" values={{ count: files.length }} defaultMessage="Close"></FormattedMessage>}
+						<button onClick={() => { setShowList(!showList) }} className='button button--primary button--icon'>
+							{!showList && <i className='material-icons'>cloud_download</i>}
+							{showList && <i className='material-icons'>close</i>}
 						</button>
 					</div>
 					<ul className='list order__list'>
 						{files?.map((file, key) => {
 							if (file.extension.includes('jpg')) return <></>
 							const size = fileSize(file.size)
-							console.log(size)
+							
 							return <a key={key} className='list__item' href={getUrl(file.src, { lang: state.lang })}>
 								<FileIcon size={16} className="list__image list__image--edgy list__image--small" extension={file.extension} />
 								<div className='list__content'>
