@@ -36,7 +36,7 @@ const ArticlePage = () => {
     };
 
     document.title = data?.title ?? '';
-	console.log(data?.tags)
+	
     const availableFiles = fileList();
 
     const hasFiles = availableFiles.length > 0;
