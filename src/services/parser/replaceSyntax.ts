@@ -67,8 +67,8 @@ const replaceSyntax = (content: string): string => {
 
     replacedText = replacedText.replaceAll(/((([\s]{2,})([*-])[\s].+\n?)+)/gi, match => {
         const list = match.split(/\n/g);
-        const regExp = new RegExp(/[ ]{2,}\*/);
-        const tag = regExp.test(list[0]) ? 'ul' : 'ol';
+        const regExp = /[\s]{2,}[*-][\s]/g;
+        const tag = match.trim()[0] == '-' ? 'ul' : 'ol'
         let result: Array<string> | undefined;
         result = list.map(element => {
             if (element === '') return '';
