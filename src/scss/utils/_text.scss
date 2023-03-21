@@ -66,32 +66,4 @@
     font-weight: 600;
 }
 
-article p.parser-block {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-}
 
-article {
-    h1.parser-block,
-    h2.parser-block,
-    h3.parser-block,
-    h4.parser-block,
-    h5.parser-block,
-    h6.parser-block {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-
-	.box {
-		h1.parser-block,
-		h2.parser-block,
-		h3.parser-block,
-		h4.parser-block,
-		h5.parser-block,
-		h6.parser-block,
-		p.parser-block {
-			padding-left: 0rem;
-			padding-right: 0rem;
-    	}
-	}
-}

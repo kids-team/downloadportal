@@ -1,6 +1,8 @@
 @use '../tools/' as tools;
 
 .product {
+
+	padding-top: 2rem;
     .header {
         border-bottom-right-radius: 0rem;
         margin-bottom: 0rem;
@@ -8,8 +10,7 @@
     }
 
     .image {
-        margin-left: 1.5rem;
-        margin-right: 1.5rem;
+        
         img {
             margin-bottom: 2rem;
 
@@ -18,9 +19,18 @@
         }
     }
 
+	&__content {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+
     &__info {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		border-bottom-right-radius: 1.5rem;
+		background-color: #e7e7e7;
     }
 
     .order {
@@ -31,7 +41,7 @@
         right: 0;
         padding: 1rem;
         margin: 0;
-        z-index: 99;
+        z-index: 1;
         background: #fff;
         box-shadow: 0px -2px 4px rgb(0 0 0 / 30%);
 
@@ -40,13 +50,19 @@
             justify-content: space-between;
             align-items: center;
 
-            i {
-                transform: rotate(180deg);
-            }
 
             h4 {
                 margin: 0;
             }
+
+			div {
+				line-height: 1rem;
+
+				small {
+					font-size: 0.75rem;
+					color: #bbb;
+				}
+			}
         }
 
         .order__list {
@@ -89,13 +105,22 @@
         gap: 4rem;
 
         .order {
-            margin-right: 1.5rem;
+            border-top-left-radius: 1.5rem;
             position: relative;
-            box-shadow: 1px 1px 4px rgb(0 0 0 / 30%);
+            box-shadow: none;
             z-index: 0;
+			padding-top: 2rem;
             margin-bottom: 2rem;
 
-            &__header {
+            .order__header {
+				div {
+					line-height: 1.5rem;
+
+					small {
+						font-size: 1rem;
+						color: #bbb;
+					}
+				}
                 button {
                     display: none;
                 }
@@ -103,6 +128,8 @@
                 h4 {
                     font-size: 1.5rem;
                 }
+
+				
             }
 
             .order__list {
