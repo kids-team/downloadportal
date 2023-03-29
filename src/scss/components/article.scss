@@ -145,6 +145,10 @@
 
         &__content {
             grid-column: span 2;
+
+			&--alignfull {
+				grid-column: span 3;
+			}
         }
 
         .header {
