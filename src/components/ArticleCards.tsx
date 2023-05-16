@@ -10,7 +10,7 @@ interface Props {
     query: string;
     value: string;
     columns: number;
-	counter?: boolean;
+    counter?: boolean;
 }
 
 const ArticleCards: React.FC<Props> = props => {
@@ -28,11 +28,13 @@ const ArticleCards: React.FC<Props> = props => {
 
     const { data, error } = useFetch<Array<Article>>(url);
 
-	
+    const loading = !data && !error;
+
+    if (error) return <></>;
 
     return (
         <>
-            {!data && !error && (
+            {loading ? (
                 <div
                     className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12 mx-6 xl:mx-0`}
                 >
@@ -48,45 +50,45 @@ const ArticleCards: React.FC<Props> = props => {
                         );
                     })}
                 </div>
-            )}
-            <div
-                className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12 lg:mx--6`}
-            >
-                {data?.map((page: Article, index: any) => {
-                    const fileNum = page.files?.length;
+            ) : (
+                <div
+                    className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12 lg:mx--6`}
+                >
+                    {data?.map((page: Article, index: any) => {
+                        const fileNum = page.files?.length;
 
-                    return (
-                        <Card
-                            key={index}
-                            image={page.pageimage}
-                            title={page.title}
-                            label={page.label ?? page.category}
-                            text={page.abstract}
-                            link={page.id}
-							icon={page.icon}
-                            footer={ counter && fileNum ? 
-									
-                                    <small className="text-gray-600">
-                                        {fileNum && fileNum}&nbsp;
-                                        <FormattedMessage
-                                            id="downloads"
-                                            values={{ count: fileNum }}
-                                            defaultMessage="{count, plural, =0 {No downloads} one {Download} other {Downloads}}"
-                                        />
-                                    </small>
-                                
-								: null
-                            }
-                        />
-                    );
-                })}
-            </div>
+                        return (
+                            <Card
+                                key={index}
+                                image={page.pageimage}
+                                title={page.title}
+                                label={page.label ?? page.category}
+                                text={page.abstract}
+                                link={page.id}
+                                icon={page.icon}
+                                footer={
+                                    counter && fileNum ? (
+                                        <small className="text-gray-600">
+                                            {fileNum && fileNum}&nbsp;
+                                            <FormattedMessage
+                                                id="downloads"
+                                                values={{ count: fileNum }}
+                                                defaultMessage="{count, plural, =0 {No downloads} one {Download} other {Downloads}}"
+                                            />
+                                        </small>
+                                    ) : null
+                                }
+                            />
+                        );
+                    })}
+                </div>
+            )}
         </>
     );
 };
 
 ArticleCards.defaultProps = {
-	counter: false
-}
+    counter: false,
+};
 
 export default ArticleCards;
