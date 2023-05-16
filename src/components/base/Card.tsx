@@ -12,7 +12,7 @@ type Props = {
     link: string;
     label?: string;
     badge?: string;
-	icon?: string;
+    icon?: string;
     footer?: React.ReactNode;
 };
 
@@ -21,8 +21,9 @@ const Card: React.FC<Props> = props => {
 
     const imgRef = useRef<HTMLDivElement>(null);
     const entry = useIntersectionObserver(imgRef, { freezeOnceVisible: true });
-    console.log(entry?.isIntersecting);
+
     const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
     const imgSrc = useMediaUrl(image, 800);
 
@@ -36,13 +37,23 @@ const Card: React.FC<Props> = props => {
                         className={imageLoaded ? '' : 'hidden'}
                         src={imgSrc}
                         onLoad={() => setImageLoaded(true)}
+                        onError={() => setImageError(true)}
                     />
                 )}
                 {!image && <div className="card__image--replace"></div>}
-				{!image && icon && <div className="card__image--icon"><i className='material-icons'>{icon}</i></div>}
-                {image && !imageLoaded && (
+                {!image && icon && (
+                    <div className="card__image--icon">
+                        <i className="material-icons">{icon}</i>
+                    </div>
+                )}
+                {image && !imageLoaded && !imageError && (
                     <div className="card__image--loading">
                         <div className="loader"></div>
+                    </div>
+                )}
+                {image && imageError && (
+                    <div className="card__image--error">
+                        <i className="material-icons">sentiment_dissatisfied</i>
                     </div>
                 )}
             </div>
