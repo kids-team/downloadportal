@@ -5,6 +5,7 @@ import express from 'express';
 import fs from 'fs';
 import https from 'https';
 import fetch from 'node-fetch';
+import { parseDomain } from 'parse-domain';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -38,13 +39,14 @@ app.get('*', async function (request, response) {
     const urlParams = parseUrlQueryParams(request.url);
     const htmlData = fs.readFileSync(filePath, 'utf8');
 
-    if (!urlParams.lang) {
-        response.send(htmlData);
-        return;
-    }
+	const { topLevelDomains } = parseDomain(request.hostname);
+
+	const lang = urlParams.lang || topLevelDomains[0];
+
+	console.log('lang', topLevelDomains[0]);
 
     let page = await fetch(
-        `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${urlParams.lang}`
+        `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${lang}`
     );
     const pageData = await page.json();
 
