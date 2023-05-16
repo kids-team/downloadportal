@@ -9,19 +9,8 @@ function getLanguageFromDomain(tld: string): string {
 }
 
 function getCurrentLanguage(availableLangs = ['de', 'fr', 'en']): string {
-    const localLang = localStorage.getItem('dp_lang');
-    if (localLang) return localLang;
-
-    const browserLanguage =
-        navigator.languages && navigator.languages.length
-            ? navigator.languages[0].slice(0, 2)
-            : navigator.language.slice(0, 2);
-    if (availableLangs.includes(browserLanguage)) return browserLanguage;
-
     const tld: string = getLanguageFromDomain(getTopLevelDomain());
-
     if (availableLangs.includes(tld)) return tld;
-
     return 'de';
 }
 
