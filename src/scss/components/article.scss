@@ -1,8 +1,7 @@
 @use '../tools/' as tools;
 
 .product {
-
-	padding-top: 2rem;
+    padding-top: 2rem;
     .header {
         border-bottom-right-radius: 0rem;
         margin-bottom: 0rem;
@@ -10,7 +9,6 @@
     }
 
     .image {
-        
         img {
             margin-bottom: 2rem;
 
@@ -19,22 +17,22 @@
         }
     }
 
-	&__content {
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
-	}
+    &__content {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
 
     &__info {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-		border-bottom-right-radius: 1.5rem;
-		background-color: #e7e7e7;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-bottom-right-radius: 1.5rem;
+        background-color: #e7e7e7;
     }
 
     .order {
-        margin-bottom: 2rem;
+        margin-bottom: 0rem;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -50,19 +48,18 @@
             justify-content: space-between;
             align-items: center;
 
-
             h4 {
                 margin: 0;
             }
 
-			div {
-				line-height: 1rem;
+            div {
+                line-height: 1rem;
 
-				small {
-					font-size: 0.75rem;
-					color: #bbb;
-				}
-			}
+                small {
+                    font-size: 0.75rem;
+                    color: #bbb;
+                }
+            }
         }
 
         .order__list {
@@ -109,18 +106,18 @@
             position: relative;
             box-shadow: none;
             z-index: 0;
-			padding-top: 2rem;
+            padding-top: 2rem;
             margin-bottom: 2rem;
 
             .order__header {
-				div {
-					line-height: 1.5rem;
+                div {
+                    line-height: 1.5rem;
 
-					small {
-						font-size: 1rem;
-						color: #bbb;
-					}
-				}
+                    small {
+                        font-size: 1rem;
+                        color: #bbb;
+                    }
+                }
                 button {
                     display: none;
                 }
@@ -128,8 +125,6 @@
                 h4 {
                     font-size: 1.5rem;
                 }
-
-				
             }
 
             .order__list {
@@ -146,9 +141,9 @@
         &__content {
             grid-column: span 2;
 
-			&--alignfull {
-				grid-column: span 3;
-			}
+            &--alignfull {
+                grid-column: span 3;
+            }
         }
 
         .header {
@@ -159,5 +154,8 @@
     }
 }
 
-.box {
+.share {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
