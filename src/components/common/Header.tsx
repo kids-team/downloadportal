@@ -14,6 +14,10 @@ const Header: React.FC<Props> = props => {
 
     const imageSrc: string = useMediaUrl(image, 1440);
 
+    const style: React.CSSProperties = {
+        aspectRatio: aspectRatio + ':9',
+    };
+
     const className: string = [
         'header',
         minimal || image === 'error' ? 'header--minimal' : '',
@@ -25,7 +29,7 @@ const Header: React.FC<Props> = props => {
 
     return (
         <header className={className}>
-            {image && image !== 'error' && <img alt="" src={imageSrc} />}
+            {!minimal && image && image !== 'error' && <img alt="" src={imageSrc} style={style} />}
 
             <div className="header__content">
                 <div>
