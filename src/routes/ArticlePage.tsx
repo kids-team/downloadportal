@@ -1,11 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { Link, ScrollRestoration, useParams } from 'react-router-dom';
 import ArticleList from '../components/ArticleList';
-import Header from '../components/common/Header';
-import ShareButtons from '../components/common/ShareButtons';
 import Error from '../components/Error';
 import FileList from '../components/FileList';
+import Header from '../components/common/Header';
+import ShareButtons from '../components/common/ShareButtons';
+import DonationButton from '../components/content/DonationButton';
 import Navigation from '../components/navigation/Navigation';
 import { getMediaUrl } from '../services/api';
 import cleanId from '../services/cleanId';
@@ -35,8 +36,10 @@ const ArticlePage = () => {
         return data.files.filter(file => file.extension !== 'jpg' && file.extension !== 'jpeg');
     };
 
+    const [categoryShowDescription, setCategoryShowDescription] = useState(false);
+
     document.title = data?.title ?? '';
-	
+
     const availableFiles = fileList();
 
     const hasFiles = availableFiles.length > 0;
@@ -50,39 +53,35 @@ const ArticlePage = () => {
     const category = data?.category ? taxonomies.categories[data?.category] : false;
     const audience = data?.audience ? taxonomies.audience[data?.audience] : false;
 
-	const tagList = <>{data?.tags?.map((tag, index) => {
-		const tagName = getTag(tag);
-		if (!tagName) return;
-		return (
-			<Link
-				to={'/tag/' + tag}
-				className="bg-gray-400 pills__item text-black"
-				key={index}
-			>
-				{tagName.name}
-			</Link>
-		);
-	})}</>
+    const tagList = (
+        <>
+            {data?.tags?.map((tag, index) => {
+                const tagName = getTag(tag);
+                if (!tagName) return;
+                return (
+                    <Link to={'/tag/' + tag} className="pills__item pills__item--primary" key={index}>
+                        {tagName.name}
+                    </Link>
+                );
+            })}
+        </>
+    );
 
-	
+    const hasImage = data?.pageimage && data?.pageimage !== 'error';
 
     return (
         <div>
-            <meta property="og:title" content={data?.title ?? ''} />
-            <meta property="og:description" content={data?.abstract ?? ''} />
-            <meta property="og:image" content={getMediaUrl('/' + data?.pageimage, 1440)} />
             <Navigation />
             <ScrollRestoration />
             <main>
-                {!hasFiles && <Header aspectRatio="21" title={data?.title ?? ''} image={data?.pageimage} />}
-                {hasFiles && <Header title={data?.title ?? ''} minimal={true} />}
+                <Header aspectRatio="21" title={data?.title ?? ''} image={data?.pageimage} minimal={hasFiles} />
                 <div className={sideInfo ? 'product article--side' : ''}>
                     {error && <Error message="No connection to server" />}
                     {!data && <div className="loader"></div>}
                     {data && (
                         <>
                             <div className="product__content">
-                                {hasFiles && (
+                                {hasFiles && hasImage && (
                                     <div className="image">
                                         <img width="100%" src={getMediaUrl('/' + data?.pageimage, 1440)} />
                                     </div>
@@ -120,7 +119,11 @@ const ArticlePage = () => {
                                         </h3>
                                         <div className="description">
                                             {category && (
-                                                <div className="description__item">
+                                                <div
+                                                    className="description__item"
+                                                    onMouseEnter={() => setCategoryShowDescription(true)}
+                                                    onMouseLeave={() => setCategoryShowDescription(false)}
+                                                >
                                                     <div
                                                         style={{ backgroundColor: category.color }}
                                                         className="description__image"
@@ -133,10 +136,23 @@ const ArticlePage = () => {
                                                         </i>
                                                     </div>
                                                     <div className="description__text">
-                                                        <div className="description__title">
-                                                            <FormattedMessage id="category" defaultMessage="Category" />
-                                                        </div>
-                                                        <div className="description__data">{category.label}</div>
+                                                        {categoryShowDescription ? (
+                                                            <div className="description__data">
+                                                                {category.description}
+                                                            </div>
+                                                        ) : (
+                                                            <>
+                                                                <div className="description__title">
+                                                                    <FormattedMessage
+                                                                        id="category"
+                                                                        defaultMessage="Category"
+                                                                    />
+                                                                </div>
+                                                                <div className="description__data">
+                                                                    {category.label}
+                                                                </div>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}
@@ -194,7 +210,8 @@ const ArticlePage = () => {
                                             )}
                                         </div>
 
-                                        {!!tagList.props.children.length && <>
+                                        {!!tagList.props.children.length && (
+                                            <>
                                                 <h3>
                                                     <FormattedMessage
                                                         id="tags"
@@ -202,18 +219,24 @@ const ArticlePage = () => {
                                                         defaultMessage="{count, plural, =0 {no tags} one {Tag} other {Tags}}"
                                                     ></FormattedMessage>
                                                 </h3>
-                                                <div className="pills py-2">
-                                                    {tagList}
-                                                </div>
+                                                <div className="pills py-2">{tagList}</div>
                                             </>
-                                        }
+                                        )}
 
                                         <div>
                                             <h3>
                                                 <FormattedMessage id="share" defaultMessage="Share" />
                                             </h3>
                                             <div className="share">
-                                                 <ShareButtons title={data.title} tags={data.tags}/>
+                                                <ShareButtons title={data.title} tags={data.tags} />
+                                                <DonationButton
+                                                    children={
+                                                        <FormattedMessage
+                                                            id="donate"
+                                                            defaultMessage="Donate"
+                                                        ></FormattedMessage>
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </div>
