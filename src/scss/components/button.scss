@@ -39,7 +39,7 @@
 
 	&--primary {
 		background-color: var(--primary-page);
-		color: var(--primary-page-contrast);
+		color: var(--primary-page-contrast) !important;
 	}
 
 	&--secondary {
