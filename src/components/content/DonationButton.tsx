@@ -1,42 +1,29 @@
-import { useContext } from "react";
-import getTopLevelDomain from "../../services/getTopLevelDomain";
-import { store } from "../../services/store";
+import { useContext } from 'react';
+import getTopLevelDomain from '../../services/getTopLevelDomain';
+import { store } from '../../services/store';
 
 type Props = {
-	className?: string;
-	children?: any;
-	marginTop?: number;
-	marginBottom?: number;
-	align: 'right' | 'left' | 'center';
-}
+    className?: string;
+    children?: any;
+    target?: string;
+};
 
 const DonationButton = (props: Props) => {
+    const { className, children, target } = props;
+    const { state } = useContext(store);
+    const tld = getTopLevelDomain('at');
+    const organization = state.organizations.find(org => org.domain === tld);
 
-	const { className, children, marginTop, marginBottom, align } = props;
-	const fallback = 'at';
-	const { state } = useContext(store);
-	const tld = getTopLevelDomain('at')
-	
-	const organization = state.organizations.find(org => org.domain === tld)
-	console.log(tld)
-	const style={marginTop: marginTop + 'rem',
-	marginBottom: marginBottom + 'rem',
-	display	: 'flex',
-	justifyContent: 'right',
-	alignItems: align
-}
-
-  	return (
-		<div style={style}>
-		<a href={organization?.donate} className="button button--primary">{children}</a>
-		</div>
-  	)
-}
+    return (
+        <a target={target} href={organization?.donate} className={className}>
+            {children}
+        </a>
+    );
+};
 
 DonationButton.defaultProps = {
-	marginTop: 1.5,
-	marginBottom: 1.5,
-	align: 'right'
-}
+    className: 'button button--primary',
+    target: '_blank',
+};
 
-export default DonationButton
+export default DonationButton;
