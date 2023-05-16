@@ -1,10 +1,13 @@
 const replaceSyntax = (content: string): string => {
-	let replacedText = content.replaceAll(/(\n\n|^)[\s\S]*?\n\n/gm, match => {
-		
-		const forbiddenTags = '(?:div|box|banner|newest|popular|subpage|donation|cards|list|subpages)';
-		
+    let replacedText = content.replaceAll(/(\n\n|^)[\s\S]*?\n\n/gm, match => {
+        const forbiddenTags = '(?:div|box|banner|newest|popular|subpage|donation|cards|list|subpages)';
+
         if (match.includes('==')) return match;
-        if (match.match(new RegExp( '(<' + forbiddenTags + ')', 'g' )) || match.match(new RegExp( '(</' + forbiddenTags + ')', 'g' ))) return match;
+        if (
+            match.match(new RegExp('(<' + forbiddenTags + ')', 'g')) ||
+            match.match(new RegExp('(</' + forbiddenTags + ')', 'g'))
+        )
+            return match;
         if (match.includes(' *') || match.includes(' -')) {
             return match;
         }
@@ -68,7 +71,7 @@ const replaceSyntax = (content: string): string => {
     replacedText = replacedText.replaceAll(/((([\s]{2,})([*-])[\s].+\n?)+)/gi, match => {
         const list = match.split(/\n/g);
         const regExp = /[\s]{2,}[*-][\s]/g;
-        const tag = match.trim()[0] == '-' ? 'ul' : 'ol'
+        const tag = match.trim()[0] == '-' ? 'ul' : 'ol';
         let result: Array<string> | undefined;
         result = list.map(element => {
             if (element === '') return '';
@@ -109,7 +112,7 @@ const replaceSyntax = (content: string): string => {
         return result;
     });
 
-	return replacedText
-}
+    return replacedText;
+};
 
 export default replaceSyntax;
