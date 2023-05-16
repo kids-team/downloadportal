@@ -17,7 +17,7 @@ function useUrl(params: Params = {}, path = '/') {
             return key + '=' + encodeURI(value);
         })
         .join('&');
-    return `${SERVER_URL + path}?lang=${state.lang}&${args}`;
+    return `${SERVER_URL + path}&${args}&lang=${state.lang}`;
 }
 
 function useMediaUrl(id: string = '', size: number = 0) {
