@@ -33,13 +33,6 @@ const ArticlePage = () => {
         return data.files.filter(file => file.extension !== 'jpg' && file.extension !== 'jpeg');
     };
 
-    const availableFiles = fileList();
-    console.log(data);
-
-    const hasFiles = availableFiles.length > 0;
-    const sideInfo = data?.showSubpages || hasFiles;
-    const countFiles = availableFiles.length;
-
     const imageSrc: string = useMediaUrl(data?.pageimage, 1440);
 
     return (
@@ -59,7 +52,8 @@ const ArticlePage = () => {
                     {error && <Error message="No connection to server" />}
                     {!data && <div className="loader"></div>}
                     {data && <Parser content={data?.content} />}
-					</div></article>
+					</div>
+				</article>
             </main>
         </div>
     );
