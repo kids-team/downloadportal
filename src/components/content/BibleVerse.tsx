@@ -67,8 +67,6 @@ const BibleVerse = (props: Props) => {
             });
     };
 
-    console.log(bibleText);
-
     const close = () => {
         setVisible(false);
     };
