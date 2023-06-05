@@ -19,7 +19,7 @@ const options: any = {
         }
 
         if (domNode.attribs && domNode.name === 'bible') {
-            if (!domNode.attribs.verse) return <>{domNode.children}</>;
+            if (!domNode.attribs.verse) return <>{domToReact(domNode.children)}</>;
             return <BibleVerse verse={domNode.attribs.verse}>{domToReact(domNode.children)}</BibleVerse>;
         }
 
