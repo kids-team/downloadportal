@@ -52,7 +52,7 @@ const ArticleCards: React.FC<Props> = props => {
                 </div>
             ) : (
                 <div
-                    className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12 lg:mx--6`}
+                    className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12 xl:mx--6`}
                 >
                     {data?.map((page: Article, index: any) => {
                         const fileNum = page.files?.length;
