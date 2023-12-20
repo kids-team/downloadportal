@@ -47,7 +47,9 @@ app.get('*', async function (request, response) {
 
     let page = await fetch(
         `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${lang}`
-    );
+    ).catch((err) => {
+		console.log(err);
+    });
     const pageData = await page.json();
 
     let injectedHtml = htmlData
