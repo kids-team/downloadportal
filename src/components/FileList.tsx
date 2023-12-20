@@ -1,5 +1,5 @@
 import fileSize from '@contexis/filesize';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormattedDate, FormattedMessage, FormattedNumber } from 'react-intl';
 import { getUrl } from '../services/api';
 import { DokuFile } from '../services/models/article';
@@ -132,7 +132,7 @@ const FileList = (props: Props) => {
                                                 style="unit"
                                                 maximumSignificantDigits={3}
                                             />
-                                            ,
+                                            ,&nbsp;
                                             <FormattedMessage id="changed" defaultMessage="Changed" />: &nbsp;
                                             <FormattedDate
                                                 day="numeric"

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ArticleList from '../components/ArticleList';
 import Combobox from '../components/base/Combobox';
@@ -47,7 +47,7 @@ const Bible = () => {
 
     if (error) return <></>;
 
-	document.title = currentBook?.long_name + ' ' + chapter + ' | kids-team Downloads';
+    document.title = currentBook?.long_name + ' ' + chapter + ' | kids-team Downloads';
 
     return (
         <>

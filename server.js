@@ -8,7 +8,6 @@ import fetch from 'node-fetch';
 import { parseDomain } from 'parse-domain';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import parseUrlQueryParams from './server/parseUrlQueryParams.js';
 
 /*
@@ -19,36 +18,26 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 5000;
 const httpsPort = process.env.HTTPS_PORT || 4000;
-const filePath = path.resolve(__dirname, './build', 'index.html');
+const filePath = path.resolve(__dirname, './dist', 'index.html');
 
-https
-    .createServer(
-        {
-            key: fs.readFileSync('.ssl/server.key'),
-            cert: fs.readFileSync('.ssl/server.cert'),
-        },
-        app
-    )
-    .listen(httpsPort, () => {
-        console.log(`✅ HTTPS server is running on port ${httpsPort}`);
-    });
+https.createServer({}, app).listen(httpsPort, () => {
+    console.log(`🔒 HTTPS server is running on port ${httpsPort}`);
+});
 
-app.use(express.static(path.resolve(__dirname, './build')));
+app.use(express.static(path.resolve(__dirname, './dist')));
 
 app.get('*', async function (request, response) {
     const urlParams = parseUrlQueryParams(request.url);
     const htmlData = fs.readFileSync(filePath, 'utf8');
 
-	const { topLevelDomains } = parseDomain(request.hostname);
+    const { topLevelDomains } = parseDomain(request.hostname);
 
-	const lang = urlParams.lang || topLevelDomains[0];
-
-	console.log('lang', topLevelDomains[0]);
+    const lang = urlParams.lang ?? (topLevelDomains ? topLevelDomains[0] : 'at');
 
     let page = await fetch(
         `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${lang}`
-    ).catch((err) => {
-		console.log(err);
+    ).catch(err => {
+        console.log(err);
     });
     const pageData = await page.json();
 
@@ -63,4 +52,4 @@ app.get('*', async function (request, response) {
     response.send(injectedHtml);
 });
 
-app.listen(port, () => console.log(`✅ HTTP Server running on port ${port}`));
+app.listen(port, () => console.log(`🌍 HTTP Server running on port ${port}`));

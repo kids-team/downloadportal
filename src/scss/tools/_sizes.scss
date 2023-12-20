@@ -1,7 +1,7 @@
 @use '../settings/' as settings;
 
 @function space($space) {
-    @return $space / 4 * settings.$spacer;
+    @return calc($space / 4 * settings.$spacer);
 }
 
 @function radius($size, $corner: '') {
@@ -12,11 +12,10 @@
 }
 
 @function rounded($size) {
-	@return map-get(settings.$border-multiplier, tl) * map-get(settings.$border-base, $size) 
-			map-get(settings.$border-multiplier, tr) * map-get(settings.$border-base, $size)
-			map-get(settings.$border-multiplier, br) * map-get(settings.$border-base, $size)
-			map-get(settings.$border-multiplier, bl) * map-get(settings.$border-base, $size);
-			
+    @return map-get(settings.$border-multiplier, tl) * map-get(settings.$border-base, $size)
+        map-get(settings.$border-multiplier, tr) * map-get(settings.$border-base, $size)
+        map-get(settings.$border-multiplier, br) * map-get(settings.$border-base, $size)
+        map-get(settings.$border-multiplier, bl) * map-get(settings.$border-base, $size);
 }
 
 @function screen($media) {

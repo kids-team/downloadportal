@@ -68,7 +68,7 @@ const Combobox: React.FC<ComboboxProps> = props => {
                 onMouseOver={() => {
                     setListSelect(-1);
                 }}
-                onClick={event => {}}
+                onClick={() => {}}
                 placeholder={selection !== -1 ? options[selection].label : placeholder}
                 value={inputField}
                 onChange={event => setInputField(event.target.value)}
@@ -90,7 +90,7 @@ const Combobox: React.FC<ComboboxProps> = props => {
                     return (
                         <li
                             className={listSelect === index ? 'selected' : ''}
-                            onMouseDown={event => {
+                            onMouseDown={() => {
                                 dropdownSelect(option.value);
                             }}
                             key={index}

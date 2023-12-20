@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '../components/base/Card';
 import Header from '../components/common/Header';
@@ -25,7 +26,7 @@ const Tag = () => {
     const url = useUrl(args);
     const { data, error } = useFetch<TagResult>(url);
 
-	document.title = data?.root.title ?? 'kids-team Downloads';
+    document.title = data?.root.title ?? 'kids-team Downloads';
 
     if (error) return <></>;
 

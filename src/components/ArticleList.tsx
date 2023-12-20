@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { getLink } from '../services/api';
 import { Article } from '../services/models/article';
 import { store } from '../services/store';
@@ -30,7 +30,7 @@ const ArticleList = (props: Props) => {
         <>
             {!data && !error && (
                 <div className={`grid grid--columns-${columns} grid--gap-12`}>
-                    {[...Array(6)].map((page, index) => {
+                    {[...Array(6)].map(index => {
                         return (
                             <li className="list__item" key={index}>
                                 <img className="list__image" alt="" />
@@ -43,6 +43,7 @@ const ArticleList = (props: Props) => {
                 {data?.map((page: Article, index: any) => {
                     return (
                         <ListItem
+                            key={index}
                             title={page.title}
                             description={page.abstract}
                             image={page.pageimage}

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getFlagCode } from '../../services/getCurrentLanguage';
 import { store } from '../../services/store';
@@ -30,8 +30,8 @@ const LanguageSelection = ({ languages }: Props) => {
                 return en;
             case 'it':
                 return it;
-			case 'rd':
-				return rd;
+            case 'rd':
+                return rd;
         }
     };
 

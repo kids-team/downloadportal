@@ -1,27 +1,30 @@
-
 // @ts-nocheck
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = 'https://dlapi.kids-team.com';
+
+console.log('SERVER_URL', SERVER_URL);
 
 function getUrl(path: string, params = {}, relative = false) {
-	if (path[0] !== '/') path = '/' + path;
-	path = path.replaceAll(':', '/')
-	if (Object.keys(params).length === 0) return relative ? path : SERVER_URL + path;
+    if (path[0] !== '/') path = '/' + path;
+    path = path.replaceAll(':', '/');
+    if (Object.keys(params).length === 0) return relative ? path : SERVER_URL + path;
 
-	let args = Object.entries(params).map(([key, value]) => {
-		return key + '=' + encodeURI(value)
-	}).join('&')
-	return SERVER_URL + path + '?' + args
+    let args = Object.entries(params)
+        .map(([key, value]) => {
+            return key + '=' + encodeURI(value);
+        })
+        .join('&');
+    return SERVER_URL + path + '?' + args;
 }
 
 function getMediaUrl(id: string, size: number) {
-	return SERVER_URL + '/_media' + id + '?w=' + size;
+    return SERVER_URL + '/_media' + id + '?w=' + size;
 }
 
 function getLink(id: string) {
-	if (id === undefined) return '';
-	let path = id.replaceAll(':', '/')
-	if (path[0] !== '/') path = '/' + path;
-	return path;
+    if (id === undefined) return '';
+    let path = id.replaceAll(':', '/');
+    if (path[0] !== '/') path = '/' + path;
+    return path;
 }
 
-export { getUrl, getMediaUrl, getLink };
+export { getLink, getMediaUrl, getUrl };

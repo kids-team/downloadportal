@@ -3,7 +3,7 @@ import { store } from './store';
 
 type Params = Object;
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = 'https://dlapi.kids-team.com';
 
 function useUrl(params: Params = {}, path = '/') {
     const { state } = useContext(store);

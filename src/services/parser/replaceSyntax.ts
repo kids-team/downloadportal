@@ -58,9 +58,9 @@ const replaceSyntax = (content: string): string => {
     replacedText = replacedText.replaceAll(/(\{{2}[\s\S]*?\}{2})/g, match => {
         const data = match.replaceAll(/[{}]{2,}/g, '');
         const [media, alt] = data.includes('|') ? data.split('|') : [data, ''];
-        const [id, width] = media.includes('?') ? media.split('?') : [media, 0];
-        const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-        const url = `${SERVER_URL}/_media${id.replaceAll(':', '/')}${width > 0 ? `?w=${width}` : ''}`;
+        const [id, width] = media.includes('?') ? media.split('?') : [media, '0'];
+        const SERVER_URL = 'https://dlapi.kids-team.com';
+        const url = `${SERVER_URL}/_media${id.replaceAll(':', '/')}${parseInt(width) > 0 ? `?w=${width}` : ''}`;
         return `<img  class="parser-block" src="${url}" alt="${alt}"/>`;
     });
     replacedText = replacedText.replaceAll(/(\*{2}[\s\S]*?\*{2})/g, match => {

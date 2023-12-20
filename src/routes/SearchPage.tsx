@@ -1,6 +1,6 @@
 import parse from 'html-react-parser';
-import { useContext, useState } from 'react';
-import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
+import React, { useContext, useState } from 'react';
+import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
 import { Link, useParams } from 'react-router-dom';
 import Combobox from '../components/base/Combobox';
 import Header from '../components/common/Header';
@@ -150,7 +150,7 @@ const SearchPage = ({ intl }: SearchPageProps) => {
     const categoriesAvailable = availableCategories();
     const tagsAvailable = availableTags();
 
-	document.title = intl.formatMessage({ defaultMessage: 'Search', id: 'search' }) + ': ' + query ?? 'kids-team Downloads';
+    document.title = intl.formatMessage({ defaultMessage: 'Search', id: 'search' }) + ': ' + query;
 
     return (
         <>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { ScrollRestoration, useParams } from 'react-router-dom';
 import Error from '../components/Error';
 import Navigation from '../components/navigation/Navigation';
@@ -14,7 +15,6 @@ const ArticlePage = () => {
         id: id ? id : 'start',
     };
 
-	
     const headerUrl = useUrl({
         controller: 'page',
         id: 'system:header',
@@ -24,9 +24,7 @@ const ArticlePage = () => {
     const { data, error } = useFetch<Article>(url);
     const header = useFetch<Article>(headerUrl);
 
-	document.title = data?.title ?? 'kids-team Downloads';
-
-    console.log('headser', header);
+    document.title = data?.title ?? 'kids-team Downloads';
 
     const fileList = () => {
         if (!data?.files) return [];
@@ -48,12 +46,13 @@ const ArticlePage = () => {
                     {data?.pageimage && <img src={imageSrc} style={{ objectPosition: 'right' }} />}
                 </header>
 
-                <article className="py-12 product"><div className='product__content product__content--alignfull'>
-                    {error && <Error message="No connection to server" />}
-                    {!data && <div className="loader"></div>}
-                    {data && <Parser content={data?.content} />}
-					</div>
-				</article>
+                <article className="py-12 product">
+                    <div className="product__content product__content--alignfull">
+                        {error && <Error message="No connection to server" />}
+                        {!data && <div className="loader"></div>}
+                        {data && <Parser content={data?.content} />}
+                    </div>
+                </article>
             </main>
         </div>
     );

@@ -37,8 +37,9 @@ const ArticleCards: React.FC<Props> = props => {
             {loading ? (
                 <div
                     className={`grid grid--columns-1 md:grid--columns-2 xl:grid--columns-${columns} grid--gap-12 mt-12 mx-6 xl:mx-0`}
+                    key={0}
                 >
-                    {[...Array(6)].map((page, index) => {
+                    {[...Array(6)].map(index => {
                         return (
                             <div key={index} className="card card--image-top card--white card--shadow card--loading">
                                 <div className="card__image"></div>
