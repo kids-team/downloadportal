@@ -3,8 +3,8 @@ import { RouterProvider } from 'react-router-dom';
 
 import { IntlProvider } from 'react-intl';
 import './App.css';
-import Footer from './components/common/Footer';
 import Error from './components/Error';
+import Footer from './components/common/Footer';
 import './scss/style.scss';
 import { getUrl } from './services/api';
 import getTopLevelDomain from './services/getTopLevelDomain';
@@ -32,7 +32,7 @@ function App() {
                 dispatch({ type: 'SET_FOOTER', payload: data.footer });
                 dispatch({ type: 'SET_STATUS', payload: 'loaded' });
                 dispatch({ type: 'SET_BIBLE', payload: data.bible });
-				dispatch({ type: 'SET_ORGANIZATION', payload: data.organizations });
+                dispatch({ type: 'SET_ORGANIZATION', payload: data.organizations });
                 dispatch({ type: 'SET_TAXONOMIES', payload: data.taxonomies });
             })
             .catch(error => {
