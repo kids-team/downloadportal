@@ -34,12 +34,20 @@ app.get('*', async function (request, response) {
 
     const lang = urlParams.lang ?? (topLevelDomains ? topLevelDomains[0] : 'at');
 
-    let page = await fetch(
-        `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${lang}`
-    ).catch(err => {
-        console.log(err);
-    });
-    const pageData = await page.json();
+    let pageData;
+    try {
+        const page = await fetch(
+            `https://dlapi.kids-team.com/?controller=page&method=meta&id=${request._parsedUrl.pathname}&lang=${lang}`
+        );
+        pageData = await page.json();
+    } catch (error) {
+        console.log(error);
+    }
+
+    if (!pageData) {
+        response.status(404).send('Es gab einen Fehler beim Laden der Seite. Bitte versuchen Sie es später erneut.');
+        return;
+    }
 
     let injectedHtml = htmlData
         .replace(/__LANG__/g, urlParams.lang)
