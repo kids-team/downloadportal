@@ -1,6 +1,7 @@
 {
     "name": "downloads-kids-team",
-    "lang": "lang",
+    "version": "1.0.0",
+    "description": "Download Portal for kids-team",
     "type": "module",
     "supportedLocales": [
         "en",
@@ -8,16 +9,11 @@
         "fr",
         "it"
     ],
-    "version": "1.4.0",
-    "private": true,
+    "private": false,
     "dependencies": {
         "@contexis/filesize": "^1.2.0",
         "@formatjs/ts-transformer": "^3.13.9",
         "@headlessui/react": "^1.7.17",
-        "@testing-library/jest-dom": "^6.1.5",
-        "@testing-library/react": "^14.1.2",
-        "@testing-library/user-event": "^14.5.1",
-        "@trendyol-js/react-carousel": "^3.0.2",
         "color": "^4.2.3",
         "express": "^4.18.2",
         "express-session": "^1.17.3",
@@ -52,7 +48,6 @@
     "devDependencies": {
         "@formatjs/cli": "^6.2.4",
         "@types/color": "^3.0.6",
-        "@types/jest": "^29.5.11",
         "@types/node": "^20.10.5",
         "@types/react": "^18.2.45",
         "@types/react-dom": "^18.2.18",
