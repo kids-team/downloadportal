@@ -1,8 +1,6 @@
 // @ts-nocheck
 const SERVER_URL = 'https://dlapi.kids-team.com';
 
-console.log('SERVER_URL', SERVER_URL);
-
 function getUrl(path: string, params = {}, relative = false) {
     if (path[0] !== '/') path = '/' + path;
     path = path.replaceAll(':', '/');

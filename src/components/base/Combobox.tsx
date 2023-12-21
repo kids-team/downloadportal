@@ -39,9 +39,7 @@ const Combobox: React.FC<ComboboxProps> = props => {
     };
 
     const keyPress = (event: any) => {
-        console.log(event);
         if (event.key === 'ArrowDown') {
-            console.log('down');
             setListSelect(listSelect + 1);
         }
         if (event.key === 'ArrowUp' && listSelect !== -1) setListSelect(listSelect - 1);

@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
 import { Link, useParams } from 'react-router-dom';
 import Combobox from '../components/base/Combobox';
@@ -83,7 +83,7 @@ const SearchPage = ({ intl }: SearchPageProps) => {
     const availableAudiences = () => {
         if (!data?.audience) return [];
         let filteredAudience = data?.audience.filter(aud => aud in state.taxonomies.audience);
-        console.log(filteredAudience);
+
         return filteredAudience.map(item => {
             return state.taxonomies.audience[item];
         });
