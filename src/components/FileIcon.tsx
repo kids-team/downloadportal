@@ -1,4 +1,4 @@
-import { ReactComponent as docIcon } from '../icons/doc.svg';
+import docIcon from '../icons/doc.svg';
 import fileIcon from '../icons/file.svg';
 import jpgIcon from '../icons/jpg.svg';
 import mpgIcon from '../icons/mp3.svg';
@@ -6,8 +6,6 @@ import pdfIcon from '../icons/pdf.svg';
 import pptIcon from '../icons/ppt.svg';
 import xlsIcon from '../icons/xls.svg';
 import zipIcon from '../icons/zip.svg';
-
-import React from 'react';
 
 type Props = {
     extension: string;
@@ -18,7 +16,7 @@ type Props = {
 const FileIcon = (props: Props) => {
     const { extension, size = 16, className = '' } = props;
 
-    const Icon = () => {
+    const getFileIcon = (extension: string) => {
         switch (extension) {
             case 'doc':
             case 'docx':
@@ -45,7 +43,11 @@ const FileIcon = (props: Props) => {
         }
     };
 
-    return <Icon />;
+    return (
+        <>
+            <img width={size} className={className} alt={extension} src={getFileIcon(extension)} />
+        </>
+    );
 };
 
 export default FileIcon;
