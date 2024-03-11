@@ -6,7 +6,7 @@
     position: relative;
     margin-top: 5rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     img {
         width: 100%;
         aspect-ratio: 4/3;
@@ -16,13 +16,10 @@
     &__content {
         padding-top: 2rem;
 
-
-			position: absolute;
-			/* top: 0; */
-			bottom: 0;
-			right: 0;
-			left: 0;
-		
+        /* top: 0; */
+        bottom: 0;
+        right: 0;
+        left: 0;
 
         .parsed-text {
             p,
@@ -106,6 +103,7 @@
     .header {
         flex-direction: row;
         margin-bottom: -6px;
+        flex-direction: column;
         &__content {
             position: absolute;
             top: -6px;
@@ -124,7 +122,6 @@
 
         &__title {
             padding: 2rem;
-            
         }
 
         img {
